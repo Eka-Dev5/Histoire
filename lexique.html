@@ -7,7 +7,7 @@
   <!-- ════════════════════════════════════════════════════
        🎯 TITRE — Personnaliser
        ════════════════════════════════════════════════════ -->
-  <title>Géographie Master — Lexique</title>
+  <title>Histoire Master — Lexique</title>
 
   <style>
 
@@ -15,8 +15,8 @@
        🎨 PALETTE — Même couleurs que quiz.html
        ════════════════════════════════════════════════════ */
     :root {
-      --primary  : #27ae60;
-      --secondary: #229954;
+      --primary  : #922B21;
+      --secondary: #c0392b;
       --success  : #48bb78;
       --bg       : #f7fafc;
       --text     : #2d3748;
@@ -109,7 +109,7 @@
   <!-- ════════════════════════════════════════════════════
        🔝 EN-TÊTE — Personnaliser l'emoji et le nom
        ════════════════════════════════════════════════════ -->
-  <h1>🌍 Lexique Géographie Master</h1>
+  <h1>🏛️ Lexique Histoire Master</h1>
   <p class="subtitle">60 mots essentiels — Niveaux 1 à 5</p>
 
   <!-- Navigation -->
@@ -125,7 +125,7 @@
   <input type="text"
          class="search-box"
          id="searchBox"
-         placeholder="Chercher un mot, un lieu, un concept…"
+         placeholder="Chercher un mot, une date, un événement…"
          oninput="filterWords()">
 
   <!-- Filtres par niveau — ajouter ou supprimer des boutons selon le nombre de niveaux -->
@@ -176,59 +176,71 @@
      ↓ REMPLACER CES EXEMPLES PAR LE VRAI CONTENU ↓
      ══════════════════════════════════════════════════════ */
   const LEXIQUE = [
-    // NIVEAU 1
-    { main: "Mont Blanc", fr: "plus haut sommet de France", def: "Point culminant de l'UE à 4 808 m, frontière France-Italie.", ex: "Le Mont Blanc culmine à 4 808 m.", level: 1, cat: "relief"},
-    { main: "Pyrénées", fr: "chaîne frontalière Espagne", def: "Montagnes séparant la France de l'Espagne et d'Andorre.", ex: "Les Pyrénées s'étendent de la Méditerranée à l'Atlantique.", level: 1, cat: "relief"},
-    { main: "Loire", fr: "plus long fleuve de France", def: "1 012 km, de la source à l'océan Atlantique.", ex: "La Loire traverse les châteaux de la Renaissance.", level: 1, cat: "fleuve"},
-    { main: "Rhône", fr: "fleuve au débit le plus fort", def: "812 km, prend sa source dans les Alpes suisses.", ex: "Le Rhône se jette dans la Méditerranée.", level: 1, cat: "fleuve"},
-    { main: "Seine", fr: "fleuve de Paris", def: "776 km, traverse la capitale sur 13 km.", ex: "La Seine est bordée de 37 ponts à Paris.", level: 1, cat: "fleuve"},
-    { main: "Guyane", fr: "département d'outre-mer", def: "Plus grand département français, forêt amazonienne.", ex: "La Guyane est située en Amérique du Sud.", level: 1, cat: "territoire"},
-    { main: "Corse", fr: "île française", def: "Île en Méditerranée, 2 départements (2A et 2B).", ex: "La Corse est surnommée l'île de Beauté.", level: 1, cat: "territoire"},
-    { main: " région", fr: "échelon territorial", def: "La France métropolitaine compte 13 régions depuis 2016.", ex: "L'Île-de-France est la région la plus peuplée.", level: 1, cat: "administration"},
-    // NIVEAU 2
-    { main: "Union européenne", fr: "UE", def: "Union de 27 pays européens depuis le Brexit.", ex: "L'UE compte 450 millions d'habitants.", level: 2, cat: "organisation"},
-    { main: "Brexit", fr: "sortie du Royaume-Uni", def: "Départ du Royaume-Uni de l'UE le 31 janvier 2020.", ex: "Le Brexit a été voté par référendum en 2016.", level: 2, cat: "politique"},
-    { main: "Berlin", fr: "capitale de l'Allemagne", def: "3,7 millions d'habitants, capitale depuis 1990.", ex: "Berlin était divisée par un mur de 1961 à 1989.", level: 2, cat: "capitale"},
-    { main: "Rome", fr: "capitale de l'Italie", def: "Ville éternelle, siège du Vatican.", ex: "Rome compte 2,8 millions d'habitants.", level: 2, cat: "capitale"},
-    { main: "Madrid", fr: "capitale de l'Espagne", def: "Centre de la péninsule ibérique.", ex: "Madrid est la plus haute capitale d'Europe.", level: 2, cat: "capitale"},
-    { main: "Bruxelles", fr: "capitale de la Belgique", def: "Siège principal des institutions de l'UE.", ex: "Bruxelles accueille la Commission européenne.", level: 2, cat: "capitale"},
-    { main: "climat océanique", fr: "doux et humide", def: "Peu d'amplitude thermique, pluies régulières.", ex: "La Bretagne a un climat océanique.", level: 2, cat: "climat"},
-    { main: "climat méditerranéen", fr: "chaud et sec en été", def: "Étés chauds et secs, hivers doux.", ex: "La Côte d'Azur a un climat méditerranéen.", level: 2, cat: "climat"},
-    { main: "Danube", fr: "fleuve européen", def: "2 860 km, traverse 10 pays et 4 capitales.", ex: "Le Danube traverse Vienne et Budapest.", level: 2, cat: "fleuve"},
-    { main: "Oural", fr: "frontière Europe-Asie", def: "Chaîne de montagnes séparant l'Europe de l'Asie.", ex: "L'Oural est la limite conventionnelle entre les deux continents.", level: 2, cat: "relief"},
-    // NIVEAU 3
-    { main: "Asie", fr: "plus grand continent", def: "44,6 M km², 4,7 milliards d'habitants.", ex: "L'Asie est le plus grand et plus peuplé des continents.", level: 3, cat: "continent"},
-    { main: "Pacifique", fr: "plus grand océan", def: "165 M km², plus grand que tous les continents réunis.", ex: "L'océan Pacifique borde l'Asie et l'Amérique.", level: 3, cat: "océan"},
-    { main: "Everest", fr: "plus haut sommet du monde", def: "8 849 m, Himalaya, Népal/Tibet.", ex: "L'Everest est le toit du monde.", level: 3, cat: "relief"},
-    { main: "Sahara", fr: "plus grand désert chaud", def: "9 M km², Afrique du Nord.", ex: "Le Sahara s'étend sur 11 pays africains.", level: 3, cat: "désert"},
-    { main: "Russie", fr: "plus grand pays du monde", def: "17 M km², à cheval sur l'Europe et l'Asie.", ex: "La Russie compte 11 fuseaux horaires.", level: 3, cat: "pays"},
-    { main: "Inde", fr: "pays le plus peuplé", def: "1,428 milliard, a dépassé la Chine en 2023.", ex: "L'Inde est devenue le pays le plus peuplé du monde.", level: 3, cat: "pays"},
-    { main: "Nil", fr: "plus long fleuve", def: "6 650 km, traverse l'Égypte.", ex: "Le Nil fertilise la vallée égyptienne.", level: 3, cat: "fleuve"},
-    { main: "Amazonie", fr: "plus grande forêt tropicale", def: "60% au Brésil, poumon vert de la planète.", ex: "L'Amazonie produit 20% de l'oxygène mondial.", level: 3, cat: "forêt"},
-    { main: "Greenwich", fr: "méridien de référence", def: "0°, banlieue de Londres.", ex: "Greenwich sert de référence pour les fuseaux horaires.", level: 3, cat: "repère"},
-    { main: "Antarctique", fr: "continent glacial", def: "14 M km², aucun habitant permanent.", ex: "L'Antarctique est protégé par le traité de 1959.", level: 3, cat: "continent"},
-    // NIVEAU 4
-    { main: "PIB", fr: "Produit Intérieur Brut", def: "Richesse produite par un pays sur un an.", ex: "Le PIB de la France est d'environ 2 800 milliards $.", level: 4, cat: "économie"},
-    { main: "IDH", fr: "Indice de Développement Humain", def: "Mesure santé, éducation, niveau de vie (0 à 1).", ex: "La Norvège a l'IDH le plus élevé (0,966).", level: 4, cat: "économie"},
-    { main: "BRICS", fr: "pays émergents", def: "Brésil, Russie, Inde, Chine, Afrique du Sud.", ex: "Les BRICS représentent 40% de la population mondiale.", level: 4, cat: "économie"},
-    { main: "ODD", fr: "Objectifs de Développement Durable", def: "17 objectifs fixés par l'ONU pour 2030.", ex: "Les ODD visent à éliminer la pauvreté et protéger la planète.", level: 4, cat: "développement"},
-    { main: "FMI", fr: "Fonds Monétaire International", def: "Organisation prêtant de l'argent aux pays en difficulté.", ex: "Le FMI impose des conditions aux pays emprunteurs.", level: 4, cat: "économie"},
-    { main: "pays développé", fr: "Nord", def: "Forte industrialisation, HDI > 0,8.", ex: "La France est un pays développé.", level: 4, cat: "développement"},
-    { main: "pays émergent", fr: "croissance rapide", def: "Industrialisation en cours, croissance économique forte.", ex: "La Chine est le pays émergent le plus important.", level: 4, cat: "développement"},
-    { main: "pauvreté extrême", fr: "moins de 2,15 $/jour", def: "700 millions de personnes dans le monde.", ex: "L'Afrique subsaharienne concentre la pauvreté extrême.", level: 4, cat: "développement"},
-    { main: "Nigeria", fr: "pays africain le plus peuplé", def: "220 millions d'habitants, Afrique de l'Ouest.", ex: "Le Nigeria est le 1er producteur de pétrole d'Afrique.", level: 4, cat: "pays"},
-    { main: "Japon", fr: "espérance de vie élevée", def: "84 ans, pays insulaire d'Asie de l'Est.", ex: "Le Japon est le pays le plus âgé du monde.", level: 4, cat: "pays"},
-    // NIVEAU 5
-    { main: "réchauffement climatique", fr: "augmentation des températures", def: "+1,1°C depuis 1850, causé par les émissions de CO2.", ex: "Le réchauffement climatique provoque des canicules plus fréquentes.", level: 5, cat: "environnement"},
-    { main: "CO2", fr: "dioxyde de carbone", def: "Principal gaz à effet de serre d'origine humaine.", ex: "La Chine émet 30% du CO2 mondial.", level: 5, cat: "environnement"},
-    { main: "GIEC", fr: "Groupe d'experts intergouvernemental", def: "Évalue le changement climatique, prix Nobel 2007.", ex: "Le GIEC publie des rapports tous les 5-7 ans.", level: 5, cat: "environnement"},
-    { main: "Accord de Paris", fr: "accord climat 2015", def: "Limiter le réchauffement à +1,5°C / +2°C.", ex: "L'Accord de Paris a été signé par 196 pays.", level: 5, cat: "environnement"},
-    { main: "déforestation", fr: "perte des forêts", def: "10 M hectares perdus chaque année dans le monde.", ex: "L'Amazonie perd 10 000 km² de forêt par an.", level: 5, cat: "environnement"},
-    { main: "énergies renouvelables", fr: "solaire, éolien, hydraulique", def: "15% du mix énergétique mondial.", ex: "Les énergies renouvelables ne s'épuisent pas.", level: 5, cat: "énergie"},
-    { main: "géothermie", fr: "chaleur terrestre", def: "Énergie issue de la chaleur interne de la Terre.", ex: "L'Islande utilise la géothermie à 90%.", level: 5, cat: "énergie"},
-    { main: "Trois-Gorges", fr: "barrage chinois", def: "Plus puissant barrage du monde (22 500 MW).", ex: "Le barrage des Trois-Gorges est sur le Yangtsé.", level: 5, cat: "énergie"},
-    { main: "eau potable", fr: "eau saine à boire", def: "2,2 milliards de personnes n'y ont pas accès.", ex: "L'accès à l'eau potable est un ODD de l'ONU.", level: 5, cat: "ressource"},
-    { main: "6e extinction", fr: "extinction de masse", def: "1 million d'espèces menacées (rapport IPBES 2019).", ex: "L'activité humaine accélère la 6e extinction de masse.", level: 5, cat: "biodiversité"}
+  // NIVEAU 1 — Préhistoire & Antiquité
+  { main:"Préhistoire", trans:"avant l'écriture", def:"Période allant des premiers hominidés à l'invention de l'écriture (-3300).", ex:"La Préhistoire s'arrête avec l'écriture cunéiforme.", level:1, cat:"période"},
+  { main:"Paléolithique", trans:"âge de la pierre taillée", def:"Période ancienne de la Préhistoire (-3M à -10000), chasseurs-cueilleurs.", ex:"Lascaux est une grotte du Paléolithique supérieur.", level:1, cat:"période"},
+  { main:"Néolithique", trans:"âge de la pierre polie", def:"Période de sédentarisation, agriculture et élevage (-5500 à -3300).", ex:"Le Néolithique voit naître les premiers villages.", level:1, cat:"période"},
+  { main:"Mésopotamie", trans:"entre les fleuves", def:"Région entre le Tigre et l'Euphrate, berceau de l'écriture.", ex:"Les Sumériens habitaient la Mésopotamie.", level:1, cat:"civilisation"},
+  { main:"cunéiforme", trans:"écriture en forme de coin", def:"Premier système d'écriture inventé par les Sumériens sur tablettes d'argile.", ex:"L'écriture cunéiforme date de -3300.", level:1, cat:"écriture"},
+  { main:"hiéroglyphes", trans:"écriture sacrée", def:"Écriture pictographique des Égyptiens anciens.", ex:"Champollion a déchiffré les hiéroglyphes en 1822.", level:1, cat:"écriture"},
+  { main:"pharaon", trans:"roi d'Égypte", def:"Souverain de l'Égypte ancienne, considéré comme un dieu.", ex:"Ramsès II est un célèbre pharaon.", level:1, cat:"titre"},
+  { main:"pyramide", trans:"tombeau monumental", def:"Édifice à base carrée construit par les Égyptiens pour les pharaons.", ex:"La pyramide de Khéops fait 146 m de haut.", level:1, cat:"monument"},
+  { main:"cité-État", trans:"ville indépendante", def:"Ville constituant un État autonome, comme Athènes ou Sparte.", ex:"La Grèce antique était divisée en cités-États.", level:1, cat:"politique"},
+  { main:"démocratie", trans:"pouvoir du peuple", def:"Régime politique où le peuple exerce le pouvoir.", ex:"Athènes est le berceau de la démocratie.", level:1, cat:"politique"},
+  { main:"République", trans:"régime sans roi", def:"Régime où le chef de l'État est élu et non héréditaire.", ex:"Rome est devenue une République en -509.", level:1, cat:"politique"},
+  { main:"Empire", trans:"vaste territoire dominé", def:"État étendu dirigé par un empereur.", ex:"L'Empire romain a duré plusieurs siècles.", level:1, cat:"politique"},
+  { main:"gladiateur", trans:"combattant de l'arène", def:"Combattant esclave ou prisonnier dans les jeux romains.", ex:"Le Colisée accueillait les combats de gladiateurs.", level:1, cat:"société"},
+  { main:"Pax Romana", trans:"paix romaine", def:"Période de paix et de stabilité sous l'empereur Auguste.", ex:"La Pax Romana a duré de -27 à 180 apr. J.-C.", level:1, cat:"période"},
+  // NIVEAU 2 — Moyen Âge
+  { main:"féodalité", trans:"système des fiefs", def:"Organisation sociale et politique basée sur la vassalité et les fiefs.", ex:"La féodalité structure la société médiévale.", level:2, cat:"société"},
+  { main:"vassal", trans:"homme lige", def:"Personne liée à un seigneur par un serment de fidélité.", ex:"Le vassal prête hommage à son seigneur.", level:2, cat:"société"},
+  { main:"fief", trans:"terre accordée", def:"Domaine foncier concédé par un seigneur à un vassal.", ex:"Le chevalier reçoit un fief en échange de son service.", level:2, cat:"société"},
+  { main:"serf", trans:"paysan dépendant", def:"Paysan lié à la terre d'un seigneur, non libre.", ex:"Le serf travaille la terre du seigneur.", level:2, cat:"société"},
+  { main:"Croisades", trans:"expéditions militaires", def:"Guerres menées par les chrétiens pour reconquérir Jérusalem (1095-1291).", ex:"La première Croisade est prêchée par Urbain II.", level:2, cat:"événement"},
+  { main:"monastère", trans:"communauté religieuse", def:"Lieu où vivent des moines ou des nonnes.", ex:"Les moines copiaient les manuscrits dans les monastères.", level:2, cat:"religion"},
+  { main:"gothique", trans:"style architectural", def:"Style d'architecture avec arcs-boutants et vitraux (XIIe-XVe siècle).", ex:"Notre-Dame de Paris est une cathédrale gothique.", level:2, cat:"art"},
+  { main:"château fort", trans:"forteresse médiévale", def:"Édifice fortifié résidence d'un seigneur.", ex:"Le château fort protégeait les habitants des attaques.", level:2, cat:"monument"},
+  { main:"blason", trans:"armoiries", def:"Écusson portant les armes d'une famille noble.", ex:"Chaque chevalier avait son blason.", level:2, cat:"symbole"},
+  { main:"troubadour", trans:"poète musicien", def:"Poète et musicien itinérant du Moyen Âge.", ex:"Les troubadours chantaient l'amour courtois.", level:2, cat:"art"},
+  { main:"chevalier", trans:"guerrier à cheval", def:"Homme de guerre formé par les armes et les codes de l'honneur.", ex:"Le chevalier suivait le code de chevalerie.", level:2, cat:"société"},
+  { main:"imprimerie", trans:"presse à caractères mobiles", def:"Technique inventée par Gutenberg vers 1450 pour reproduire des textes.", ex:"L'imprimerie a révolutionné la diffusion du savoir.", level:2, cat:"technique"},
+  // NIVEAU 3 — Temps Modernes
+  { main:"conquistador", trans:"conquérant espagnol", def:"Explorateur espagnol qui a conquis l'Amérique.", ex:"Cortés et Pizarre étaient des conquistadors.", level:3, cat:"personnage"},
+  { main:"traite négrière", trans:"commerce d'esclaves", def:"Commerce triangulaire d'esclaves africains vers les Amériques.", ex:"La traite négrière a déporté 12 millions d'Africains.", level:3, cat:"économie"},
+  { main:"colonie", trans:"territoire dominé", def:"Territoire occupé et gouverné par une puissance étrangère.", ex:"L'Amérique était une colonie espagnole.", level:3, cat:"politique"},
+  { main:"Réforme", trans:"réforme protestante", def:"Mouvement religieux du XVIe siècle critiquant l'Église catholique.", ex:"Luther a déclenché la Réforme en 1517.", level:3, cat:"religion"},
+  { main:"protestantisme", trans:"religion réformée", def:"Ensemble des Églises nées de la Réforme.", ex:"Le protestantisme s'est répandu en Europe du Nord.", level:3, cat:"religion"},
+  { main:"absolutisme", trans:"pouvoir absolu", def:"Régime où le roi détient tout le pouvoir sans partage.", ex:"Louis XIV incarne l'absolutisme.", level:3, cat:"politique"},
+  { main:"Lumières", trans:"siècle des Lumières", def:"Mouvement intellectuel du XVIIIe siècle valorant la raison.", ex:"Voltaire et Rousseau étaient des philosophes des Lumières.", level:3, cat:"pensée"},
+  { main:"philosophe", trans:"penseur", def:"Personne qui réfléchit sur les questions fondamentales.", ex:"Montesquieu a écrit 'L'Esprit des lois'.", level:3, cat:"pensée"},
+  { main:"Encyclopédie", trans:"ouvrage de référence", def:"Dictionnaire raisonné des sciences, des arts et des métiers (1751-1772).", ex:"Diderot et d'Alembert ont dirigé l'Encyclopédie.", level:3, cat:"ouvrage"},
+  { main:"traité", trans:"accord international", def:"Convention signée entre plusieurs États.", ex:"Le traité de Westphalie a mis fin à la guerre de Trente Ans.", level:3, cat:"diplomatie"},
+  // NIVEAU 4 — Révolution & 19e siècle
+  { main:"Révolution", trans:"changement brutal", def:"Transformation profonde et rapide d'un régime politique.", ex:"La Révolution française a commencé en 1789.", level:4, cat:"événement"},
+  { main:"Tiers-État", trans:"peuple", def:"Ordre regroupant le peuple (bourgeois, paysans, artisans) sous l'Ancien Régime.", ex:"Le Tiers-État réclame l'égalité en 1789.", level:4, cat:"société"},
+  { main:"guillotine", trans:"instrument de décapitation", def:"Machine inventée pour exécuter les condamnés à mort.", ex:"Louis XVI est guillotiné le 21 janvier 1793.", level:4, cat:"justice"},
+  { main:"Terreur", trans:"régime de terreur", def:"Période de la Révolution (1793-1794) marquée par les exécutions massives.", ex:"Robespierre dirige la Terreur.", level:4, cat:"période"},
+  { main:"coup d'État", trans:"prise de pouvoir par la force", def:"Action violente pour renverser un gouvernement.", ex:"Le 18 brumaire est un coup d'État de Napoléon.", level:4, cat:"politique"},
+  { main:"Code civil", trans:"code napoléonien", def:"Ensemble des lois civiles promulguées par Napoléon en 1804.", ex:"Le Code civil établit l'égalité devant la loi.", level:4, cat:"droit"},
+  { main:"industrialisation", trans:"développement industriel", def:"Transformation économique basée sur l'industrie et la machine.", ex:"L'industrialisation commence en Angleterre au XVIIIe siècle.", level:4, cat:"économie"},
+  { main:"prolétariat", trans:"classe ouvrière", def:"Classe sociale des travailleurs salariés n'ayant que leur force de travail.", ex:"Le prolétariat travaille dans les usines.", level:4, cat:"société"},
+  { main:"bourgeoisie", trans:"classe possédante", def:"Classe sociale des propriétaires, commerçants et intellectuels.", ex:"La bourgeoisie dirige les affaires économiques.", level:4, cat:"société"},
+  { main:"colonialisme", trans:"domination coloniale", def:"Politique d'expansion et de domination sur des territoires étrangers.", ex:"Le colonialisme français s'étend en Afrique et en Asie.", level:4, cat:"politique"},
+  { main:"suffrage universel", trans:"droit de vote pour tous", def:"Droit de vote accordé à tous les citoyens adultes.", ex:"Le suffrage universel masculin est instauré en 1848.", level:4, cat:"droit"},
+  { main:"Commune", trans:"insurrection parisienne", def:"Gouvernement révolutionnaire de Paris en 1871.", ex:"La Commune de Paris dure 72 jours.", level:4, cat:"événement"},
+  // NIVEAU 5 — 20e siècle
+  { main:"totalitarisme", trans:"régime dictatorial total", def:"Régime politique contrôlant tous les aspects de la vie.", ex:"Le nazisme et le stalinisme sont des totalitarismes.", level:5, cat:"politique"},
+  { main:"génocide", trans:"extermination d'un peuple", def:"Destruction systématique d'un groupe ethnique ou religieux.", ex:"L'Holocauste est le génocide des Juifs par les nazis.", level:5, cat:"crime"},
+  { main:"Holocauste", trans:"Shoah", def:"Extermination de 6 millions de Juifs par le régime nazi.", ex:"L'Holocauste reste le crime le plus horrible du XXe siècle.", level:5, cat:"crime"},
+  { main:"Débarquement", trans:"invasion alliée", def:"Opération militaire alliée en Normandie le 6 juin 1944.", ex:"Le Débarquement ouvre le second front en Europe.", level:5, cat:"événement"},
+  { main:"Résistance", trans:"mouvement de résistance", def:"Ensemble des mouvements luttant contre l'occupant nazi.", ex:"La Résistance française aide les Alliés.", level:5, cat:"mouvement"},
+  { main:"Guerre froide", trans:"confrontation Est-Ouest", def:"Période de tensions entre les USA et l'URSS (1947-1991).", ex:"La Guerre froide divise le monde en deux blocs.", level:5, cat:"période"},
+  { main:"décolonisation", trans:"indépendance des colonies", def:"Processus d'accession à l'indépendance des colonies.", ex:"La décolonisation touche l'Afrique et l'Asie après 1945.", level:5, cat:"politique"},
+  { main:"mur de Berlin", trans:"symbole de la division", def:"Mur érigé en 1961 séparant Berlin-Est et Berlin-Ouest.", ex:"Le mur de Berlin tombe le 9 novembre 1989.", level:5, cat:"monument"},
+  { main:"OTAN", trans:"Alliance atlantique", def:"Organisation du traité de l'Atlantique Nord (1949).", ex:"L'OTAN regroupe les pays alliés des USA.", level:5, cat:"organisation"},
+  { main:"URSS", trans:"Union soviétique", def:"Union des Républiques socialistes soviétiques (1922-1991).", ex:"L'URSS disparaît en décembre 1991.", level:5, cat:"pays"},
+  { main:"armistice", trans:"arrêt des combats", def:"Accord mettant fin aux hostilités.", ex:"L'armistice de 1918 est signé le 11 novembre.", level:5, cat:"diplomatie"},
+  { main:"traite négrière", trans:"commerce triangulaire", def:"Commerce d'esclaves entre l'Afrique, l'Amérique et l'Europe.", ex:"La traite négrière a déporté des millions d'Africains.", level:5, cat:"économie"}
 ];
   /* fin LEXIQUE */
 

@@ -7,7 +7,7 @@
   <!-- ════════════════════════════════════════════════════
        🎯 TITRE
        ════════════════════════════════════════════════════ -->
-  <title>Géographie Master — Mon Espace</title>
+  <title>Histoire Master — Mon Espace</title>
 
   <style>
 
@@ -15,8 +15,8 @@
        🎨 PALETTE — Même couleurs que quiz.html !
        ════════════════════════════════════════════════════ */
     :root {
-      --primary  : #27ae60;
-      --secondary: #229954;
+      --primary  : #922B21;
+      --secondary: #c0392b;
       --success  : #48bb78;
       --error    : #f56565;
       --warning  : #ed8936;
@@ -168,7 +168,7 @@
   <!-- ════════════════════════════════════════════════════
        🔝 TITRE — Personnaliser l'emoji et le nom
        ════════════════════════════════════════════════════ -->
-  <h1>🌍 Mon Espace Géographie Master</h1>
+  <h1>🏛️ Mon Espace Histoire Master</h1>
   <div class="subtitle">Tous tes progrès, badges et révisions en un coup d'œil</div>
 
 
@@ -223,7 +223,7 @@
 
     <div class="level-progress">
       <!-- ↓ Personnaliser le titre avec l'emoji de la matière ↓ -->
-      <h3>🌍 Progression par niveau</h3>
+      <h3>🏛️ Progression par niveau</h3>
       <div id="levelBars"></div>
     </div>
 
@@ -273,19 +273,19 @@
      ⚙️  CONFIG — Même clés que dans quiz.html !
          PLAYERS_KEY doit être IDENTIQUE à quiz.html
      ══════════════════════════════════════════════════════ */
-  const STORAGE_KEY = "geoMaster_v1";       /* même que quiz.html */
-  const PLAYERS_KEY = "geoMaster_players";  /* même que quiz.html */
+  const STORAGE_KEY = "histoireMaster_v1";       /* même que quiz.html */
+  const PLAYERS_KEY = "histoireMaster_players";  /* même que quiz.html */
 
   /* ══════════════════════════════════════════════════════
      📋 NOMS DES NIVEAUX — Pour les barres de progression
          ↓ Personnaliser les titres selon la matière
      ══════════════════════════════════════════════════════ */
   const LEVEL_NAMES = {
-    1: "La France 🗺️",
-    2: "L'Europe 🇪🇺",
-    3: "Le Monde 🌏",
-    4: "Développement ⚖️",
-    5: "Environnement 🌱"
+    1 : "Préhistoire & Antiquité 🦴",
+    2 : "Moyen Âge ⚔️",
+    3 : "Temps Modernes 🌍",
+    4 : "Révolution & 19e s. 🔥",
+    5 : "20e siècle 💥"
   };
 
   /* ══════════════════════════════════════════════════════
@@ -305,7 +305,7 @@
     { id:7,  icon:"7️⃣",  name:"Expert",        desc:"Terminer le niveau 7",          check: p => (p.completed||[]).includes(7)  },
     { id:8,  icon:"8️⃣",  name:"Champion",      desc:"Terminer le niveau 8",          check: p => (p.completed||[]).includes(8)  },
     { id:9,  icon:"9️⃣",  name:"Presque !",     desc:"Terminer le niveau 9",          check: p => (p.completed||[]).includes(9)  },
-    { id:10, icon:"🏆",  name:"Géographe Légendaire",   desc:"Terminer le niveau 10",         check: p => (p.completed||[]).includes(10) },
+    { id:10, icon:"🏆",  name:"Historien Légendaire",   desc:"Terminer le niveau 10",         check: p => (p.completed||[]).includes(10) },
     { id:11, icon:"🎯",  name:"Sniper",         desc:"100% à un niveau",              check: _ => false                           },
     { id:12, icon:"🔥",  name:"En feu !",       desc:"Série de 10 bonnes réponses",   check: p => (p.streak||0) >= 10            },
     { id:13, icon:"⚡",  name:"Éclair",          desc:"Série de 20 bonnes réponses",   check: p => (p.streak||0) >= 20            },
@@ -337,16 +337,16 @@
          options → 4 propositions (la bonne parmi les 4)
      ══════════════════════════════════════════════════════ */
   const CAMELEON_EXERCISES = [
-    { error:"La Loire est le fleuve qui traverse Paris.", correct:"La Seine traverse Paris.", rule:"C'est la SEINE qui traverse Paris ! La Loire traverse les châteaux de la Renaissance.", options:["La Loire traverse Paris.","La Seine traverse Paris.","Le Rhône traverse Paris.","La Garonne traverse Paris."] },
-    { error:"Le Mont Blanc culmine à 4 000 mètres.", correct:"Le Mont Blanc culmine à 4 808 mètres.", rule:"Le Mont Blanc fait exactement 4 808 m — point culminant de France ET de l'Union européenne !", options:["Le Mont Blanc culmine à 4 000 m.","Le Mont Blanc culmine à 4 808 m.","Le Mont Blanc culmine à 5 000 m.","Le Mont Blanc culmine à 3 500 m."] },
-    { error:"L'UE compte 25 pays depuis le Brexit.", correct:"L'UE compte 27 pays depuis le Brexit.", rule:"Depuis le départ du Royaume-Uni en 2020, l'UE compte 27 pays (pas 25) !", options:["L'UE compte 25 pays.","L'UE compte 27 pays.","L'UE compte 28 pays.","L'UE compte 30 pays."] },
-    { error:"La capitale de l'Allemagne est Munich.", correct:"La capitale de l'Allemagne est Berlin.", rule:"Berlin est la capitale de l'Allemagne depuis la réunification de 1990. Munich est en Bavière !", options:["La capitale est Munich.","La capitale est Berlin.","La capitale est Francfort.","La capitale est Hambourg."] },
-    { error:"Le Rhône est le plus long fleuve de France.", correct:"La Loire est le plus long fleuve de France.", rule:"La Loire (1 012 km) est le PLUS LONG. Le Rhône a le débit le plus puissant !", options:["Le Rhône est le plus long.","La Loire est le plus long.","La Seine est la plus longue.","La Garonne est la plus longue."] },
-    { error:"L'Amazonie se trouve en Afrique.", correct:"L'Amazonie se trouve en Amérique du Sud.", rule:"L'Amazonie est en AMÉRIQUE DU SUD (60% au Brésil). Le Congo est la grande forêt africaine !", options:["L'Amazonie est en Afrique.","L'Amazonie est en Amérique du Sud.","L'Amazonie est en Asie.","L'Amazonie est en Australie."] },
-    { error:"L'Everest culmine à 7 000 mètres.", correct:"L'Everest culmine à 8 849 mètres.", rule:"L'Everest (8 849 m) est le plus haut sommet du monde, dans l'Himalaya (Népal/Tibet) !", options:["L'Everest culmine à 7 000 m.","L'Everest culmine à 8 849 m.","L'Everest culmine à 9 000 m.","L'Everest culmine à 6 000 m."] },
-    { error:"La France compte 22 régions depuis 2016.", correct:"La France compte 13 régions depuis 2016.", rule:"La réforme de 2016 a réduit le nombre de régions de 22 à 13 !", options:["22 régions depuis 2016.","13 régions depuis 2016.","18 régions depuis 2016.","26 régions depuis 2016."] },
-    { error:"Le Sahara est en Asie.", correct:"Le Sahara est en Afrique.", rule:"Le Sahara (9 M km²) est en AFRIQUE du Nord. Le désert de Gobi est en Asie !", options:["Le Sahara est en Asie.","Le Sahara est en Afrique.","Le Sahara est en Amérique.","Le Sahara est en Europe."] },
-    { error:"L'Inde est le pays le plus grand du monde.", correct:"La Russie est le pays le plus grand du monde.", rule:"La RUSSIE (17 M km²) est le plus grand pays. L'Inde est le plus PEUPLÉ (depuis 2023) !", options:["L'Inde est le plus grand.","La Russie est le plus grand.","La Chine est le plus grand.","Les USA sont les plus grands."] }
+    { error:"La Préhistoire s'arrête avec les dinosaures.", correct:"La Préhistoire s'arrête avec l'invention de l'écriture.", rule:"La Préhistoire s'arrête avec l'écriture (-3300), pas avec les dinosaures (-65M ans) !", options:["La Préhistoire s'arrête avec les dinosaures.","La Préhistoire s'arrête avec l'invention de l'écriture.","La Préhistoire s'arrête avec la roue.","La Préhistoire s'arrête avec le feu."] },
+    { error:"Charlemagne est couronné roi de France en 800.", correct:"Charlemagne est couronné Empereur d'Occident en 800.", rule:"Charlemagne est couronné EMPEREU R (pas roi) d'Occident le 25 décembre 800 à Rome !", options:["Charlemagne est couronné roi de France en 800.","Charlemagne est couronné Empereur d'Occident en 800.","Charlemagne est couronné roi d'Allemagne en 800.","Charlemagne est couronné pape en 800."] },
+    { error:"Jeanne d'Arc est brûlée vive à Paris.", correct:"Jeanne d'Arc est brûlée vive à Rouen.", rule:"Jeanne d'Arc est brûlée à Rouen le 30 mai 1431, pas à Paris !", options:["Jeanne d'Arc est brûlée vive à Paris.","Jeanne d'Arc est brûlée vive à Rouen.","Jeanne d'Arc est brûlée vive à Orléans.","Jeanne d'Arc est brûlée vive à Reims."] },
+    { error:"La Bastille est prise le 4 juillet 1789.", correct:"La Bastille est prise le 14 juillet 1789.", rule:"Le 14 juillet 1789 (pas le 4) est la date de la prise de la Bastille, fête nationale française !", options:["La Bastille est prise le 4 juillet 1789.","La Bastille est prise le 14 juillet 1789.","La Bastille est prise le 24 juillet 1789.","La Bastille est prise le 1er juillet 1789."] },
+    { error:"Napoléon est vaincu définitivement à Austerlitz.", correct:"Napoléon est vaincu définitivement à Waterloo.", rule:"Austerlitz (1805) est sa plus grande VICTOIRE. Waterloo (1815) est sa défaite finale !", options:["Napoléon est vaincu définitivement à Austerlitz.","Napoléon est vaincu définitivement à Waterloo.","Napoléon est vaincu définitivement à Moscou.","Napoléon est vaincu définitivement à Leipzig."] },
+    { error:"La guerre de Cent Ans dure exactement 100 ans.", correct:"La guerre de Cent Ans dure 116 ans (1337-1453).", rule:"Malgré son nom, la guerre de Cent Ans dure 116 ans, de 1337 à 1453 !", options:["La guerre de Cent Ans dure exactement 100 ans.","La guerre de Cent Ans dure 116 ans (1337-1453).","La guerre de Cent Ans dure 50 ans.","La guerre de Cent Ans dure 200 ans."] },
+    { error:"L'armistice de la 1re Guerre mondiale date du 11 novembre 1919.", correct:"L'armistice de la 1re Guerre mondiale date du 11 novembre 1918.", rule:"L'armistice est signé le 11 novembre 1918 (pas 1919). Le traité de Versailles est de 1919 !", options:["L'armistice date du 11 novembre 1919.","L'armistice date du 11 novembre 1918.","L'armistice date du 8 mai 1918.","L'armistice date du 14 juillet 1918."] },
+    { error:"L'appel du 18 juin 1940 est lancé par le maréchal Pétain.", correct:"L'appel du 18 juin 1940 est lancé par le général de Gaulle.", rule:"De Gaulle lance son appel depuis Londres le 18 juin 1940. Pétain, lui, choisit l'armistice !", options:["L'appel est lancé par Pétain.","L'appel est lancé par le général de Gaulle.","L'appel est lancé par Churchill.","L'appel est lancé par Leclerc."] },
+    { error:"La chute du mur de Berlin a lieu le 9 novembre 1991.", correct:"La chute du mur de Berlin a lieu le 9 novembre 1989.", rule:"Le mur de Berlin tombe le 9 novembre 1989 (pas 1991). L'URSS disparaît en décembre 1991 !", options:["Le mur tombe le 9 novembre 1991.","Le mur tombe le 9 novembre 1989.","Le mur tombe le 9 novembre 1985.","Le mur tombe le 9 novembre 1979."] },
+    { error:"Christophe Colomb découvre l'Afrique en 1492.", correct:"Christophe Colomb découvre l'Amérique en 1492.", rule:"Colomb découvre l'AMÉRIQUE en 1492, pensant atteindre les Indes. Pas l'Afrique !", options:["Colomb découvre l'Afrique en 1492.","Colomb découvre l'Amérique en 1492.","Colomb découvre l'Asie en 1492.","Colomb découvre l'Océanie en 1492."] }
   ]; /* fin CAMELEON_EXERCISES */
 
 

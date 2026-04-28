@@ -7,7 +7,7 @@
   <!-- ════════════════════════════════════════════════════
        🎯 TITRE
        ════════════════════════════════════════════════════ -->
-  <title>Géographie Master 🌍</title>
+  <title>Histoire Master 🏛️</title>
 
   <style>
 
@@ -17,8 +17,8 @@
                      #27ae60 vert   | #14486B bleu
        ════════════════════════════════════════════════════ */
     :root {
-      --primary   : #27ae60;
-      --secondary : #229954;
+      --primary   : #922B21;
+      --secondary : #c0392b;
       --success   : #48bb78;
       --error     : #f56565;
       --warning   : #ed8936;
@@ -313,8 +313,8 @@
   <div id="accueil" class="section active">
 
     <!-- ↓ Personnaliser le titre et le slogan ↓ -->
-    <div class="home-title">Géographie Master 🌍</div>
-    <div class="home-sub">Apprendre la géographie, un niveau à la fois.</div>
+    <div class="home-title">Histoire Master 🏛️</div>
+    <div class="home-sub">Apprendre l'histoire, un niveau à la fois.</div>
 
     <div class="home-stats">
       <div class="home-stat"><div class="home-stat-num" id="homeLevel">1</div><div class="home-stat-label">Niveau</div></div>
@@ -517,10 +517,10 @@
          playersKey  → Clé unique des joueurs   (ne pas réutiliser)
      ══════════════════════════════════════════════════════ */
   const SUBJECT_CONFIG = {
-    name         : "Géographie Master",
-    emoji        : "🌍",
-    storageKey   : "geoMaster_v1",
-    playersKey   : "geoMaster_players",
+    name         : "Histoire Master",
+    emoji        : "🏛️",
+    storageKey   : "histoireMaster_v1",
+    playersKey   : "histoireMaster_players",
     dashboardFile: "dashboard.html",
     lexiqueFile  : "lexique.html"
   };
@@ -537,254 +537,136 @@
   const LESSONS_DATA = [
     {
         num: 1,
-        title: "La France : territoire et régions",
-        content: `<div class="lesson-rule"><h4>🗺️ Le territoire français</h4>
-    <p>La France métropolitaine compte <strong>13 régions</strong> depuis 2016 (anciennement 22). Elle s'étend sur <strong>643 801 km²</strong> (1er pays de l'UE par la superficie).</p>
-    <table class="lesson-table"><tr><th>Frontière</th><th>Pays voisin</th><th>Particularité</th></tr>
-    <tr><td>Nord</td><td>Belgique, Luxembourg</td><td>Plat pays, frontière linguistique</td></tr>
-    <tr><td>Nord-Est</td><td>Allemagne</td><td>Rhin, Vosges</td></tr>
-    <tr><td>Est</td><td>Suisse</td><td>Jura, Alpes</td></tr>
-    <tr><td>Sud-Est</td><td>Italie, Monaco</td><td>Alpes, Côte d'Azur</td></tr>
-    <tr><td>Sud</td><td>Espagne, Andorre</td><td>Pyrénées</td></tr>
-    <tr><td>Ouest</td><td>océan Atlantique</td><td>Côtes rocheuses et sableuses</td></tr>
-    <tr><td>Nord-Ouest</td><td>la Manche</td><td>Manche, Pas de Calais</td></tr>
+        title: "La Préhistoire et l'Antiquité",
+        objective: "De la Préhistoire à la chute de Rome (476)",
+        content: `<div class="lesson-rule"><h4>🦴 La Préhistoire : avant l'écriture</h4>
+    <p>La <strong>Préhistoire</strong> commence avec l'apparition des premiers hominidés (il y a environ 3 millions d'années) et s'arrête avec l'invention de <strong>l'écriture</strong> (vers -3300 en Mésopotamie).</p>
+    <table class="lesson-table"><tr><th>Période</th><th>Dates</th><th>Caractéristiques</th></tr>
+    <tr><td><strong>Paléolithique</strong></td><td>-3 000 000 à -10 000</td><td>Chasseurs-cueilleurs, pierre taillée, feu maîtrisé, art rupestre</td></tr>
+    <tr><td><strong>Mésolithique</strong></td><td>-10 000 à -5 500</td><td>Transition, outils plus fins, domestication du chien</td></tr>
+    <tr><td><strong>Néolithique</strong></td><td>-5 500 à -3 300</td><td>Agriculture, élevage, sédentarisation, poterie, mégalithes</td></tr>
+    <tr><td><strong>Âge des métaux</strong></td><td>-3 300 à -1 200</td><td>Cuivre, bronze (alliage cuivre + étain), fer</td></tr>
     </table>
-    <p style="margin-top:8px"><strong>Outre-mer :</strong> 5 DROM (Guadeloupe, Martinique, Guyane, La Réunion, Mayotte) + 5 COM + Terres australes et antarctiques françaises.</p></div>
+    <p style="margin-top:8px"><strong>Points clés :</strong></p>
+    <p>• <strong>Lascaux</strong> (Dordogne, -18 000 ans) : grotte ornée de peintures pariétales.</p>
+    <p>• <strong>Carnac</strong> (Morbihan) : alignements de mégalithes du Néolithique.</p>
+    <p>• La <strong>révolution néolithique</strong> : passage de la chasse-cueillette à l'agriculture.</p></div>
     
-    <div class="lesson-rule"><h4>🏔️ Les grands reliefs</h4>
-    <p><strong>Les montagnes :</strong></p>
-    <p>• <strong>Les Alpes</strong> : Mont Blanc (4 808 m, point culminant de l'UE), massifs du Mont-Blanc, du Pelvoux, de la Vanoise.</p>
-    <p>• <strong>Les Pyrénées</strong> : Vignemale, Pic du Midi, frontière naturelle avec l'Espagne.</p>
-    <p>• <strong>Le Massif central</strong> : volcanique (Puy de Dôme, Puy de Sancy 1 886 m), plateau granitique.</p>
-    <p>• <strong>Les Vosges</strong> : Ballon de Guebwiller (1 424 m), forêts de sapins.</p>
-    <p>• <strong>Le Jura</strong> : relief karstique, cascades du Hérisson.</p>
-    <p>• <strong>Les Cévennes</strong> : partie sud du Massif central, gorges du Tarn.</p>
-    <p style="margin-top:8px"><strong>Les plaines :</strong></p>
-    <p>• <strong>Plaine du Nord</strong> : bassin parisien (céréales, betteraves).</p>
-    <p>• <strong>Plaine de l'Est</strong> : Alsace, Lorraine (industrie, agriculture).</p>
-    <p>• <strong>Plaine du Sud-Ouest</strong> : Aquitaine (vignes, maïs).</p></div>
-    
-    <div class="lesson-rule"><h4>🌊 Les fleuves et cours d'eau</h4>
-    <table class="lesson-table"><tr><th>Fleuve</th><th>Longueur</th><th>Embouchure</th><th>Particularité</th></tr>
-    <tr><td><strong>La Loire</strong></td><td>1 012 km</td><td>océan Atlantique</td><td>Plus long fleuve de France, châteaux</td></tr>
-    <tr><td><strong>Le Rhône</strong></td><td>812 km (545 en France)</td><td>Méditerranée</td><td>Débit le plus puissant, delta (Camargue)</td></tr>
-    <tr><td><strong>La Seine</strong></td><td>776 km</td><td>Manche</td><td>Paris, port de Rouen (Le Havre)</td></tr>
-    <tr><td><strong>La Garonne</strong></td><td>647 km (575 en France)</td><td>océan Atlantique</td><td>Bordeaux, estuaire de la Gironde</td></tr>
-    <tr><td><strong>Le Rhin</strong></td><td>1 233 km (188 en France)</td><td>Mer du Nord</td><td>Frontière, port de Strasbourg</td></tr>
-    <tr><td><strong>La Meuse</strong></td><td>950 km (486 en France)</td><td>Mer du Nord</td><td>Ardennes, Rotterdam</td></tr>
-    </table></div>
+    <div class="lesson-rule"><h4>🏛️ L'Antiquité : les premières civilisations</h4>
+    <p>L'Antiquité s'étend de l'invention de l'écriture (-3300) à la chute de l'Empire romain d'Occident (476).</p>
+    <p style="margin-top:8px"><strong>1. La Mésopotamie</strong> : Sumériens (écriture cunéiforme -3300), ziggourats, Code d'Hammurabi.</p>
+    <p><strong>2. L'Égypte ancienne</strong> : Nil, pharaons (Khéops, Toutankhamon, Ramsès II), hiéroglyphes (Champollion 1822), pyramides de Gizeh.</p>
+    <p><strong>3. La Grèce antique</strong> : cités-États (Athènes/démocratie, Sparte/militaire), Jeux olympiques (-776), guerres médiques, Alexandre le Grand, philosophes (Socrate, Platon, Aristote).</p>
+    <p><strong>4. Rome antique</strong> : fondation -753, République (-509), Jules César (-100/-44), Auguste (Pax Romana), Colisée, christianisation (392), chute 476.</p></div>
     
     <div class="lesson-warning">⚠️ Attention :<br>
-    • La Loire est le plus <strong>long</strong> fleuve, le Rhône a le plus <strong>fort débit</strong>.<br>
-    • La Seine est le fleuve de Paris mais pas le plus long !<br>
-    • La France a 5 500 km de côtes (Manche, Atlantique, Méditerranée).</div>
+    • La Préhistoire s'arrête avec <strong>l'écriture</strong>, pas avec la pierre !<br>
+    • L'Antiquète ne se limite pas à Rome : Grèce, Égypte, Mésopotamie.</div>
     
-    <div class="lesson-example">✅ Points clés :<br>
-    • 13 régions | 101 départements | 35 000 communes<br>
-    • Mont Blanc 4 808 m | Étang de Lers (Ariège) -10 m<br>
-    • 5 DROM-COM | 2,5 millions de km² de ZEE (2e mondiale)<br>
-    • Fleuves : Loire (1 012 km), Rhône, Seine, Garonne, Rhin</div>`
+    <div class="lesson-example">✅ Dates clés :<br>
+    • -18 000 ans : Lascaux | -3300 : écriture cunéiforme | -2560 : pyramide de Khéops<br>
+    • -776 : Jeux olympiques | -508 : démocratie athénienne | -44 : assassinat de César | 476 : chute de Rome</div>`
     },
     {
         num: 2,
-        title: "L'Europe : pays, capitales et climats",
-        content: `<div class="lesson-rule"><h4>🌍 L'Union européenne</h4>
-    <p>L'UE compte <strong>27 pays</strong> (depuis le Brexit de 2020). Superficie : 4,2 millions km². Population : 450 millions.</p>
-    <p><strong>Les 6 pays fondateurs (1957) :</strong> France, Allemagne, Italie, Belgique, Pays-Bas, Luxembourg.</p>
-    <p><strong>Derniers entrants :</strong> Croatie (2013). Candidats : Ukraine, Moldavie, Géorgie, Albanie, Macédoine du Nord, Monténégro, Serbie, Turquie.</p>
-    <p><strong>Eurozone :</strong> 20 pays utilisent l'euro (€). Hors zone : Danemark, Suède, Pologne, Hongrie, Roumanie, Bulgarie, République tchèque.</p></div>
+        title: "Le Moyen Âge (476-1492)",
+        objective: "Du Haut Moyen Âge à la fin du Moyen Âge",
+        content: `<div class="lesson-rule"><h4>⚔️ Haut Moyen Âge (476-1000)</h4>
+    <p>Invasions barbares, Vikings, Sarrasins (bataille de Poitiers 732), Hongrois.</p>
+    <p><strong>Charlemagne</strong> (742-814) : couronné empereur 800, renaissance carolingienne, Traité de Verdun 843.</p>
+    <p><strong>Féodalité</strong> : vassalité, fiefs, trois ordres (clergé, noblesse, tiers-état).</p></div>
     
-    <div class="lesson-rule"><h4>🏛️ Capitales et pays à connaître</h4>
-    <table class="lesson-table"><tr><th>Pays</th><th>Capitale</th><th>Langue officielle</th><th>Population (M)</th></tr>
-    <tr><td>Allemagne</td><td>Berlin</td><td>Allemand</td><td>83</td></tr>
-    <tr><td>Italie</td><td>Rome</td><td>Italien</td><td>59</td></tr>
-    <tr><td>Espagne</td><td>Madrid</td><td>Espagnol</td><td>47</td></tr>
-    <tr><td>Pologne</td><td>Varsovie</td><td>Polonais</td><td>38</td></tr>
-    <tr><td>Roumanie</td><td>Bucarest</td><td>Roumain</td><td>19</td></tr>
-    <tr><td>Pays-Bas</td><td>Amsterdam</td><td>Néerlandais</td><td>17</td></tr>
-    <tr><td>Belgique</td><td>Bruxelles</td><td>Français, Néerl., Allemand</td><td>11</td></tr>
-    <tr><td>Grèce</td><td>Athènes</td><td>Grec</td><td>10</td></tr>
-    <tr><td>Portugal</td><td>Lisbonne</td><td>Portugais</td><td>10</td></tr>
-    <tr><td>Suède</td><td>Stockholm</td><td>Suédois</td><td>10</td></tr>
-    <tr><td>Autriche</td><td>Vienne</td><td>Allemand</td><td>9</td></tr>
-    <tr><td>Danemark</td><td>Copenhague</td><td>Danois</td><td>6</td></tr>
-    <tr><td>Finlande</td><td>Helsinki</td><td>Finnois, Suédois</td><td>5,5</td></tr>
-    <tr><td>Irlande</td><td>Dublin</td><td>Irlandais, Anglais</td><td>5</td></tr>
-    <tr><td>Luxembourg</td><td>Luxembourg</td><td>Luxembourgeois</td><td>0,6</td></tr>
-    </table></div>
+    <div class="lesson-rule"><h4>🏰 Bas Moyen Âge (1000-1492)</h4>
+    <p><strong>Croisades</strong> (1095-1291) : 8 expéditions, prêchées par Urbain II.</p>
+    <p><strong>Architecture gothique</strong> : arcs-boutants, vitraux (Notre-Dame de Paris 1163-1345).</p>
+    <p><strong>Guerre de Cent Ans</strong> (1337-1453) : Jeanne d'Arc libère Orléans (1429), brûlée à Rouen (1431).</p>
+    <p><strong>Peste noire</strong> (1347-1353) : 25-30 millions de morts.</p>
+    <p><strong>Universités</strong> : Bologne 1088, Paris 1150, Oxford 1167.</p></div>
     
-    <div class="lesson-rule"><h4>🌤️ Les climats européens</h4>
-    <table class="lesson-table"><tr><th>Climat</th><th>Zone</th><th>Caractéristiques</th></tr>
-    <tr><td><strong>Océanique</strong></td><td>Ouest (Bretagne, UK, Irlande)</td><td>Doux, humide, peu d'amplitude thermique</td></tr>
-    <tr><td><strong>Méditerranéen</strong></td><td>Sud (Espagne, Italie, Grèce)</td><td>Étés chauds et secs, hivers doux</td></tr>
-    <tr><td><strong>Continental</strong></td><td>Est (Pologne, Hongrie, Roumanie)</td><td>Hivers froids, étés chauds, amplitude forte</td></tr>
-    <tr><td><strong>Montagnard</strong></td><td>Alpes, Pyrénées, Carpates</td><td>Froid, neigeux, altitude</td></tr>
-    <tr><td><strong>Semi-aride</strong></td><td>Sud-Est (Espagne intérieure)</td><td>Sec, canicules</td></tr>
-    <tr><td><strong>Polaire / Subpolaire</strong></td><td>Nord (Finlande, Suède, Islande)</td><td>Froid, nuits polaires, aurores boréales</td></tr>
-    </table></div>
+    <div class="lesson-warning">⚠️ Le Moyen Âge n'est pas "sombre" ! Inventions : moulin à eau, horloge, lunettes, boussole, imprimerie (Gutenberg ~1450).<br>
+    1492 = fin du Moyen Âge : chute de Grenade, découverte de l'Amérique.</div>
     
-    <div class="lesson-example">✅ Points clés :<br>
-    • 27 pays dans l'UE | 6 fondateurs (1957) | 20 dans la zone euro<br>
-    • Plus grande ville : Berlin (3,7 M) | Plus petit pays : Malte (316 km²)<br>
-    • Mont Blanc 4 808 m (frontière France-Italie) | Volcan Etna (Sicile)<br>
-    • Climats : océanique, méditerranéen, continental, montagnard</div>`
+    <div class="lesson-example">✅ Dates clés :<br>
+    • 732 : Poitiers | 800 : Charlemagne | 843 : Verdun | 1095 : Croisades<br>
+    • 1215 : Magna Carta | 1337-1453 : Guerre de Cent Ans | 1348 : Peste noire<br>
+    • 1429 : Orléans | 1453 : Constantinople | 1492 : fin du Moyen Âge</div>`
     },
     {
         num: 3,
-        title: "Le monde : continents et océans",
-        content: `<div class="lesson-rule"><h4>🌏 Les 7 continents</h4>
-    <table class="lesson-table"><tr><th>Continent</th><th>Superficie (M km²)</th><th>Population (M)</th><th>Points clés</th></tr>
-    <tr><td><strong>Asie</strong></td><td>44,6</td><td>4 700</td><td>Plus grand et plus peuplé, Himalaya, Chine, Inde</td></tr>
-    <tr><td><strong>Afrique</strong></td><td>30,4</td><td>1 400</td><td>Sahara, Kilimandjaro, Nil, croissance démographique</td></tr>
-    <tr><td><strong>Amérique du Nord</strong></td><td>24,7</td><td>600</td><td>USA, Canada, Mexique, Grand Canyon</td></tr>
-    <tr><td><strong>Amérique du Sud</strong></td><td>17,8</td><td>430</td><td>Amazonie, Andes, Brésil, Argentine</td></tr>
-    <tr><td><strong>Antarctique</strong></td><td>14,0</td><td>0 (scientifiques)</td><td>Plus froid, glace, protocole de Madrid</td></tr>
-    <tr><td><strong>Europe</strong></td><td>10,2</td><td>750</td><td>UE, Alpes, densément peuplée</td></tr>
-    <tr><td><strong>Océanie</strong></td><td>8,5</td><td>45</td><td>Australie, Nouvelle-Zélande, îles du Pacifique</td></tr>
-    </table></div>
+        title: "Les Temps Modernes (1492-1789)",
+        objective: "Grandes Découvertes, Réforme, Absolutisme, Lumières",
+        content: `<div class="lesson-rule"><h4>🌍 Grandes Découvertes (15e-16e siècle)</h4>
+    <p>Colomb 1492, Vasco de Gama 1498, Magellan 1519-1522, Cortés (Azteques), Pizarre (Inca).</p>
+    <p>Conséquences : colonisation, traite négrière, échange colombien.</p></div>
     
-    <div class="lesson-rule"><h4>🌊 Les 5 océans</h4>
-    <table class="lesson-table"><tr><th>Océan</th><th>Superficie (M km²)</th><th>Profondeur max</th><th>Particularité</th></tr>
-    <tr><td><strong>Pacifique</strong></td><td>165</td><td>Fosse des Mariannes (-11 034 m)</td><td>Plus grand, ceinture de feu, îles</td></tr>
-    <tr><td><strong>Atlantique</strong></td><td>106</td><td>Fosse de Porto Rico (-8 605 m)</td><td>Dorsale médio-atlantique, Gulf Stream</td></tr>
-    <tr><td><strong>Indien</strong></td><td>70</td><td>Fosse de Java (-7 450 m)</td><td>Monsons, routes maritimes</td></tr>
-    <tr><td><strong>Austral / Antarctique</strong></td><td>20</td><td>-</td><td>Entre Australie et Antarctique</td></tr>
-    <tr><td><strong>Arctique</strong></td><td>14</td><td>-</td><td>Glace permanente, réchauffement rapide</td></tr>
-    </table>
-    <p style="margin-top:8px"><strong>Points extrêmes :</strong></p>
-    <p>• Point le plus haut : Everest (8 849 m, Népal/Tibet)</p>
-    <p>• Point le plus bas : Fosse des Mariannes (-11 034 m)</p>
-    <p>• Point le plus chaud : Dallol, Éthiopie (34,6°C en moyenne annuelle)</p>
-    <p>• Point le plus froid : Vostok, Antarctique (-89,2°C)</p></div>
+    <div class="lesson-rule"><h4>⛪ Réforme et guerres de religion</h4>
+    <p>Luther 1517 (95 thèses), protestantisme, guerres de religion en France (1562-1598).</p>
+    <p>Massacre de la Saint-Barthélemy 1572, Édit de Nantes 1598 (Henri IV).</p></div>
     
-    <div class="lesson-rule"><h4>🗺️ Grands repères géographiques</h4>
-    <p><strong>Parallèles importants :</strong></p>
-    <p>• <strong>Équateur (0°)</strong> : jour = nuit toute l'année, climat tropical.</p>
-    <p>• <strong>Tropique du Cancer (23,5°N)</strong> : limite nord des tropiques.</p>
-    <p>• <strong>Tropique du Capricorne (23,5°S)</strong> : limite sud des tropiques.</p>
-    <p>• <strong>Cercle polaire arctique (66,5°N)</strong> : soleil de minuit, aurores.</p>
-    <p>• <strong>Cercle polaire antarctique (66,5°S)</strong> : nuit polaire.</p>
-    <p style="margin-top:8px"><strong>Méridiens importants :</strong></p>
-    <p>• <strong>Méridien de Greenwich (0°)</strong> : référence des fuseaux horaires.</p>
-    <p>• <strong>Méridien de Paris (2°20'E)</strong> : ancienne référence française.</p></div>
+    <div class="lesson-rule"><h4>👑 Absolutisme (17e siècle)</h4>
+    <p>Louis XIII + Richelieu, Louis XIV (1643-1715) : "L'État, c'est moi", Versailles 1661-1710, révocation Édit de Nantes 1685.</p>
+    <p>Arts : Molière, Racine, Lully.</p></div>
     
-    <div class="lesson-warning">⚠️ Attention :<br>
-    • L'Asie et l'Europe forment un seul continent physique : <strong>Eurasie</strong>.<br>
-    • L'océan Austral est parfois considéré comme une extension de l'océan Pacifique, Sud et Indien.<br>
-    • L'Antarctique n'appartient à aucun pays (traité de 1959).</div>
+    <div class="lesson-rule"><h4>💡 Les Lumières (18e siècle)</h4>
+    <p>Montesquieu (Esprit des lois 1748, séparation des pouvoirs), Voltaire (tolérance), Rousseau (Contrat social 1762), Diderot (Encyclopédie 1751-1772).</p></div>
     
-    <div class="lesson-example">✅ Points clés :<br>
-    • 7 continents | 5 océans | 195 pays reconnus par l'ONU<br>
-    • Plus grand pays : Russie (17 M km²) | Plus peuplé : Inde (1,4 Mrd)<br>
-    • Plus haut : Everest 8 849 m | Plus bas : Fosse Mariannes -11 034 m<br>
-    • Plus grand désert : Sahara (9 M km²) | Plus grande forêt : Amazonie</div>`
+    <div class="lesson-warning">⚠️ Contradictions : progrès scientifiques (Copernic, Galilée, Newton) mais esclavage et extermination des peuples amérindiens.</div>
+    
+    <div class="lesson-example">✅ Dates clés :<br>
+    • 1492 : Amérique | 1517 : Luther | 1598 : Édit de Nantes | 1648 : Westphalie<br>
+    • 1685 : révocation | 1715 : mort Louis XIV | 1751-1772 : Encyclopédie | 1789 : Révolution</div>`
     },
     {
         num: 4,
-        title: "Développement et inégalités mondiales",
-        content: `<div class="lesson-rule"><h4>💰 Indicateurs de développement</h4>
-    <table class="lesson-table"><tr><th>Indicateur</th><th>Définition</th><th>Pays de référence</th></tr>
-    <tr><td><strong>PIB/habitant</strong></td><td>Richesse produite par personne</td><td>Luxembourg ($135 000), France ($40 000), Burundi ($300)</td></tr>
-    <tr><td><strong>IDH</strong> (Indice Dév. Humain)</td><td>Santé, éducation, niveau de vie (0 à 1)</td><td>Norvège (0,966), France (0,903), Niger (0,394)</td></tr>
-    <tr><td><strong>Taux d'alphabétisation</strong></td><td>% de personnes sachant lire et écrire</td><td>Andorre (100%), Mali (35%)</td></tr>
-    <tr><td><strong>Espérance de vie</strong></td><td>Années de vie moyenne</td><td>Japon (84 ans), RDC (59 ans)</td></tr>
-    <tr><td><strong>Taux de natalité</strong></td><td>Nombre de naissances pour 1 000 hab.</td><td>Niger (47‰), Corée du Sud (7‰)</td></tr>
-    <tr><td><strong>Taux de mortalité infantile</strong></td><td>Décès avant 1 an pour 1 000 naissances</td><td>Islande (2‰), Somalie (76‰)</td></tr>
-    </table></div>
+        title: "La Révolution et le 19e siècle (1789-1914)",
+        objective: "Révolution française, Empire, Industrialisation",
+        content: `<div class="lesson-rule"><h4>🔥 Révolution française (1789-1799)</h4>
+    <p>14 juillet 1789 : Bastille | 26 août 1789 : Droits de l'Homme | 21 janvier 1793 : Louis XVI guillotiné.</p>
+    <p>Terreur 1793-1794 (Robespierre), Directoire 1795-1799.</p></div>
     
-    <div class="lesson-rule"><h4>🌍 Classement des pays</h4>
-    <p><strong>Pays développés (Nord) :</strong> forte industrialisation, services dominants, HDI > 0,8.</p>
-    <p>Ex: USA, Japon, Allemagne, France, Royaume-Uni, Canada, Australie, Corée du Sud.</p>
-    <p style="margin-top:8px"><strong>Pays émergents (Sud) :</strong> croissance rapide, industrialisation en cours.</p>
-    <p>Ex: Chine, Inde, Brésil, Russie, Afrique du Sud (BRICS), Mexique, Indonésie, Turquie.</p>
-    <p style="margin-top:8px"><strong>Pays en développement / du Sud :</strong> faible industrialisation, forte dépendance agricole, HDI < 0,55.</p>
-    <p>Ex: Mali, Haïti, Afghanistan, Yémen, Tchad, Burundi, Soudan du Sud.</p>
-    <p style="margin-top:8px"><strong>Pays à revenu intermédiaire :</strong> transition entre les deux.</p>
-    <p>Ex: Maroc, Vietnam, Philippines, Égypte, Ukraine.</p></div>
+    <div class="lesson-rule"><h4>⚔️ Empire napoléonien (1799-1815)</h4>
+    <p>18 brumaire 1799 (coup d'État), couronnement 1804, Code civil 1804, Austerlitz 1805, Russie 1812, Waterloo 1815.</p></div>
     
-    <div class="lesson-rule"><h4>⚖️ Inégalités mondiales</h4>
-    <p><strong>Écart Nord-Sud :</strong></p>
-    <p>• 20% des plus riches consomment 80% des ressources mondiales.</p>
-    <p>• 10% de la population détient 76% de la richesse mondiale.</p>
-    <p>• 700 millions de personnes vivent avec moins de 2,15 $/jour.</p>
-    <p style="margin-top:8px"><strong>ODD (Objectifs de Développement Durable) :</strong></p>
-    <p>17 objectifs fixés par l'ONU en 2015 pour 2030.</p>
-    <p>Ex: faim zéro, santé, éducation, égalité, eau propre, climat.</p>
-    <p style="margin-top:8px"><strong>Dette des pays du Sud :</strong></p>
-    <p>• Dette extérieure : argent emprunté à l'étranger (FMI, Banque mondiale).</p>
-    <p>• Service de la dette : remboursement des intérêts, parfois supérieur au budget santé.</p>
-    <p>• Initiative PPTE (Pays Pauvres Très Endettés) lancée en 1996.</p></div>
+    <div class="lesson-rule"><h4>🏭 Révolution industrielle</h4>
+    <p>Watt 1769 (machine à vapeur), Stephenson 1829 (Rocket), urbanisation, prolétariat.</p>
+    <p>1848 : IIe République, abolition esclavage (Schoelcher).</p>
+    <p>1870 : Sedan, Commune 1871, IIIe République.</p>
+    <p>Jules Ferry 1881-1882 (école laïque/gratuite/obligatoire), loi 1905 (séparation Églises/État).</p></div>
     
-    <div class="lesson-example">✅ Points clés :<br>
-    • IDH max : Norvège (0,966) | IDH min : Soudan du Sud (0,385)<br>
-    • PIB/hab max : Luxembourg ($135 000) | min : Burundi ($300)<br>
-    • 17 ODD pour 2030 | 700 millions en extrême pauvreté<br>
-    • BRICS : Brésil, Russie, Inde, Chine, Afrique du Sud (+ nouveaux entrants)</div>`
+    <div class="lesson-example">✅ Dates clés :<br>
+    • 1789 : Révolution | 1804 : Code civil | 1815 : Waterloo | 1848 : IIe République<br>
+    • 1870 : Sedan | 1871 : Commune | 1881-1882 : Ferry | 1905 : séparation</div>`
     },
     {
         num: 5,
-        title: "Enjeux environnementaux du XXIe siècle",
-        content: `<div class="lesson-rule"><h4>🌡️ Le réchauffement climatique</h4>
-    <p><strong>Constats :</strong></p>
-    <p>• +1,1°C depuis l'ère préindustrielle (1850-1900).</p>
-    <p>• Objectif Accord de Paris (2015) : limiter à +1,5°C (idéal) ou +2°C (maximum).</p>
-    <p>• 2023 : année la plus chaude jamais enregistrée.</p>
-    <p style="margin-top:8px"><strong>Conséquences :</strong></p>
-    <p>• Fonte des glaces : Groenland -280 milliards tonnes/an, Antarctique instable.</p>
-    <p>• Élévation du niveau des mers : +3,4 mm/an, menace pour les îles (Maldives, Tuvalu).</p>
-    <p>• Canicules plus fréquentes : Europe 2022 (+40 000 morts), Canada 2021 (49,6°C).</p>
-    <p>• Cycles hydrologiques perturbés : sécheresses (Californie, Sahel) et inondations (Pakistan 2022).</p>
-    <p>• Acidification des océans : -30% de pH depuis 1850, menace coraux et coquillages.</p></div>
+        title: "Le 20e siècle : Guerres et Mondialisation (1914-2000)",
+        objective: "De 1914 à la chute du Mur de Berlin",
+        content: `<div class="lesson-rule"><h4>💥 Première Guerre mondiale (1914-1918)</h4>
+    <p>28 juin 1914 : Sarajevo | 1916 : Verdun (700 000 morts), Somme (1 million) | 11 novembre 1918 : armistice.</p>
+    <p>Traité de Versailles 1919 : humiliation allemande.</p></div>
     
-    <div class="lesson-rule"><h4>🌳 Déforestation et biodiversité</h4>
-    <table class="lesson-table"><tr><th>Zone</th><th>Taux de perte</th><th>Causes principales</th></tr>
-    <tr><td><strong>Amazonie</strong></td><td>17% depuis 1970</td><td>Agriculture (soja, élevage), mines, routes</td></tr>
-    <tr><td><strong>Bornéo</strong></td><td>30% depuis 1973</td><td>Palmiers à huile, bois tropical</td></tr>
-    <tr><td><strong>Congo</strong></td><td>10% depuis 2000</td><td>Agriculture itinérante, bois de chauffe</td></tr>
-    <tr><td><strong>Indonésie</strong></td><td>25% depuis 2000</td><td>Palmiers à huile, incendies</td></tr>
-    </table>
-    <p style="margin-top:8px"><strong>6e extinction de masse :</strong> 1 million d'espèces menacées (IPBES 2019).</p>
-    <p>• Rhinocéros noir, pangolin, tigre de Sumatra, gorille des montagnes.</p>
-    <p>• Coraux : 50% des récifs mondiaux menacés d'ici 2050.</p>
-    <p>• Abeilles : 40% des colonies disparaissent chaque année.</p></div>
+    <div class="lesson-rule"><h4>⚡ Entre-deux-guerres</h4>
+    <p>Révolution russe 1917 (Lénine, bolcheviks), URSS 1922.</p>
+    <p>Krach 1929 (Jeudi noir), Grande Dépression.</p>
+    <p>Régimes totalitaires : Mussolini 1922 (fascisme), Hitler 1933 (nazisme), Staline (goulags).</p></div>
     
-    <div class="lesson-rule"><h4>♻️ Transition écologique et énergies</h4>
-    <p><strong>Mix énergétique mondial (2023) :</strong></p>
-    <p>• Pétrole : 31% | Charbon : 27% | Gaz : 23% | Nucléaire : 4% | Renouvelables : 15%</p>
-    <p style="margin-top:8px"><strong>Énergies renouvelables :</strong></p>
-    <p>• <strong>Solaire</strong> : coût divisé par 10 en 10 ans, leader Chine.</p>
-    <p>• <strong>Éolien</strong> : offshore en expansion (Mer du Nord).</p>
-    <p>• <strong>Hydraulique</strong> : barrages (Trois-Gorges, Chine : 22 500 MW).</p>
-    <p>• <strong>Géothermie</strong> : Islande (90% du chauffage).</p>
-    <p style="margin-top:8px"><strong>Accords internationaux :</strong></p>
-    <p>• <strong>Protocole de Montréal (1987)</strong> : protection couche d'ozone (succès !).</p>
-    <p>• <strong>Protocole de Kyoto (1997)</strong> : premiers engagements réduction CO2.</p>
-    <p>• <strong>Accord de Paris (2015)</strong> : +1,5°C, contributions nationales (NDC).</p>
-    <p>• <strong>COP28 (2023)</strong> : transition "hors des énergies fossiles".</p></div>
+    <div class="lesson-rule"><h4>🔥 Seconde Guerre mondiale (1939-1945)</h4>
+    <p>1er septembre 1939 : invasion Pologne | 18 juin 1940 : appel de Gaulle | Régime de Vichy.</p>
+    <p>Holocauste : 6 millions de Juifs. 6 juin 1944 : Débarquement (Overlord). 25 août 1944 : libération Paris. 8 mai 1945 : VE Day. 6/9 août 1945 : Hiroshima/Nagasaki.</p></div>
     
-    <div class="lesson-rule"><h4>💧 Ressources en eau et sécurité alimentaire</h4>
-    <p><strong>Stress hydrique :</strong></p>
-    <p>• 2,2 milliards de personnes sans accès à l'eau potable gérée en toute sécurité.</p>
-    <p>• Aquifères fossiles surexploités : Nubien (Afrique), Ogallala (USA).</p>
-    <p>• Fleuves partagés : Nil (11 pays), Mékong (6 pays), Danube (19 pays).</p>
-    <p style="margin-top:8px"><strong>Sécurité alimentaire :</strong></p>
-    <p>• 735 millions de personnes sous-alimentées (2023).</p>
-    <p>• Gaspillage : 1/3 de la nourriture produite est perdue.</p>
-    <p>• Agriculture intensive : pesticides, OGM, élevage industriel.</p>
-    <p>• Agriculture biologique : 2% des terres agricoles mondiales.</p></div>
+    <div class="lesson-rule"><h4>🌍 Guerre froide et décolonisation (1947-1991)</h4>
+    <p>OTAN 1949, Pacte de Varsovie 1955, Mur de Berlin 1961-1989 (chute 9 nov 1989).</p>
+    <p>Décolonisation : Inde 1947, Algérie 1954-1962 (indépendance 5 juillet 1962).</p>
+    <p>Chute URSS décembre 1991, traité de Maastricht 1992 (UE).</p></div>
     
-    <div class="lesson-warning">⚠️ Attention :<br>
-    • Le réchauffement n'est pas uniforme : +2°C en moyenne = +4°C en Arctique.<br>
-    • "Hors énergies fossiles" (COP28) ≠ "hors pétrole/gaz/charbon" immédiatement.<br>
-    • La déforestation en Amazonie approche le "point de non-retour" (20-25%).</div>
+    <div class="lesson-warning">⚠️ Bilan : 70 millions de morts en 2 guerres mondiales, génocides, mais aussi progrès (droits de l'homme, espace 1969).</div>
     
-    <div class="lesson-example">✅ Points clés :<br>
-    • +1,1°C depuis 1850 | Objectif +1,5°C | 2023 année record<br>
-    • 1 million d'espèces menacées | 6e extinction de masse en cours<br>
-    • 15% d'énergies renouvelables | COP28 : transition hors fossiles<br>
-    • 735 millions sous-alimentés | 2,2 Mds sans eau potable sûre</div>`
+    <div class="lesson-example">✅ Dates clés :<br>
+    • 1914-1918 : WWI | 1917 : Révolution russe | 1929 : Krach | 1939-1945 : WWII<br>
+    • 1940 : 18 juin | 1944 : Débarquement | 1945 : Hiroshima | 1962 : Algérie indépendante<br>
+    • 1989 : Mur de Berlin | 1991 : chute URSS | 1992 : Maastricht</div>`
     }
-];
+]
   /* fin LESSONS_DATA */
 
 
@@ -801,247 +683,246 @@
      ══════════════════════════════════════════════════════ */
   const QUESTIONS_DB = {
     1: {
-        title: "La France 🗺️",
-        objective: "Territoire, régions, reliefs, fleuves",
-        qcm: [
-            {q: "Combien de régions compte la France métropolitaine depuis 2016 ?", options: ["13", "18", "22", "26"], correct: "13", explanation: "La France métropolitaine compte 13 régions depuis la réforme territoriale de 2016 (anciennement 22)."},
-            {q: "Quelle est la superficie totale de la France (métropole + outre-mer) ?", options: ["551 000 km²", "643 801 km²", "675 000 km²", "720 000 km²"], correct: "643 801 km²", explanation: "La France métropolitaine fait 551 000 km², avec les outre-mer cela fait 643 801 km² (1er pays de l'UE)."},
-            {q: "Quel est le point culminant de la France métropolitaine ?", options: ["Mont Pelvoux", "Pic du Midi", "Mont Blanc", "Puy de Sancy"], correct: "Mont Blanc", explanation: "Le Mont Blanc culmine à 4 808 m, c'est aussi le plus haut sommet de l'Union européenne."},
-            {q: "Quelle est l'altitude du Mont Blanc ?", options: ["4 105 m", "4 808 m", "5 102 m", "3 900 m"], correct: "4 808 m", explanation: "4 808 mètres, frontière France-Italie-Suisse."},
-            {q: "Quel massif montagneux sépare la France de l'Espagne ?", options: ["Les Alpes", "Les Vosges", "Les Pyrénées", "Le Jura"], correct: "Les Pyrénées", explanation: "Les Pyrénées forment une frontière naturelle de la Méditerranée à l'Atlantique."},
-            {q: "Quel est le plus long fleuve de France ?", options: ["Le Rhône", "La Seine", "La Loire", "Le Rhin"], correct: "La Loire", explanation: "La Loire mesure 1 012 km, c'est le plus long fleuve entièrement en France."},
-            {q: "Quel fleuve français a le débit le plus puissant ?", options: ["La Loire", "La Seine", "Le Rhône", "La Garonne"], correct: "Le Rhône", explanation: "Le Rhône a le débit le plus important grâce aux glaciers des Alpes et à son bassin versant."},
-            {q: "Quel fleuve traverse Paris ?", options: ["La Loire", "Le Rhône", "La Seine", "La Marne"], correct: "La Seine", explanation: "La Seine traverse Paris sur 13 km, avec 37 ponts dans la capitale."},
-            {q: "Quel fleuve se jette dans la Méditerranée ?", options: ["La Loire", "Le Rhône", "La Seine", "La Garonne"], correct: "Le Rhône", explanation: "Le Rhône se jette dans la Méditerranée par un delta : la Camargue."},
-            {q: "Quel est le plus grand département français (outre-mer inclus) ?", options: ["Nord", "Gironde", "Guyane", "Paris"], correct: "Guyane", explanation: "La Guyane est le plus grand département avec 83 534 km² (forêt amazonienne)."},
-            {q: "Quelle région française est connue pour ses châteaux de la Renaissance ?", options: ["Bretagne", "Alsace", "Centre-Val de Loire", "Provence"], correct: "Centre-Val de Loire", explanation: "Le Val de Loire est inscrit au patrimoine mondial de l'UNESCO pour ses châteaux (Chambord, Chenonceau)."},
-            {q: "Quel volcan français est encore en activité ?", options: ["Puy de Dôme", "Montagne Pelée", "Piton de la Fournaise", "Vesuve"], correct: "Piton de la Fournaise", explanation: "Le Piton de la Fournaise (La Réunion) est l'un des volcans les plus actifs au monde."},
-            {q: "Quel est le plus haut sommet du Massif central ?", options: ["Puy de Dôme", "Mont Aigoual", "Puy de Sancy", "Mont Lozère"], correct: "Puy de Sancy", explanation: "Le Puy de Sancy culmine à 1 886 m, c'est un ancien volcan."},
-            {q: "Quelle mer borde la côte méditerranéenne française ?", options: ["Mer du Nord", "Manche", "Mer Méditerranée", "Océan Atlantique"], correct: "Mer Méditerranée", explanation: "La Côte d'Azur borde la Méditerranée, avec des villes comme Nice, Cannes, Marseille."},
-            {q: "Quel département français est une île en Méditerranée ?", options: ["Haute-Corse", "Var", "Pyrénées-Orientales", "Alpes-Maritimes"], correct: "Haute-Corse", explanation: "La Corse est divisée en deux départements : Haute-Corse (2B) et Corse-du-Sud (2A)."},
-            {q: "Quelle chaîne de montagnes borde l'Alsace ?", options: ["Les Alpes", "Les Pyrénées", "Les Vosges", "Le Jura"], correct: "Les Vosges", explanation: "Les Vosges séparent l'Alsace de la Lorraine, avec le Ballon de Guebwiller (1 424 m)."},
-            {q: "Quel fleuve forme une partie de la frontière entre la France et l'Allemagne ?", options: ["La Meuse", "Le Rhin", "La Moselle", "La Sarre"], correct: "Le Rhin", explanation: "Le Rhin sert de frontière sur 188 km entre Strasbourg et Bâle."},
-            {q: "Quelle est la région la plus peuplée de France ?", options: ["Île-de-France", "Auvergne-Rhône-Alpes", "Hauts-de-France", "Nouvelle-Aquitaine"], correct: "Île-de-France", explanation: "L'Île-de-France compte 12,2 millions d'habitants (Paris et sa région)."},
-            {q: "Quel est le plus petit département français ?", options: ["Paris", "Hauts-de-Seine", "Seine-Saint-Denis", "Val-de-Marne"], correct: "Paris", explanation: "Paris (75) fait 105 km², c'est le plus petit département mais le plus densément peuplé."},
-            {q: "Quel océan borde la côte ouest de la France ?", options: ["Océan Indien", "Océan Pacifique", "Océan Atlantique", "Mer du Nord"], correct: "Océan Atlantique", explanation: "L'Atlantique borde les côtes de la Bretagne, de la Vendée, de la Gironde et du Pays basque."}
+        title: "Préhistoire & Antiquité 🦴🏛️",
+        objective: "De la Préhistoire à la chute de Rome",
+        "qcm": [
+            {q: "La Préhistoire s'arrête avec l'invention de...", options: ["la roue", "l'écriture", "le feu", "l'agriculture"], correct: "l'écriture", explanation: "La Préhistoire s'arrête avec l'invention de l'écriture (vers -3300 en Mésopotamie)."},
+            {q: "La grotte de Lascaux se trouve dans quel département ?", options: ["la Dordogne", "la Vienne", "le Morbihan", "la Haute-Garonne"], correct: "la Dordogne", explanation: "Lascaux est en Dordogne, avec des peintures datant d'environ -18 000 ans."},
+            {q: "Quel peuple a inventé l'écriture cunéiforme ?", options: ["les Égyptiens", "les Sumériens", "les Grecs", "les Romains"], correct: "les Sumériens", explanation: "Les Sumériens en Mésopotamie ont inventé l'écriture cunéiforme vers -3300."},
+            {q: "Sur quoi écrivaient les Sumériens ?", options: ["du papyrus", "des tablettes d'argile", "du parchemin", "de la pierre"], correct: "des tablettes d'argile", explanation: "Les Sumériens écrivaient sur des tablettes d'argile avec un stylet."},
+            {q: "Quel fleuve fertilisait l'Égypte ancienne ?", options: ["le Tigre", "l'Euphrate", "le Nil", "le Danube"], correct: "le Nil", explanation: "Le Nil fertilisait les terres grâce à sa crue annuelle."},
+            {q: "Qui a déchiffré les hiéroglyphes égyptiens ?", options: ["Archimède", "Champollion", "Aristote", "César"], correct: "Champollion", explanation: "Champollion a déchiffré les hiéroglyphes en 1822 grâce à la pierre de Rosette."},
+            {q: "La plus grande pyramide d'Égypte est celle de...", options: ["Toutankhamon", "Ramsès II", "Khéops", "Akhenaton"], correct: "Khéops", explanation: "La pyramide de Khéops à Gizeh fait 146 mètres de haut."},
+            {q: "Quelle est la date des premiers Jeux olympiques ?", options: ["-776", "-508", "-490", "-330"], correct: "-776", explanation: "Les premiers Jeux olympiques ont eu lieu en -776 à Olympie."},
+            {q: "Quelle cité grecque est connue pour sa démocratie ?", options: ["Sparte", "Corinthe", "Athènes", "Thèbes"], correct: "Athènes", explanation: "Athènes est la célèbre cité-démocratie, sous Périclès au Ve siècle."},
+            {q: "Quelle cité grecque est connue pour son armée ?", options: ["Athènes", "Sparte", "Corinthe", "Delphes"], correct: "Sparte", explanation: "Sparte était une société militaire où les garçons étaient entraînés dès l'enfance."},
+            {q: "Qui a dit 'Connais-toi toi-même' ?", options: ["Platon", "Aristote", "Socrate", "Alexandre"], correct: "Socrate", explanation: "Socrate est connu pour cette maxime et sa méthode de questionnement."},
+            {q: "Qui a écrit 'La République' ?", options: ["Socrate", "Platon", "Aristote", "Homère"], correct: "Platon", explanation: "Platon a écrit 'La République', un dialogue sur la justice et l'État idéal."},
+            {q: "Qui était le précepteur d'Alexandre le Grand ?", options: ["Platon", "Socrate", "Aristote", "Pythagore"], correct: "Aristote", explanation: "Aristote a été le précepteur du jeune Alexandre."},
+            {q: "De quelle date date la fondation légendaire de Rome ?", options: ["-753", "-509", "-44", "-27"], correct: "-753", explanation: "La fondation légendaire de Rome par Romulus et Rémus date de -753."},
+            {q: "Quelle bataille a opposé Rome à Carthage ?", options: ["Marathon", "Salamine", "les guerres puniques", "Thermopyles"], correct: "les guerres puniques", explanation: "Les trois guerres puniques (-264 à -146) ont opposé Rome à Carthage."},
+            {q: "Qui a dit 'Le sort en est jeté' (Alea jacta est) ?", options: ["Auguste", "César", "Pompée", "Cicéron"], correct: "César", explanation: "Jules César a prononcé cette phrase en franchissant le Rubicon en -49."},
+            {q: "Quel empereur a instauré la Pax Romana ?", options: ["Jules César", "Néron", "Auguste", "Marc Aurèle"], correct: "Auguste", explanation: "Auguste (-27 à 14) a instauré la paix romaine (Pax Romana)."},
+            {q: "Quel monument romain accueillait 50 000 spectateurs ?", options: ["le Panthéon", "le Colisée", "les thermes", "le Forum"], correct: "le Colisée", explanation: "Le Colisée de Rome est un amphithéâtre de 50 000 places pour les gladiateurs."},
+            {q: "En quelle année le christianisme devient-il religion officielle ?", options: ["313", "325", "392", "476"], correct: "392", explanation: "Théodose Ier a fait du christianisme la religion officielle en 392."},
+            {q: "Quelle date marque la chute de l'Empire romain d'Occident ?", options: ["313", "392", "410", "476"], correct: "476", explanation: "En 476, Odoacre dépose Romulus Augustule, dernier empereur d'Occident."}
         ],
-        libre: [
-            {q: "La France métropolitaine compte ___ régions depuis 2016.", answer: "13", alternatives: ["treize"], explanation: "13 régions depuis la réforme territoriale de 2016."},
-            {q: "Le Mont Blanc culmine à ___ mètres.", answer: "4808", alternatives: ["4 808", "4.808", "quatre mille huit cent huit"], explanation: "4 808 m, point culminant de l'UE."},
-            {q: "Les ___ séparent la France de l'Espagne.", answer: "Pyrénées", alternatives: ["pyrénées", "Pyrenees", "pyrenees"], explanation: "Chaîne montagneuse frontalière."},
-            {q: "Le plus long fleuve de France est la ___ (1 012 km).", answer: "Loire", alternatives: ["loire"], explanation: "La Loire, de la source (Mont Gerbier de Jonc) à l'océan."},
-            {q: "Le fleuve avec le débit le plus puissant est le ___.", answer: "Rhône", alternatives: ["rhône", "Rhone", "rhone"], explanation: "Le Rhône, grâce aux glaciers alpins."},
-            {q: "Le fleuve qui traverse Paris est la ___.", answer: "Seine", alternatives: ["seine"], explanation: "La Seine, 776 km de long."},
-            {q: "Le fleuve qui se jette dans la Méditerranée est le ___.", answer: "Rhône", alternatives: ["rhône", "Rhone", "rhone"], explanation: "Le Rhône et son delta (Camargue)."},
-            {q: "Le plus grand département français est la ___ (83 534 km²).", answer: "Guyane", alternatives: ["guyane", "Guyane française", "guyane française"], explanation: "La Guyane, forêt amazonienne."},
-            {q: "La région des châteaux de la Renaissance est le Val de ___.", answer: "Loire", alternatives: ["loire", "Val de Loire", "val de loire", "Centre-Val de Loire"], explanation: "Patrimoine mondial de l'UNESCO."},
-            {q: "Le volcan actif de La Réunion s'appelle le Piton de la ___.", answer: "Fournaise", alternatives: ["fournaise", "Piton de la Fournaise"], explanation: "L'un des volcans les plus actifs au monde."},
-            {q: "Le plus haut sommet du Massif central est le Puy de ___ (1 886 m).", answer: "Sancy", alternatives: ["sancy", "Puy de Sancy"], explanation: "Ancien volcan, station de ski."},
-            {q: "La mer qui borde la Côte d'Azur est la mer ___.", answer: "Méditerranée", alternatives: ["méditerranée", "Mediteranee", "mediteranee", "Méditerranée"], explanation: "Mer Méditerranée."},
-            {q: "La Corse est divisée en Haute-Corse et Corse-du-___.", answer: "Sud", alternatives: ["sud"], explanation: "Deux départements : 2B et 2A."},
-            {q: "Les ___ séparent l'Alsace de la Lorraine.", answer: "Vosges", alternatives: ["vosges"], explanation: "Chaîne des Vosges."},
-            {q: "Le ___ forme la frontière entre la France et l'Allemagne.", answer: "Rhin", alternatives: ["rhin", "Rhin"], explanation: "188 km de frontière fluviale."},
-            {q: "La région la plus peuplée de France est l'___-de-France.", answer: "Île", alternatives: ["île", "Ile", "ile", "Île-de-France"], explanation: "12,2 millions d'habitants."},
-            {q: "Le plus petit département français est ___ (105 km²).", answer: "Paris", alternatives: ["paris", "75"], explanation: "Paris, département 75."},
-            {q: "L'océan qui borde la côte ouest est l'océan ___.", answer: "Atlantique", alternatives: ["atlantique"], explanation: "Océan Atlantique."},
-            {q: "La ___ est la région la plus vaste de France métropolitaine (84 000 km²).", answer: "Nouvelle-Aquitaine", alternatives: ["nouvelle-aquitaine", "Nouvelle Aquitaine", "nouvelle aquitaine", "Aquitaine"], explanation: "Nouvelle-Aquitaine (Bordeaux, Limoges, Pau)."},
-            {q: "Le département français situé en Amérique du Sud est la ___.", answer: "Guyane", alternatives: ["guyane", "Guyane française", "guyane française"], explanation: "Guyane, territoire ultramarin."}
+        "libre": [
+            {q: "La Préhistoire s'arrête avec l'invention de l'___", answer: "écriture", explanation: "L'écriture marque la fin de la Préhistoire (vers -3300)."},
+            {q: "La grotte de Lascaux se trouve dans le département de la ___", answer: "Dordogne", alternatives: ["dordogne"], explanation: "Lascaux est en Dordogne."},
+            {q: "Les ___ ont inventé l'écriture cunéiforme.", answer: "Sumériens", alternatives: ["sumériens", "Sumeriens", "sumeriens"], explanation: "Les Sumériens en Mésopotamie."},
+            {q: "Les Sumériens écrivaient sur des tablettes d'___", answer: "argile", explanation: "Ils utilisaient des tablettes d'argile et un stylet."},
+            {q: "Le fleuve qui fertilisait l'Égypte ancienne s'appelle le ___", answer: "Nil", alternatives: ["nil"], explanation: "Le Nil et sa crue annuelle."},
+            {q: "___ a déchiffré les hiéroglyphes en 1822.", answer: "Champollion", alternatives: ["champollion", "Jean-François Champollion"], explanation: "Champollion grâce à la pierre de Rosette."},
+            {q: "La plus grande pyramide est celle du pharaon ___", answer: "Khéops", alternatives: ["khéops", "Kheops", "kheops", "Khufu"], explanation: "La pyramide de Khéops fait 146 m."},
+            {q: "Les premiers Jeux olympiques datent de ___ avant J.-C.", answer: "776", alternatives: ["-776"], explanation: "-776 à Olympie."},
+            {q: "La cité grecque de la démocratie est ___", answer: "Athènes", alternatives: ["athènes", "Athenes", "athenes"], explanation: "Athènes sous Périclès."},
+            {q: "La cité grecque militaire est ___", answer: "Sparte", alternatives: ["sparte"], explanation: "Sparte, société des guerriers."},
+            {q: "'Connais-toi toi-même' est une maxime de ___", answer: "Socrate", alternatives: ["socrate"], explanation: "Socrate et sa méthode."},
+            {q: "Platon a écrit 'La ___'", answer: "République", alternatives: ["république", "Republique", "republique"], explanation: "'La République' de Platon."},
+            {q: "___ a été le précepteur d'Alexandre le Grand.", answer: "Aristote", alternatives: ["aristote"], explanation: "Aristote a enseigné à Alexandre."},
+            {q: "La fondation légendaire de Rome date de ___ avant J.-C.", answer: "753", alternatives: ["-753"], explanation: "-753, Romulus et Rémus."},
+            {q: "___ a franchi le Rubicon en -49.", answer: "César", alternatives: ["césar", "Jules César", "jules césar", "Jules Cesar", "jules cesar"], explanation: "Jules César : 'Alea jacta est'."},
+            {q: "___ a instauré la Pax Romana.", answer: "Auguste", alternatives: ["auguste", "Auguste"], explanation: "Auguste, premier empereur."},
+            {q: "L'amphithéâtre romain de 50 000 places s'appelle le ___", answer: "Colisée", alternatives: ["colisée", "Colisee", "colisee", "Colisée de Rome"], explanation: "Le Colisée de Rome."},
+            {q: "En ___, Théodose fait du christianisme la religion officielle.", answer: "392", explanation: "392 apr. J.-C."},
+            {q: "L'Empire romain d'Occident tombe en ___", answer: "476", explanation: "476 : fin de l'Empire romain d'Occident."},
+            {q: "Les guerres entre Rome et Carthage s'appellent les guerres ___", answer: "puniques", alternatives: ["Puniques"], explanation: "Trois guerres puniques."}
         ]
     },
     2: {
-        title: "L'Europe 🇪🇺",
-        objective: "Pays, capitales, climats, Union européenne",
-        qcm: [
-            {q: "Combien de pays compte l'Union européenne depuis le Brexit ?", options: ["25", "26", "27", "28"], correct: "27", explanation: "27 pays depuis le départ du Royaume-Uni le 31 janvier 2020."},
-            {q: "Quel pays a quitté l'UE en 2020 (Brexit) ?", options: ["Irlande", "Danemark", "Royaume-Uni", "Suède"], correct: "Royaume-Uni", explanation: "Le Royaume-Uni a quitté l'UE le 31 janvier 2020 après un référendum en 2016."},
-            {q: "Quelle est la capitale de l'Allemagne ?", options: ["Munich", "Francfort", "Berlin", "Hambourg"], correct: "Berlin", explanation: "Berlin est la capitale depuis la réunification de 1990 (3,7 millions d'habitants)."},
-            {q: "Quelle est la capitale de l'Italie ?", options: ["Milan", "Rome", "Naples", "Turin"], correct: "Rome", explanation: "Rome, ville éternelle, siège du Vatican."},
-            {q: "Quelle est la capitale de l'Espagne ?", options: ["Barcelone", "Séville", "Madrid", "Valence"], correct: "Madrid", explanation: "Madrid, au centre de la péninsule ibérique."},
-            {q: "Quelle est la capitale de la Pologne ?", options: ["Cracovie", "Varsovie", "Gdansk", "Wroclaw"], correct: "Varsovie", explanation: "Varsovie, reconstruite après sa destruction en 1944."},
-            {q: "Quel pays européen a trois langues officielles (français, néerlandais, allemand) ?", options: ["Suisse", "Belgique", "Luxembourg", "Autriche"], correct: "Belgique", explanation: "La Belgique a trois communautés linguistiques : flamande, wallonne, germanophone."},
-            {q: "Quelle ville est le siège principal des institutions de l'UE ?", options: ["Strasbourg", "Bruxelles", "Luxembourg", "Francfort"], correct: "Bruxelles", explanation: "Bruxelles est le siège de la Commission européenne et du Conseil de l'UE."},
-            {q: "Quel pays européen est connu pour ses fjords ?", options: ["Suède", "Norvège", "Finlande", "Danemark"], correct: "Norvège", explanation: "La Norvège est célèbre pour ses fjords (Sognefjord, Geirangerfjord)."},
-            {q: "Quel pays des Balkans est membre de l'UE depuis 2013 ?", options: ["Serbie", "Croatie", "Albanie", "Macédoine du Nord"], correct: "Croatie", explanation: "La Croatie a rejoint l'UE le 1er juillet 2013."},
-            {q: "Quel climat domine sur la côte atlantique de l'Europe ?", options: ["Méditerranéen", "Continental", "Océanique", "Montagnard"], correct: "Océanique", explanation: "Climat océanique : doux, humide, peu d'amplitude thermique (Bretagne, UK, Irlande)."},
-            {q: "Quel climat caractérise le Sud de l'Europe (Espagne, Italie, Grèce) ?", options: ["Océanique", "Méditerranéen", "Continental", "Polaire"], correct: "Méditerranéen", explanation: "Étés chauds et secs, hivers doux et humides."},
-            {q: "Quel pays européen a le PIB par habitant le plus élevé ?", options: ["Allemagne", "France", "Luxembourg", "Suisse"], correct: "Luxembourg", explanation: "Luxembourg : environ 135 000 $/habitant (centre financier)."},
-            {q: "Quelle mer borde l'Europe du Nord ?", options: ["Mer Méditerranée", "Mer Baltique", "Mer du Nord", "Mer Noire"], correct: "Mer du Nord", explanation: "La Mer du Nord borde le Royaume-Uni, la Norvège, le Danemark, l'Allemagne, les Pays-Bas."},
-            {q: "Quel fleuve traverse Vienne (Autriche) et Budapest (Hongrie) ?", options: ["Le Danube", "Le Rhin", "L'Elbe", "La Vistule"], correct: "Le Danube", explanation: "Le Danube traverse 10 pays et 4 capitales (Vienne, Bratislava, Budapest, Belgrade)."},
-            {q: "Quelle chaîne de montagnes sépare l'Europe de l'Asie ?", options: ["Les Alpes", "L'Oural", "Les Carpates", "Les Pyrénées"], correct: "L'Oural", explanation: "L'Oural est considéré comme la frontière Europe-Asie."},
-            {q: "Quel pays européen est le plus grand en superficie ?", options: ["France", "Allemagne", "Ukraine", "Espagne"], correct: "Ukraine", explanation: "L'Ukraine fait 603 000 km², c'est le plus grand pays entièrement en Europe."},
-            {q: "Quelle île méditerranéenne appartient à la France ?", options: ["Sicile", "Sardaigne", "Corse", "Malte"], correct: "Corse", explanation: "La Corse est une île française en Méditerranée, au sud-est de la France continentale."},
-            {q: "Quel volcan actif se trouve en Sicile (Italie) ?", options: ["Vésuve", "Etna", "Stromboli", "Vulcano"], correct: "Etna", explanation: "L'Etna est le volcan actif le plus haut d'Europe (3 357 m)."},
-            {q: "Quel pays européen n'utilise PAS l'euro ?", options: ["France", "Allemagne", "Pologne", "Italie"], correct: "Pologne", explanation: "La Pologne utilise le zloty. Les pays hors zone euro : Danemark, Suède, Pologne, Hongrie, Roumanie, Bulgarie, R. tchèque."}
+        title: "Le Moyen Âge ⚔️🏰",
+        objective: "De 476 à 1492 : Charlemagne, Croisades, Guerre de Cent Ans",
+        "qcm": [
+            {q: "En quelle année Charlemagne est-il couronné empereur ?", options: ["742", "800", "843", "732"], correct: "800", explanation: "Charlemagne est couronné empereur d'Occident le 25 décembre 800 par le pape Léon III."},
+            {q: "Quel traité divise l'empire de Charlemagne en 843 ?", options: ["Traité de Verdun", "Traité de Westphalie", "Traité de Paris", "Traité de Versailles"], correct: "Traité de Verdun", explanation: "Le Traité de Verdun (843) divise l'empire entre les petits-fils de Charlemagne."},
+            {q: "Quelle bataille en 732 arrête l'avancée arabe ?", options: ["Poitiers", "Marathon", "Waterloo", "Austerlitz"], correct: "Poitiers", explanation: "Charles Martel arrête les Arabes à Poitiers (ou Tours) en 732."},
+            {q: "Qui a prêché la première Croisade en 1095 ?", options: ["Charlemagne", "Urbain II", "Innocent III", "Clément V"], correct: "Urbain II", explanation: "Le pape Urbain II prêche la première Croisade à Clermont en 1095."},
+            {q: "Quelle ville est libérée par Jeanne d'Arc en 1429 ?", options: ["Paris", "Reims", "Orléans", "Rouen"], correct: "Orléans", explanation: "Jeanne d'Arc libère Orléans le 8 mai 1429."},
+            {q: "En quelle année Jeanne d'Arc est-elle brûlée vive ?", options: ["1429", "1430", "1431", "1435"], correct: "1431", explanation: "Jeanne d'Arc est brûlée vive à Rouen le 30 mai 1431."},
+            {q: "Quelle épidémie a tué un tiers des Européens au XIVe siècle ?", options: ["la variole", "la peste noire", "le choléra", "la grippe espagnole"], correct: "la peste noire", explanation: "La peste bubonique (1347-1353) tue 25 à 30 millions d'Européens."},
+            {q: "Quel roi anglais signe la Magna Carta en 1215 ?", options: ["Richard Cœur de Lion", "Jean sans Terre", "Henri V", "Édouard III"], correct: "Jean sans Terre", explanation: "Jean sans Terre signe la Magna Carta en 1215 (charte des libertés)."},
+            {q: "Quel style architectural caractérise les cathédrales du XIIe-XVe siècle ?", options: ["roman", "gothique", "baroque", "renaissance"], correct: "gothique", explanation: "Le style gothique : arcs-boutants, vitraux, ogives (Notre-Dame de Paris)."},
+            {q: "Quelle université est la plus ancienne d'Europe ?", options: ["Paris", "Oxford", "Bologne", "Salamanque"], correct: "Bologne", explanation: "Bologne (Italie) fondée en 1088 est la plus ancienne université."},
+            {q: "Quels peuples ont pillé les côtes européennes au VIIIe-XIe siècle ?", options: ["les Sarrasins", "les Hongrois", "les Vikings", "les Mongols"], correct: "les Vikings", explanation: "Les Vikings (Normands, Danois) naviguaient et pillaient les côtes."},
+            {q: "Quel roi de France a dit 'Paris vaut bien une messe' ?", options: ["François Ier", "Henri IV", "Louis XIV", "Henri III"], correct: "Henri IV", explanation: "Henri IV, protestant, se convertit au catholicisme en 1593."},
+            {q: "Quel édit de 1598 accorde la liberté de culte aux protestants ?", options: ["Édit de Nantes", "Édit de Fontainebleau", "Édit de Milan", "Édit de Worms"], correct: "Édit de Nantes", explanation: "L'Édit de Nantes (1598) accorde la liberté de culte aux huguenots."},
+            {q: "Quelle guerre oppose la France et l'Angleterre de 1337 à 1453 ?", options: ["guerre de Trente Ans", "guerre de Cent Ans", "guerre de Succession", "guerre de Sept Ans"], correct: "guerre de Cent Ans", explanation: "La Guerre de Cent Ans (1337-1453) pour la couronne française."},
+            {q: "Quel événement de 1492 marque la fin du Moyen Âge ?", options: ["bataille de Marignan", "chute de Grenade", "bataille de Pavia", "paix d'Augbourg"], correct: "chute de Grenade", explanation: "La chute de Grenade (2 janvier 1492) marque la fin de la Reconquista et du Moyen Âge."},
+            {q: "Quel moine allemand affiche ses 95 thèses en 1517 ?", options: ["Calvin", "Luther", "Zwingli", "Erasmus"], correct: "Luther", explanation: "Martin Luther affiche ses 95 thèses à Wittenberg le 31 octobre 1517."},
+            {q: "Quel est le nom du système politique du Moyen Âge basé sur les fiefs ?", options: ["monarchie absolue", "féodalité", "démocratie", "théocratie"], correct: "féodalité", explanation: "La féodalité repose sur les liens de vassalité et les fiefs."},
+            {q: "Quelle est la date de la prise de Constantinople par les Ottomans ?", options: ["1453", "1492", "1517", "1529"], correct: "1453", explanation: "Constantinople tombe le 29 mai 1453, fin de l'Empire byzantin."},
+            {q: "Quels étaient les trois ordres de la société féodale ?", options: ["Paysans, artisans, marchands", "Clergé, noblesse, tiers-état", "Roitelets, vassaux, serfs", "Chevaliers, moines, bourgeois"], correct: "Clergé, noblesse, tiers-état", explanation: "La société féodale était divisée en trois ordres : ceux qui priaient (clergé), ceux qui combattaient (noblesse), ceux qui travaillaient (tiers-état)."},
+            {q: "Qui a inventé l'imprimerie vers 1450 ?", options: ["Léonard de Vinci", "Gutenberg", "Galilée", "Copernic"], correct: "Gutenberg", explanation: "Gutenberg invente l'imprimerie à caractères mobiles vers 1450 à Mayence."}
         ],
-        libre: [
-            {q: "L'UE compte ___ pays depuis le Brexit.", answer: "27", alternatives: ["vingt-sept"], explanation: "27 pays depuis le départ du Royaume-Uni en 2020."},
-            {q: "Le ___ a quitté l'UE en 2020.", answer: "Royaume-Uni", alternatives: ["royaume-uni", "UK", "uk", "Royaume Uni", "royaume uni", "Angleterre", "angleterre", "Grande-Bretagne", "grande-bretagne"], explanation: "Brexit, 31 janvier 2020."},
-            {q: "La capitale de l'Allemagne est ___.", answer: "Berlin", alternatives: ["berlin"], explanation: "Berlin, 3,7 millions d'habitants."},
-            {q: "La capitale de l'Italie est ___.", answer: "Rome", alternatives: ["rome"], explanation: "Rome, ville éternelle."},
-            {q: "La capitale de l'Espagne est ___.", answer: "Madrid", alternatives: ["madrid"], explanation: "Madrid, centre de la péninsule ibérique."},
-            {q: "La capitale de la Pologne est ___.", answer: "Varsovie", alternatives: ["varsovie", "Varsovie"], explanation: "Varsovie, reconstruite après 1944."},
-            {q: "La ___ a trois langues officielles (français, néerlandais, allemand).", answer: "Belgique", alternatives: ["belgique"], explanation: "Trois communautés linguistiques."},
-            {q: "___ est le siège principal des institutions de l'UE.", answer: "Bruxelles", alternatives: ["bruxelles"], explanation: "Siège de la Commission européenne."},
-            {q: "La ___ est connue pour ses fjords.", answer: "Norvège", alternatives: ["norvège", "Norvege", "norvege"], explanation: "Fjords norvégiens."},
-            {q: "La ___ a rejoint l'UE en 2013.", answer: "Croatie", alternatives: ["croatie"], explanation: "Dernier pays à avoir rejoint l'UE."},
-            {q: "Le climat ___ domine sur la côte atlantique.", answer: "océanique", alternatives: ["Océanique", "oceanique", "Oceanique"], explanation: "Doux et humide."},
-            {q: "Le climat ___ caractérise le Sud de l'Europe.", answer: "méditerranéen", alternatives: ["Méditerranéen", "mediterraneen", "Mediterraneen"], explanation: "Étés chauds et secs."},
-            {q: "Le ___ a le PIB/habitant le plus élevé d'Europe.", answer: "Luxembourg", alternatives: ["luxembourg"], explanation: "Environ 135 000 $/habitant."},
-            {q: "La mer ___ borde l'Europe du Nord.", answer: "du Nord", alternatives: ["du nord", "Du Nord", "Nord", "nord"], explanation: "Mer du Nord."},
-            {q: "Le ___ traverse Vienne et Budapest.", answer: "Danube", alternatives: ["danube", "Danube"], explanation: "2 860 km, 10 pays traversés."},
-            {q: "L'___ sépare l'Europe de l'Asie.", answer: "Oural", alternatives: ["oural", "ural", "Ural", "monts Oural", "monts Ourals"], explanation: "Chaîne de l'Oural."},
-            {q: "L'___ est le plus grand pays d'Europe (603 000 km²).", answer: "Ukraine", alternatives: ["ukraine"], explanation: "Plus grand pays entièrement en Europe."},
-            {q: "L'___ est le volcan actif le plus haut d'Europe (Sicile).", answer: "Etna", alternatives: ["etna", "Etna", "l'Etna", "l'etna", "Mont Etna"], explanation: "3 357 m, Sicile."},
-            {q: "La ___ n'utilise pas l'euro (monnaie : zloty).", answer: "Pologne", alternatives: ["pologne"], explanation: "Pologne, zloty polonais."},
-            {q: "Le ___ est le plus haut sommet d'Europe (4 808 m).", answer: "Mont Blanc", alternatives: ["mont blanc", "Mont blanc", "Mont-Blanc", "mont-blanc"], explanation: "Frontière France-Italie."}
+        "libre": [
+            {q: "Charlemagne est couronné empereur en ___", answer: "800", explanation: "25 décembre 800 par le pape Léon III."},
+            {q: "Le Traité de ___ divise l'empire de Charlemagne en 843.", answer: "Verdun", alternatives: ["verdun"], explanation: "Traité de Verdun (843)."},
+            {q: "Charles Martel arrête les Arabes à la bataille de ___ en 732.", answer: "Poitiers", alternatives: ["poitiers", "Tours", "tours"], explanation: "Bataille de Poitiers (ou Tours), 732."},
+            {q: "Le pape ___ prêche la première Croisade en 1095.", answer: "Urbain II", alternatives: ["urbain ii", "Urbain 2", "urbain 2"], explanation: "Urbain II à Clermont."},
+            {q: "Jeanne d'Arc libère la ville d'___ en 1429.", answer: "Orléans", alternatives: ["orléans", "Orleans", "orleans"], explanation: "Libération d'Orléans le 8 mai 1429."},
+            {q: "Jeanne d'Arc est brûlée vive à ___ en 1431.", answer: "Rouen", alternatives: ["rouen"], explanation: "Rouen, le 30 mai 1431."},
+            {q: "L'épidémie du XIVe siècle qui tue un tiers des Européens est la ___ noire.", answer: "peste", alternatives: ["Peste"], explanation: "La peste bubonique (1347-1353)."},
+            {q: "___ sans Terre signe la Magna Carta en 1215.", answer: "Jean", alternatives: ["jean", "Jean sans Terre", "jean sans terre"], explanation: "Jean sans Terre (roi d'Angleterre)."},
+            {q: "Le style architectural des cathédrales du XIIe-XVe siècle est le style ___", answer: "gothique", alternatives: ["Gothique"], explanation: "Gothique : arcs-boutants, vitraux."},
+            {q: "La plus ancienne université d'Europe est ___ (fondée en 1088).", answer: "Bologne", alternatives: ["bologne"], explanation: "Université de Bologne, Italie."},
+            {q: "Les ___ sont des navigateurs scandinaves qui pillent les côtes européennes.", answer: "Vikings", alternatives: ["vikings", "Normands", "normands"], explanation: "Vikings, VIIIe-XIe siècle."},
+            {q: "'Paris vaut bien une messe' est une phrase attribuée à ___", answer: "Henri IV", alternatives: ["henri iv", "Henri 4", "henri 4"], explanation: "Henri IV se convertit au catholicisme."},
+            {q: "L'___ de Nantes (1598) accorde la liberté de culte aux protestants.", answer: "Édit", alternatives: ["édit", "Edit", "edit"], explanation: "Édit de Nantes signé par Henri IV."},
+            {q: "La Guerre de ___ Ans oppose la France et l'Angleterre de 1337 à 1453.", answer: "Cent", alternatives: ["cent"], explanation: "Guerre de Cent Ans."},
+            {q: "La chute de ___ en 1492 marque la fin du Moyen Âge.", answer: "Grenade", alternatives: ["grenade"], explanation: "Chute de Grenade, fin de la Reconquista."},
+            {q: "___ affiche ses 95 thèses à Wittenberg en 1517.", answer: "Luther", alternatives: ["luther", "Martin Luther", "martin luther"], explanation: "Martin Luther déclenche la Réforme."},
+            {q: "Le système politique du Moyen Âge basé sur les fiefs s'appelle la ___", answer: "féodalité", alternatives: ["Féodalité", "feodalite", "Féodalite"], explanation: "Féodalité : liens de vassalité."},
+            {q: "Constantinople tombe aux mains des Ottomans en ___", answer: "1453", explanation: "29 mai 1453, fin de l'Empire byzantin."},
+            {q: "___ invente l'imprimerie à caractères mobiles vers 1450.", answer: "Gutenberg", alternatives: ["gutenberg"], explanation: "Johannes Gutenberg à Mayence."},
+            {q: "Le massacre de la Saint-___ (1572) tue des milliers de protestants à Paris.", answer: "Barthélemy", alternatives: ["barthélemy", "Barthélemy", "Saint-Barthélemy", "saint-barthélemy"], explanation: "Massacre de la Saint-Barthélemy, 24 août 1572."}
         ]
     },
     3: {
-        title: "Le monde 🌏",
-        objective: "Continents, océans, repères géographiques",
-        qcm: [
-            {q: "Quel est le plus grand continent en superficie ?", options: ["Afrique", "Amérique du Nord", "Asie", "Europe"], correct: "Asie", explanation: "L'Asie fait 44,6 millions km², c'est aussi le plus peuplé (4,7 milliards)."},
-            {q: "Quel est le plus peuplé des continents ?", options: ["Afrique", "Asie", "Amérique du Nord", "Europe"], correct: "Asie", explanation: "L'Asie compte 4,7 milliards d'habitants (60% de l'humanité)."},
-            {q: "Quel est le plus grand océan du monde ?", options: ["Atlantique", "Indien", "Pacifique", "Arctique"], correct: "Pacifique", explanation: "L'océan Pacifique fait 165 millions km², plus grand que tous les continents réunis."},
-            {q: "Quel est le point le plus profond des océans ?", options: ["Fosse des Mariannes", "Fosse de Java", "Fosse de Porto Rico", "Fosse des Philippines"], correct: "Fosse des Mariannes", explanation: "La fosse des Mariannes atteint -11 034 m (Challenger Deep)."},
-            {q: "Quel est le plus haut sommet du monde ?", options: ["K2", "Mont Everest", "Kilimandjaro", "Mont Blanc"], correct: "Mont Everest", explanation: "L'Everest culmine à 8 849 m (Népal/Tibet)."},
-            {q: "Dans quel pays se trouve le Kilimandjaro ?", options: ["Kenya", "Tanzanie", "Éthiopie", "Ouganda"], correct: "Tanzanie", explanation: "Le Kilimandjaro (5 895 m) est en Tanzanie, plus haut sommet d'Afrique."},
-            {q: "Quel désert est le plus grand du monde (chaud) ?", options: ["Gobi", "Sahara", "Kalahari", "Atacama"], correct: "Sahara", explanation: "Le Sahara fait 9 millions km² (Afrique du Nord)."},
-            {q: "Quel pays est le plus grand du monde en superficie ?", options: ["Canada", "Chine", "États-Unis", "Russie"], correct: "Russie", explanation: "La Russie fait 17 millions km², à cheval sur l'Europe et l'Asie."},
-            {q: "Quel pays est le plus peuplé du monde ?", options: ["Chine", "Inde", "États-Unis", "Indonésie"], correct: "Inde", explanation: "L'Inde a dépassé la Chine en 2023 avec 1,428 milliard d'habitants."},
-            {q: "Quel parallèle marque la limite nord des tropiques ?", options: ["Équateur", "Tropique du Cancer", "Tropique du Capricorne", "Cercle polaire"], correct: "Tropique du Cancer", explanation: "23,5° Nord, le Soleil est au zénith le 21 juin."},
-            {q: "Quel méridien sert de référence pour les fuseaux horaires ?", options: ["Méridien de Paris", "Méridien de Greenwich", "Méridien de Rome", "Méridien de Berlin"], correct: "Méridien de Greenwich", explanation: "Greenwich (0°), banlieue de Londres, observatoire royal."},
-            {q: "Quel continent est entièrement situé dans l'hémisphère Sud ?", options: ["Afrique", "Australie", "Amérique du Sud", "Antarctique"], correct: "Antarctique", explanation: "L'Antarctique est centré sur le pôle Sud, aucun habitant permanent."},
-            {q: "Quel pays d'Amérique du Sud a la plus grande forêt tropicale ?", options: ["Argentine", "Brésil", "Colombie", "Pérou"], correct: "Brésil", explanation: "Le Brésil abrite 60% de l'Amazonie."},
-            {q: "Quel océan borde la côte est de l'Australie ?", options: ["Pacifique", "Indien", "Atlantique", "Austral"], correct: "Pacifique", explanation: "L'océan Pacifique borde l'est de l'Australie (Grande Barrière de Corail)."},
-            {q: "Quel est le plus long fleuve du monde ?", options: ["Nil", "Amazone", "Yangtsé", "Mississippi"], correct: "Nil", explanation: "Le Nil fait 6 650 km (débat avec l'Amazone selon les sources)."},
-            {q: "Quel pays d'Afrique est traversé par le Nil ?", options: ["Maroc", "Égypte", "Afrique du Sud", "Nigeria"], correct: "Égypte", explanation: "Le Nil traverse l'Égypte du sud au nord, Le Caire est sur ses rives."},
-            {q: "Quel pays d'Asie est une archipel de plus de 17 000 îles ?", options: ["Japon", "Philippines", "Indonésie", "Malaisie"], correct: "Indonésie", explanation: "L'Indonésie est le plus grand archipel du monde (17 000 îles)."},
-            {q: "Quel pays d'Amérique du Nord est le troisième plus grand du monde ?", options: ["Mexique", "Canada", "États-Unis", "Brésil"], correct: "États-Unis", explanation: "Les USA font 9,8 millions km², 3e pays du monde par la superficie."},
-            {q: "Quel continent est le moins peuplé ?", options: ["Europe", "Océanie", "Antarctique", "Amérique du Sud"], correct: "Antarctique", explanation: "L'Antarctique n'a aucun habitant permanent (seulement des scientifiques temporaires)."},
-            {q: "Quel pays d'Europe n'est pas membre de l'UE mais utilise l'euro ?", options: ["Norvège", "Suisse", "Monaco", "Islande"], correct: "Monaco", explanation: "Monaco, Andorre, Saint-Marin, Vatican et Monténégro utilisent l'euro sans être dans l'UE."}
+        title: "Les Temps Modernes 🌍👑",
+        objective: "De 1492 à 1789 : Découvertes, Réforme, Absolutisme, Lumières",
+        "qcm": [
+            {q: "En quelle année Christophe Colomb découvre l'Amérique ?", options: ["1492", "1498", "1517", "1522"], correct: "1492", explanation: "12 octobre 1492 : Colomb atteint les Bahamas."},
+            {q: "Quel navigateur portugais contourne l'Afrique pour atteindre l'Inde en 1498 ?", options: ["Colomb", "Magellan", "Vasco de Gama", "Cortés"], correct: "Vasco de Gama", explanation: "Vasco de Gama atteint Calicut (Inde) en 1498."},
+            {q: "Qui réalise la première circumnavigation du globe (1519-1522) ?", options: ["Colomb", "Magellan", "Vasco de Gama", "Drake"], correct: "Magellan", explanation: "Magellan part en 1519, meurt aux Philippines, son équipage achève le tour en 1522."},
+            {q: "Quel conquistador détruit l'Empire aztèque de 1519 à 1521 ?", options: ["Pizarre", "Cortés", "Magellan", "Drake"], correct: "Cortés", explanation: "Hernán Cortés conquiert le Mexique et l'Empire aztèque."},
+            {q: "Quel conquistador conquiert l'Empire inca en 1532-1533 ?", options: ["Cortés", "Pizarre", "Almagro", "Orellana"], correct: "Pizarre", explanation: "Francisco Pizarre capture l'empereur inca Atahualpa."},
+            {q: "Quel moine allemand affiche ses 95 thèses le 31 octobre 1517 ?", options: ["Calvin", "Luther", "Zwingli", "Münzer"], correct: "Luther", explanation: "Martin Luther à Wittenberg : début de la Réforme protestante."},
+            {q: "Quel roi de France signe l'Édit de Nantes en 1598 ?", options: ["Henri III", "Henri IV", "Louis XIII", "Louis XIV"], correct: "Henri IV", explanation: "Henri IV accorde la liberté de culte aux protestants (huguenots)."},
+            {q: "Quel massacre de 1572 tue des milliers de protestants à Paris ?", options: ["Saint-Barthélemy", "Saint-Denis", "Saint-Germain", "Saint-Michel"], correct: "Saint-Barthélemy", explanation: "Massacre de la Saint-Barthélemy, nuit du 23 au 24 août 1572."},
+            {q: "Quel roi de France fait construire le château de Versailles ?", options: ["Louis XIII", "Louis XIV", "Louis XV", "Louis XVI"], correct: "Louis XIV", explanation: "Louis XIV fait construire Versailles de 1661 à 1710."},
+            {q: "Quelle phrase est attribuée à Louis XIV ?", options: ["L'État, c'est moi", "Après moi, le déluge", "Je suis le roi", "Vive la France"], correct: "L'État, c'est moi", explanation: "'L'État, c'est moi' symbolise l'absolutisme de Louis XIV."},
+            {q: "Quel cardinal est le principal ministre de Louis XIII ?", options: ["Mazarin", "Richelieu", "Fouquet", "Colbert"], correct: "Richelieu", explanation: "Le cardinal de Richelieu (1624-1642) centralise le pouvoir royal."},
+            {q: "Quel philosophe écrit 'L'Esprit des lois' en 1748 ?", options: ["Voltaire", "Rousseau", "Montesquieu", "Diderot"], correct: "Montesquieu", explanation: "Montesquieu propose la séparation des pouvoirs."},
+            {q: "Quel philosophe écrit 'Du contrat social' en 1762 ?", options: ["Voltaire", "Rousseau", "Montesquieu", "Diderot"], correct: "Rousseau", explanation: "Rousseau défend la souveraineté du peuple."},
+            {q: "Quel philosophe est l'auteur principal de l'Encyclopédie ?", options: ["Voltaire", "Rousseau", "Montesquieu", "Diderot"], correct: "Diderot", explanation: "Diderot dirige l'Encyclopédie (1751-1772) avec d'Alembert."},
+            {q: "Quel philosophe prône la tolérance dans son 'Traité sur la tolérance' ?", options: ["Voltaire", "Rousseau", "Montesquieu", "Diderot"], correct: "Voltaire", explanation: "Voltaire écrit le 'Traité sur la tolérance' après l'affaire Calas (1763)."},
+            {q: "Quel événement de 1685 révoque l'Édit de Nantes ?", options: ["Édit de Fontainebleau", "Édit de Milan", "Édit de Worms", "Édit de Paris"], correct: "Édit de Fontainebleau", explanation: "Louis XIV révoque l'Édit de Nantes par l'Édit de Fontainebleau."},
+            {q: "Quel scientifique publie 'De revolutionibus orbium coelestium' en 1543 ?", options: ["Galilée", "Copernic", "Newton", "Kepler"], correct: "Copernic", explanation: "Copernic place le Soleil au centre du système (héliocentrisme)."},
+            {q: "Quel scientifique est condamné par l'Inquisition en 1633 ?", options: ["Copernic", "Galilée", "Newton", "Kepler"], correct: "Galilée", explanation: "Galilée est condamné pour avoir défendu l'héliocentrisme."},
+            {q: "Quel scientifique formule la loi de la gravitation universelle ?", options: ["Copernic", "Galilée", "Newton", "Descartes"], correct: "Newton", explanation: "Isaac Newton publie les 'Principia Mathematica' en 1687."},
+            {q: "Quel traité met fin à la guerre de Trente Ans en 1648 ?", options: ["Westphalie", "Verdun", "Utrecht", "Aix-la-Chapelle"], correct: "Westphalie", explanation: "Les traités de Westphalie (1648) reconnaissent la souveraineté des États."}
         ],
-        libre: [
-            {q: "Le plus grand continent est l'___ (44,6 M km²).", answer: "Asie", alternatives: ["asie"], explanation: "Asie, plus grand et plus peuplé."},
-            {q: "Le plus grand océan est l'océan ___ (165 M km²).", answer: "Pacifique", alternatives: ["pacifique"], explanation: "Plus grand que tous les continents réunis."},
-            {q: "Le point le plus profond est la fosse des ___ (-11 034 m).", answer: "Mariannes", alternatives: ["mariannes", "Mariannes", "fosse des Mariannes"], explanation: "Challenger Deep."},
-            {q: "Le plus haut sommet du monde est le ___ (8 849 m).", answer: "Everest", alternatives: ["everest", "Mont Everest", "mont everest"], explanation: "Népal/Tibet."},
-            {q: "Le Kilimandjaro se trouve en ___ (5 895 m).", answer: "Tanzanie", alternatives: ["tanzanie", "Tanzanie"], explanation: "Plus haut sommet d'Afrique."},
-            {q: "Le plus grand désert chaud est le ___ (9 M km²).", answer: "Sahara", alternatives: ["sahara", "Sahara"], explanation: "Afrique du Nord."},
-            {q: "Le plus grand pays du monde est la ___ (17 M km²).", answer: "Russie", alternatives: ["russie", "Russie", "Fédération de Russie"], explanation: "À cheval Europe-Asie."},
-            {q: "Le pays le plus peuplé du monde est l'___ (1,428 Mrd).", answer: "Inde", alternatives: ["inde", "Inde"], explanation: "A dépassé la Chine en 2023."},
-            {q: "Le ___ du Cancer marque la limite nord des tropiques.", answer: "Tropique", alternatives: ["tropique", "Tropique"], explanation: "23,5° Nord."},
-            {q: "Le méridien de ___ sert de référence pour les fuseaux horaires.", answer: "Greenwich", alternatives: ["greenwich", "Greenwich"], explanation: "0°, banlieue de Londres."},
-            {q: "L'___ est entièrement dans l'hémisphère Sud.", answer: "Antarctique", alternatives: ["antarctique", "Antarctique"], explanation: "Continent glacial."},
-            {q: "Le ___ abrite 60% de l'Amazonie.", answer: "Brésil", alternatives: ["brésil", "Bresil", "bresil", "Brasil"], explanation: "Plus grande forêt tropicale."},
-            {q: "L'océan ___ borde l'est de l'Australie.", answer: "Pacifique", alternatives: ["pacifique"], explanation: "Grande Barrière de Corail."},
-            {q: "Le plus long fleuve du monde est le ___ (6 650 km).", answer: "Nil", alternatives: ["nil", "Nil"], explanation: "Débat avec l'Amazone selon les sources."},
-            {q: "Le Nil traverse l'___ du sud au nord.", answer: "Égypte", alternatives: ["égypte", "Egypte", "egypte"], explanation: "Le Caire est sur ses rives."},
-            {q: "L'___ est l'archipel le plus grand du monde (17 000 îles).", answer: "Indonésie", alternatives: ["indonésie", "Indonesie", "indonesie"], explanation: "Java, Sumatra, Bornéo, Bali..."},
-            {q: "Les ___ sont le troisième plus grand pays (9,8 M km²).", answer: "États-Unis", alternatives: ["états-unis", "Etats-Unis", "etats-unis", "USA", "usa", "Etats Unis", "etats unis", "Amérique", "amerique"], explanation
-Des 
-            {q: "Les ___ sont le troisième plus grand pays (9,8 M km²).", answer: "États-Unis", alternatives: ["états-unis", "Etats-Unis", "etats-unis", "USA", "usa", "Etats Unis", "etats unis", "Amérique", "amerique", "Etats-Unis d'Amerique"], explanation: "Troisième pays par la superficie."},
-            {q: "Le continent le moins peuplé est l'___.", answer: "Antarctique", alternatives: ["antarctique", "Antarctique"], explanation: "Aucun habitant permanent."},
-            {q: "___ utilise l'euro sans être membre de l'UE.", answer: "Monaco", alternatives: ["monaco", "Andorre", "andorre", "Saint-Marin", "saint-marin", "Vatican", "vatican", "Monténégro", "monténégro"], explanation: "Monaco, Andorre, Saint-Marin, Vatican, Monténégro."}
+        "libre": [
+            {q: "Christophe Colomb découvre l'Amérique en ___", answer: "1492", explanation: "12 octobre 1492, Bahamas."},
+            {q: "___ de Gama atteint l'Inde en contournant l'Afrique en 1498.", answer: "Vasco", alternatives: ["vasco", "Vasco de Gama", "vasco de gama"], explanation: "Vasco de Gama, navigateur portugais."},
+            {q: "___ réalise la première circumnavigation (1519-1522).", answer: "Magellan", alternatives: ["magellan", "Magellan", "Fernand de Magellan"], explanation: "Magellan, explorateur portugais."},
+            {q: "___ conquiert l'Empire aztèque de 1519 à 1521.", answer: "Cortés", alternatives: ["cortés", "Cortes", "cortes", "Hernán Cortés"], explanation: "Hernán Cortés, conquistador."},
+            {q: "___ conquiert l'Empire inca en 1532-1533.", answer: "Pizarre", alternatives: ["pizarre", "Pizarre", "Pizarro", "pizarro", "Francisco Pizarre"], explanation: "Francisco Pizarre."},
+            {q: "___ affiche ses 95 thèses à Wittenberg en 1517.", answer: "Luther", alternatives: ["luther", "Martin Luther", "martin luther"], explanation: "Martin Luther, début de la Réforme."},
+            {q: "Henri IV signe l'Édit de ___ en 1598.", answer: "Nantes", alternatives: ["nantes"], explanation: "Édit de Nantes, liberté de culte."},
+            {q: "Le massacre de la Saint-___ a lieu en août 1572.", answer: "Barthélemy", alternatives: ["barthélemy", "Barthélemy", "Saint-Barthélemy"], explanation: "Massacre des protestants à Paris."},
+            {q: "___ XIV fait construire le château de Versailles.", answer: "Louis", alternatives: ["louis", "Louis XIV", "louis xiv", "Louis 14", "louis 14"], explanation: "Louis XIV, le Roi-Soleil."},
+            {q: "'L'État, c'est moi' est une phrase attribuée à ___ XIV.", answer: "Louis", alternatives: ["louis", "Louis XIV", "louis xiv"], explanation: "Louis XIV et l'absolutisme."},
+            {q: "Le cardinal ___ est le ministre de Louis XIII.", answer: "Richelieu", alternatives: ["richelieu", "de Richelieu"], explanation: "Cardinal de Richelieu (1624-1642)."},
+            {q: "___ écrit 'L'Esprit des lois' en 1748.", answer: "Montesquieu", alternatives: ["montesquieu"], explanation: "Montesquieu et la séparation des pouvoirs."},
+            {q: "___ écrit 'Du contrat social' en 1762.", answer: "Rousseau", alternatives: ["rousseau", "Jean-Jacques Rousseau"], explanation: "Rousseau et la souveraineté du peuple."},
+            {q: "___ dirige l'Encyclopédie avec d'Alembert.", answer: "Diderot", alternatives: ["diderot", "Denis Diderot"], explanation: "Diderot, 1751-1772."},
+            {q: "___ écrit le 'Traité sur la tolérance' en 1763.", answer: "Voltaire", alternatives: ["voltaire"], explanation: "Voltaire après l'affaire Calas."},
+            {q: "L'Édit de ___ (1685) révoque l'Édit de Nantes.", answer: "Fontainebleau", alternatives: ["fontainebleau"], explanation: "Louis XIV révoque les droits des protestants."},
+            {q: "___ place le Soleil au centre du système solaire (1543).", answer: "Copernic", alternatives: ["copernic", "Copernic"], explanation: "Nicolas Copernic, héliocentrisme."},
+            {q: "___ est condamné par l'Inquisition en 1633 pour héliocentrisme.", answer: "Galilée", alternatives: ["galilée", "Galilee", "galilee", "Galileo"], explanation: "Galilée Galilei."},
+            {q: "___ formule la loi de la gravitation universelle en 1687.", answer: "Newton", alternatives: ["newton", "Isaac Newton"], explanation: "Isaac Newton, 'Principia Mathematica'."},
+            {q: "Les traités de ___ (1648) mettent fin à la guerre de Trente Ans.", answer: "Westphalie", alternatives: ["westphalie"], explanation: "Traités de Westphalie, paix européenne."}
         ]
     },
     4: {
-        title: "Développement & inégalités 🌍⚖️",
-        objective: "Indicateurs, pays développés, émergents, ODD",
-        qcm: [
-            {q: "Quel indicateur mesure la richesse produite par personne ?", options: ["IDH", "PIB total", "PIB/habitant", "Taux de natalité"], correct: "PIB/habitant", explanation: "Le PIB par habitant (Produit Intérieur Brut) mesure la richesse moyenne par personne."},
-            {q: "Que signifie IDH ?", options: ["Indice de Développement Humain", "Indice de Densité Habitable", "Indice de Distribution des Habitations", "Indice de Déficit Hydrique"], correct: "Indice de Développement Humain", explanation: "IDH = Indice de Développement Humain (0 à 1), mesure santé, éducation et niveau de vie."},
-            {q: "Quel pays a l'IDH le plus élevé au monde ?", options: ["Norvège", "Suisse", "France", "Japon"], correct: "Norvège", explanation: "La Norvège a l'IDH le plus élevé (0,966 en 2023)."},
-            {q: "Quel pays africain a l'IDH le plus faible ?", options: ["Soudan du Sud", "Niger", "Tchad", "RDC"], correct: "Soudan du Sud", explanation: "Le Soudan du Sud a un IDH de 0,385 (2023), l'un des plus bas au monde."},
-            {q: "Quel pays a le PIB/habitant le plus élevé ?", options: ["USA", "Luxembourg", "Qatar", "Singapour"], correct: "Luxembourg", explanation: "Le Luxembourg dépasse 135 000 $/habitant grâce à son secteur financier."},
-            {q: "Quel pays asiatique est considéré comme le plus peuplé en 2023 ?", options: ["Chine", "Inde", "Indonésie", "Pakistan"], correct: "Inde", explanation: "L'Inde a dépassé la Chine en 2023 avec environ 1,428 milliard d'habitants."},
-            {q: "Quel groupe réunit le Brésil, la Russie, l'Inde, la Chine et l'Afrique du Sud ?", options: ["G7", "G20", "BRICS", "OTAN"], correct: "BRICS", explanation: "BRICS = Brésil, Russie, Inde, Chine, Afrique du Sud (pays émergents)."},
-            {q: "Quel accord de 2015 fixe 17 objectifs pour 2030 ?", options: ["Protocole de Kyoto", "Accord de Paris", "Objectifs de Développement Durable", "Traité de Maastricht"], correct: "Objectifs de Développement Durable", explanation: "Les 17 ODD (Objectifs de Développement Durable) ont été adoptés par l'ONU en 2015."},
-            {q: "Quel pourcentage de la population mondiale vit avec moins de 2,15 $/jour ?", options: ["2%", "5%", "9%", "15%"], correct: "9%", explanation: "Environ 700 millions de personnes (9%) vivent dans l'extrême pauvreté."},
-            {q: "Quel continent connaît la croissance démographique la plus rapide ?", options: ["Asie", "Europe", "Afrique", "Amérique du Sud"], correct: "Afrique", explanation: "L'Afrique double sa population tous les 25-30 ans (1,4 milliard en 2023)."},
-            {q: "Quel pays est le premier producteur mondial de CO2 ?", options: ["USA", "Inde", "Chine", "Russie"], correct: "Chine", explanation: "La Chine produit environ 30% des émissions mondiales de CO2."},
-            {q: "Quel pays européen a quitté l'UE en 2020 ?", options: ["Royaume-Uni", "Grèce", "Italie", "Pologne"], correct: "Royaume-Uni", explanation: "Brexit : le Royaume-Uni a quitté l'UE le 31 janvier 2020."},
-            {q: "Quel indicateur mesure le nombre de naissances pour 1 000 habitants ?", options: ["Taux de mortalité", "Taux de natalité", "Taux de fécondité", "Taux de croissance"], correct: "Taux de natalité", explanation: "Taux de natalité = nombre de naissances pour 1 000 habitants sur un an."},
-            {q: "Quel pays a l'espérance de vie la plus élevée ?", options: ["Japon", "France", "Suisse", "Singapour"], correct: "Japon", explanation: "Le Japon a une espérance de vie d'environ 84 ans."},
-            {q: "Quel pays africain est le plus peuplé ?", options: ["Égypte", "Éthiopie", "Nigeria", "RDC"], correct: "Nigeria", explanation: "Le Nigeria compte environ 220 millions d'habitants, 1er pays africain."},
-            {q: "Quelle organisation prête de l'argent aux pays en difficulté ?", options: ["OTAN", "FMI", "OMS", "UNESCO"], correct: "FMI", explanation: "Le FMI (Fonds Monétaire International) prête de l'argent contre des réformes économiques."},
-            {q: "Quel est le taux d'alphabétisation dans les pays développés ?", options: ["60%", "80%", "95%", "99%"], correct: "99%", explanation: "Dans les pays développés, le taux d'alphabétisation approche 99%."},
-            {q: "Quel pays sud-américain fait partie des BRICS ?", options: ["Argentine", "Chili", "Brésil", "Colombie"], correct: "Brésil", explanation: "Le Brésil est le seul pays sud-américain dans les BRICS originaux."},
-            {q: "Quelle est la part des énergies renouvelables dans le mix mondial ?", options: ["5%", "15%", "25%", "35%"], correct: "15%", explanation: "Les énergies renouvelables représentent environ 15% du mix énergétique mondial (2023)."},
-            {q: "Quel pourcentage de la richesse mondiale est détenu par les 10% les plus riches ?", options: ["40%", "55%", "76%", "90%"], correct: "76%", explanation: "Les 10% les plus riches détiennent 76% de la richesse mondiale (rapport Oxfam)."}
+        title: "Révolution & 19e siècle 🔥🏭",
+        objective: "De 1789 à 1914 : Révolution, Empire, Industrialisation",
+        "qcm": [
+            {q: "Quelle date marque la prise de la Bastille ?", options: ["5 mai 1789", "20 juin 1789", "14 juillet 1789", "26 août 1789"], correct: "14 juillet 1789", explanation: "14 juillet 1789 : prise de la Bastille, symbole de la Révolution."},
+            {q: "Quel serment est prononcé le 20 juin 1789 ?", options: ["Serment du Jeu de Paume", "Serment de Versailles", "Serment de Paris", "Serment de la Bastille"], correct: "Serment du Jeu de Paume", explanation: "Les députés du Tiers-État jurent de ne pas se séparer avant une constitution."},
+            {q: "Quelle déclaration est adoptée le 26 août 1789 ?", options: ["Déclaration des Droits de l'Homme", "Déclaration d'indépendance", "Déclaration de guerre", "Déclaration de paix"], correct: "Déclaration des Droits de l'Homme", explanation: "Déclaration des Droits de l'Homme et du Citoyen, 17 articles."},
+            {q: "Quel roi est guillotiné le 21 janvier 1793 ?", options: ["Louis XIV", "Louis XV", "Louis XVI", "Charles X"], correct: "Louis XVI", explanation: "Louis XVI est guillotiné place de la Révolution (Concorde)."},
+            {q: "Qui dirige le Comité de salut public pendant la Terreur ?", options: ["Danton", "Robespierre", "Marat", "Saint-Just"], correct: "Robespierre", explanation: "Robespierre dirige la Terreur (1793-1794), 17 000 exécutions."},
+            {q: "Quel coup d'État marque le début du Consulat en 1799 ?", options: ["18 brumaire", "18 juin", "14 juillet", "9 thermidor"], correct: "18 brumaire", explanation: "18 brumaire An VIII (9 novembre 1799) : coup d'État de Bonaparte."},
+            {q: "En quelle année Napoléon se couronne-t-il empereur ?", options: ["1799", "1804", "1812", "1815"], correct: "1804", explanation: "2 décembre 1804 : Napoléon se couronne empereur à Notre-Dame."},
+            {q: "Quel code est promulgué en 1804 ?", options: ["Code pénal", "Code civil", "Code de commerce", "Code forestier"], correct: "Code civil", explanation: "Code civil (Code Napoléon) : égalité devant la loi, propriété sacrée."},
+            {q: "Quelle bataille de 1812 est une catastrophe pour Napoléon ?", options: ["Austerlitz", "Waterloo", "Russie", "Iéna"], correct: "Russie", explanation: "Campagne de Russie : 600 000 partent, 30 000 reviennent."},
+            {q: "Quelle bataille de 1815 marque la fin de Napoléon ?", options: ["Austerlitz", "Waterloo", "Leipzig", "Borodino"], correct: "Waterloo", explanation: "18 juin 1815 : défaite à Waterloo, exil à Sainte-Hélène."},
+            {q: "Quelle révolution a lieu en France en 1848 ?", options: ["Révolution de Juillet", "Révolution de Février", "Commune", "Révolution de 1830"], correct: "Révolution de Février", explanation: "Révolution de Février 1848 : abdication de Louis-Philippe, IIe République."},
+            {q: "Qui abolit l'esclavage en France en 1848 ?", options: ["Napoléon III", "Lamartine", "Victor Schoelcher", "Gambetta"], correct: "Victor Schoelcher", explanation: "Victor Schoelcher fait voter l'abolition de l'esclavage le 27 avril 1848."},
+            {q: "Quelle guerre oppose le Nord et le Sud des États-Unis (1861-1865) ?", options: ["guerre d'indépendance", "guerre de Sécession", "guerre de 1812", "guerre hispano-américaine"], correct: "guerre de Sécession", explanation: "Guerre de Sécession : abolition de l'esclavage (1865)."},
+            {q: "Quelle défaite française de 1870 met fin au Second Empire ?", options: ["Waterloo", "Sedan", "Verdun", "Dien Bien Phu"], correct: "Sedan", explanation: "Sedan (1er septembre 1870) : Napoléon III capturé, fin du Second Empire."},
+            {q: "Quel événement de 1871 dure 72 jours à Paris ?", options: ["la Commune", "la Terreur", "les journées de Juin", "le siège"], correct: "la Commune", explanation: "Commune de Paris (18 mars - 28 mai 1871) : première insurrection ouvrière."},
+            {q: "Quel ministre rend l'école laïque, gratuite et obligatoire en 1881-1882 ?", options: ["Gambetta", "Jules Ferry", "Clemenceau", "Léon Blum"], correct: "Jules Ferry", explanation: "Jules Ferry : lois de 1881-1882 sur l'école publique."},
+            {q: "Quelle loi de 1905 sépare les Églises et l'État ?", options: ["loi Falloux", "loi Debré", "loi de séparation", "loi Guizot"], correct: "loi de séparation", explanation: "Loi de séparation des Églises et de l'État (9 décembre 1905)."},
+            {q: "Quel scandale politique divise la France de 1894 à 1906 ?", options: ["l'affaire Boulanger", "l'affaire Dreyfus", "l'affaire Stavisky", "l'affaire des poisons"], correct: "l'affaire Dreyfus", explanation: "Affaire Dreyfus : capitaine juif injustement condamné, réhabilité en 1906."},
+            {q: "Quelle machine à vapeur est inventée par James Watt en 1769 ?", options: ["locomotive", "métier à tisser", "machine à vapeur", "télégraphe"], correct: "machine à vapeur", explanation: "James Watt améliore la machine à vapeur en 1769."},
+            {q: "Quelle locomotive est construite par George Stephenson en 1829 ?", options: ["La Rocket", "Le Flying Scotsman", "L'Orient-Express", "La Pacific"], correct: "La Rocket", explanation: "La Rocket de Stephenson remporte le concours de Rainhill en 1829."}
         ],
-        libre: [
-            {q: "L'___ mesure la richesse produite par personne.", answer: "PIB/habitant", alternatives: ["pib/habitant", "PIB par habitant", "pib par habitant", "PIB par tête", "pib par tête", "produit intérieur brut par habitant"], explanation: "Produit Intérieur Brut par habitant."},
-            {q: "___ signifie Indice de Développement Humain.", answer: "IDH", alternatives: ["idh", "Indice de Développement Humain", "indice de développement humain"], explanation: "IDH : santé, éducation, niveau de vie."},
-            {q: "Le pays avec l'IDH le plus élevé est la ___ (0,966).", answer: "Norvège", alternatives: ["norvège", "Norvege", "norvege"], explanation: "Norvège, pays scandinave."},
-            {q: "Le pays africain avec l'IDH le plus faible est le Soudan du ___.", answer: "Sud", alternatives: ["sud"], explanation: "Soudan du Sud, IDH 0,385."},
-            {q: "Le ___ a le PIB/habitant le plus élevé (135 000 $).", answer: "Luxembourg", alternatives: ["luxembourg"], explanation: "Grand-duché, centre financier."},
-            {q: "L'___ est devenu le pays le plus peuplé en 2023.", answer: "Inde", alternatives: ["inde", "Inde"], explanation: "1,428 milliard, devant la Chine."},
-            {q: "Le groupe ___ rassemble Brésil, Russie, Inde, Chine, Afrique du Sud.", answer: "BRICS", alternatives: ["brics", "Brics"], explanation: "Pays émergents."},
-            {q: "Les 17 ___ de Développement Durable ont été fixés en 2015.", answer: "Objectifs", alternatives: ["objectifs", "ODD", "odd"], explanation: "ODD pour 2030."},
-            {q: "Environ ___ millions de personnes vivent avec moins de 2,15 $/jour.", answer: "700", alternatives: ["sept cents", "sept-cents"], explanation: "9% de la population mondiale."},
-            {q: "L'___ connaît la croissance démographique la plus rapide.", answer: "Afrique", alternatives: ["afrique", "Afrique"], explanation: "Doublement tous les 25-30 ans."},
-            {q: "La ___ est le premier producteur mondial de CO2.", answer: "Chine", alternatives: ["chine", "Chine"], explanation: "30% des émissions mondiales."},
-            {q: "Le ___ a quitté l'UE en 2020 (Brexit).", answer: "Royaume-Uni", alternatives: ["royaume-uni", "UK", "uk", "Royaume Uni", "royaume uni", "Angleterre", "angleterre", "Grande-Bretagne", "grande-bretagne"], explanation: "Brexit, 31 janvier 2020."},
-            {q: "Le taux de ___ mesure les naissances pour 1 000 habitants.", answer: "natalité", alternatives: ["Natalité", "natalité"], explanation: "Taux de natalité."},
-            {q: "Le ___ a l'espérance de vie la plus élevée (84 ans).", answer: "Japon", alternatives: ["japon", "Japon"], explanation: "Japon, pays asiatique."},
-            {q: "Le pays africain le plus peuplé est le ___ (220 M).", answer: "Nigeria", alternatives: ["nigeria", "Nigeria", "Nigéria", "nigéria"], explanation: "Nigeria, Afrique de l'Ouest."},
-            {q: "Le ___ prête de l'argent aux pays en difficulté.", answer: "FMI", alternatives: ["fmi", "Fonds Monétaire International", "fonds monétaire international"], explanation: "FMI, organisation internationale."},
-            {q: "Le taux d'___ dans les pays développés approche 99%.", answer: "alphabétisation", alternatives: ["Alphabétisation", "alphabetisation", "Alphabetisation"], explanation: "Capacité à lire et écrire."},
-            {q: "Le ___ est le seul pays sud-américain dans les BRICS.", answer: "Brésil", alternatives: ["brésil", "Bresil", "bresil", "Brasil"], explanation: "Brésil, pays émergent."},
-            {q: "Les énergies ___ représentent 15% du mix mondial.", answer: "renouvelables", alternatives: ["Renouvelables", "renouvelables"], explanation: "Solaire, éolien, hydraulique..."},
-            {q: "Les 10% les plus riches détiennent ___% de la richesse mondiale.", answer: "76", alternatives: ["soixante-seize", "soixante seize"], explanation: "Selon Oxfam."}
+        "libre": [
+            {q: "La prise de la Bastille a lieu le ___ juillet 1789.", answer: "14", alternatives: ["14 juillet"], explanation: "14 juillet 1789, fête nationale française."},
+            {q: "Le Serment du ___ de Paume est prononcé le 20 juin 1789.", answer: "Jeu", alternatives: ["jeu", "Jeu de Paume", "jeu de paume"], explanation: "Serment du Jeu de Paume à Versailles."},
+            {q: "La Déclaration des Droits de l'___ est adoptée le 26 août 1789.", answer: "Homme", alternatives: ["homme", "Homme et du Citoyen", "homme et du citoyen"], explanation: "Déclaration des Droits de l'Homme et du Citoyen."},
+            {q: "___ XVI est guillotiné le 21 janvier 1793.", answer: "Louis", alternatives: ["louis", "Louis XVI", "louis xvi"], explanation: "Louis XVI, roi de France."},
+            {q: "___ dirige la Terreur (1793-1794).", answer: "Robespierre", alternatives: ["robespierre", "Maximilien Robespierre"], explanation: "Robespierre et le Comité de salut public."},
+            {q: "Le coup d'État du 18 ___ (9 novembre 1799) marque le début du Consulat.", answer: "brumaire", alternatives: ["Brumaire"], explanation: "18 brumaire An VIII, coup de Napoléon."},
+            {q: "Napoléon se couronne empereur en ___", answer: "1804", explanation: "2 décembre 1804 à Notre-Dame."},
+            {q: "Le Code ___ est promulgué en 1804.", answer: "civil", alternatives: ["Civil", "civil", "napoléon", "Napoléon"], explanation: "Code civil ou Code Napoléon."},
+            {q: "La campagne de ___ (1812) est une catastrophe pour Napoléon.", answer: "Russie", alternatives: ["russie"], explanation: "600 000 partent, 30 000 reviennent."},
+            {q: "Napoléon est défait à ___ en 1815.", answer: "Waterloo", alternatives: ["waterloo"], explanation: "18 juin 1815, Belgique."},
+            {q: "La Révolution de ___ 1848 proclame la IIe République.", answer: "Février", alternatives: ["février", "février 1848"], explanation: "Révolution de Février, abdication de Louis-Philippe."},
+            {q: "___ fait voter l'abolition de l'esclavage en 1848.", answer: "Schoelcher", alternatives: ["schoelcher", "Victor Schoelcher"], explanation: "Victor Schoelcher, 27 avril 1848."},
+            {q: "La guerre de ___ (1861-1865) oppose le Nord et le Sud des USA.", answer: "Sécession", alternatives: ["sécession", "Secession", "secession"], explanation: "Guerre de Sécession, abolition de l'esclavage."},
+            {q: "La défaite de ___ (1870) met fin au Second Empire.", answer: "Sedan", alternatives: ["sedan"], explanation: "Sedan, 1er septembre 1870."},
+            {q: "La ___ de Paris dure 72 jours en 1871.", answer: "Commune", alternatives: ["commune"], explanation: "Commune de Paris, 18 mars - 28 mai 1871."},
+            {q: "___ rend l'école laïque, gratuite et obligatoire (1881-1882).", answer: "Ferry", alternatives: ["ferry", "Jules Ferry", "jules ferry"], explanation: "Jules Ferry, ministre de l'Instruction publique."},
+            {q: "La loi de ___ des Églises et de l'État date de 1905.", answer: "séparation", alternatives: ["Séparation", "séparation"], explanation: "9 décembre 1905."},
+            {q: "L'affaire ___ divise la France de 1894 à 1906.", answer: "Dreyfus", alternatives: ["dreyfus"], explanation: "Capitaine Alfred Dreyfus, réhabilité en 1906."},
+            {q: "___ améliore la machine à vapeur en 1769.", answer: "Watt", alternatives: ["watt", "James Watt", "james watt"], explanation: "James Watt, ingénieur écossais."},
+            {q: "La locomotive '___' de Stephenson date de 1829.", answer: "Rocket", alternatives: ["rocket", "The Rocket", "the rocket"], explanation: "La Rocket, concours de Rainhill."}
         ]
     },
     5: {
-        title: "Enjeux environnementaux 🌡️🌳",
-        objective: "Réchauffement, déforestation, énergies, eau",
-        qcm: [
-            {q: "De combien de degrés la température mondiale a-t-elle augmenté depuis l'ère préindustrielle ?", options: ["+0,5°C", "+1,1°C", "+1,5°C", "+2°C"], correct: "+1,1°C", explanation: "+1,1°C depuis 1850-1900, selon le GIEC."},
-            {q: "Quel est l'objectif idéal de l'Accord de Paris (2015) ?", options: ["Limiter à +1,5°C", "Limiter à +2°C", "Stabiliser à +1°C", "Revenir à 0°C"], correct: "Limiter à +1,5°C", explanation: "Objectif : +1,5°C (idéal) ou +2°C maximum par rapport à l'ère préindustrielle."},
-            {q: "Quelle année a été la plus chaude jamais enregistrée ?", options: ["2016", "2020", "2022", "2023"], correct: "2023", explanation: "2023 a battu tous les records de température mondiale."},
-            {q: "Quel est le point le plus profond des océans ?", options: ["Fosse des Mariannes", "Fosse de Java", "Fosse de Porto Rico", "Fosse des Philippines"], correct: "Fosse des Mariannes", explanation: "-11 034 m (Challenger Deep, Pacifique)."},
-            {q: "Quel gaz est le principal responsable de l'effet de serre ?", options: ["Oxygène", "Azote", "Dioxyde de carbone (CO2)", "Méthane"], correct: "Dioxyde de carbone (CO2)", explanation: "Le CO2 est le principal gaz à effet de serre d'origine humaine (combustion fossile)."},
-            {q: "Quel pays est le plus grand émetteur de CO2 ?", options: ["USA", "Inde", "Chine", "Russie"], correct: "Chine", explanation: "La Chine émet environ 30% du CO2 mondial."},
-            {q: "Quel pourcentage des récifs coralliens est menacé d'ici 2050 ?", options: ["20%", "50%", "70%", "90%"], correct: "50%", explanation: "50% des récifs coralliens mondiaux sont menacés d'ici 2050 (acidification, réchauffement)."},
-            {q: "Quel protocole de 1987 a protégé la couche d'ozone ?", options: ["Protocole de Kyoto", "Protocole de Montréal", "Accord de Paris", "Protocole de Rio"], correct: "Protocole de Montréal", explanation: "Protocole de Montréal : interdiction des CFC, succès environnemental majeur."},
-            {q: "Quel accord de 2015 concerne le climat ?", options: ["Protocole de Kyoto", "Accord de Paris", "Traité de Maastricht", "Accord de Copenhague"], correct: "Accord de Paris", explanation: "Accord de Paris (COP21) : limiter le réchauffement à +1,5°C / +2°C."},
-            {q: "Quelle forêt tropicale perd le plus d'arbres chaque année ?", options: ["Congo", "Bornéo", "Amazonie", "Indonésie"], correct: "Amazonie", explanation: "L'Amazonie perd environ 10 000 km² de forêt par an (déforestation)."},
-            {q: "Quel pays est le leader mondial de l'énergie solaire ?", options: ["USA", "Allemagne", "Chine", "Inde"], correct: "Chine", explanation: "La Chine produit plus de 50% des panneaux solaires mondiaux."},
-            {q: "Quel pays utilise la géothermie pour 90% de son chauffage ?", options: ["Norvège", "Islande", "Suède", "Finlande"], correct: "Islande", explanation: "L'Islande utilise l'énergie géothermique (volcans, sources chaudes)."},
-            {q: "Quel barrage chinois est le plus puissant au monde ?", options: ["Barrage d'Itaipu", "Barrage des Trois-Gorges", "Barrage d'Assouan", "Barrage de Hoover"], correct: "Barrage des Trois-Gorges", explanation: "22 500 MW, sur le Yangtsé en Chine."},
-            {q: "Quel pourcentage de la nourriture produite est gaspillé ?", options: ["10%", "20%", "33%", "50%"], correct: "33%", explanation: "Un tiers de la nourriture produite est perdue ou gaspillée."},
-            {q: "Combien de personnes n'ont pas accès à l'eau potable gérée en sécurité ?", options: ["500 millions", "1,1 milliard", "2,2 milliards", "3 milliards"], correct: "2,2 milliards", explanation: "2,2 milliards de personnes n'ont pas accès à l'eau potable gérée en toute sécurité."},
-            {q: "Quel phénomène menace les îles comme les Maldives et Tuvalu ?", options: ["Sécheresse", "Élévation du niveau des mers", "Canicules", "Déforestation"], correct: "Élévation du niveau des mers", explanation: "+3,4 mm/an, menace d'innondation pour les îles basses."},
-            {q: "Quel insecte pollinisateur est en déclin mondial ?", options: ["Papillon", "Abeille", "Coccinelle", "Moustique"], correct: "Abeille", explanation: "40% des colonies d'abeilles disparaissent chaque année (pesticides, climat)."},
-            {q: "Quelle COP a adopté la transition 'hors des énergies fossiles' ?", options: ["COP21", "COP26", "COP27", "COP28"], correct: "COP28", explanation: "COP28 (Dubaï, 2023) : accord historique sur la sortie des énergies fossiles."},
-            {q: "Quel pourcentage des terres agricoles mondiales est en agriculture biologique ?", options: ["2%", "5%", "10%", "15%"], correct: "2%", explanation: "Seulement 2% des terres agricoles mondiales sont en bio."},
-            {q: "Quel rapport de 2019 alerte sur la 6e extinction de masse ?", options: ["Rapport Stern", "Rapport GIEC", "Rapport IPBES", "Rapport Oxfam"], correct: "Rapport IPBES", explanation: "IPBES : 1 million d'espèces menacées d'extinction."}
+        title: "Le 20e siècle 🌍💥",
+        objective: "De 1914 à 2000 : Guerres mondiales, Guerre froide, Mondialisation",
+        "qcm": [
+            {q: "Quel attentat déclenche la Première Guerre mondiale en 1914 ?", options: ["attentat de Sarajevo", "attentat de Paris", "attentat de Berlin", "attentat de Vienne"], correct: "attentat de Sarajevo", explanation: "28 juin 1914 : attentat de Sarajevo contre l'archiduc François-Ferdinand."},
+            {q: "Quelle bataille de 1916 dure 10 mois et fait 700 000 morts ?", options: ["la Marne", "Verdun", "la Somme", "Tannenberg"], correct: "Verdun", explanation: "Bataille de Verdun (février-décembre 1916) : 'Ils ne passeront pas !'"},
+            {q: "Quelle date marque l'armistice de 1918 ?", options: ["11 septembre", "11 octobre", "11 novembre", "11 décembre"], correct: "11 novembre", explanation: "11 novembre 1918 à 11h : armistice signé à Rethondes."},
+            {q: "Quel traité de 1919 humilie l'Allemagne ?", options: ["Brest-Litovsk", "Versailles", "Trianon", "Sèvres"], correct: "Versailles", explanation: "Traité de Versailles (1919) : l'Allemagne est déclarée coupable et paie des réparations."},
+            {q: "Quelle révolution a lieu en Russie en 1917 ?", options: ["Révolution française", "Révolution russe", "Révolution chinoise", "Révolution cubaine"], correct: "Révolution russe", explanation: "Révolution russe : chute du tsar (février), pouvoir bolchevique (octobre)."},
+            {q: "Qui dirige la Révolution russe d'octobre 1917 ?", options: ["Staline", "Trotski", "Lénine", "Kerenski"], correct: "Lénine", explanation: "Lénine et les bolcheviks prennent le pouvoir en octobre 1917."},
+                        {q: "Quelle date marque le krach boursier de Wall Street ?", options: ["24 octobre 1928", "24 octobre 1929", "24 octobre 1930", "24 octobre 1931"], correct: "24 octobre 1929", explanation: "24 octobre 1929 ('Jeudi noir') : krach de Wall Street, début de la Grande Dépression."},
+            {q: "Qui devient chancelier d'Allemagne en 1933 ?", options: ["Hindenburg", "Hitler", "Mussolini", "Franco"], correct: "Hitler", explanation: "Adolf Hitler est nommé chancelier le 30 janvier 1933."},
+            {q: "Quel régime Mussolini instaure-t-il en Italie en 1922 ?", options: ["nazisme", "fascisme", "stalinisme", "franquisme"], correct: "fascisme", explanation: "Mussolini instaure le fascisme en Italie (marche sur Rome, 1922)."},
+            {q: "Quelle date marque le début de la Seconde Guerre mondiale ?", options: ["1er septembre 1938", "1er septembre 1939", "10 mai 1940", "7 décembre 1941"], correct: "1er septembre 1939", explanation: "1er septembre 1939 : l'Allemagne envahit la Pologne."},
+            {q: "Quel appel lance le général de Gaulle le 18 juin 1940 ?", options: ["appel à la résistance", "appel de Londres", "appel du 18 juin", "appel à l'insurrection"], correct: "appel du 18 juin", explanation: "18 juin 1940 : 'La France a perdu une bataille, mais pas la guerre.'"},
+            {q: "Quel régime dirige la France de 1940 à 1944 ?", options: ["IIIe République", "Régime de Vichy", "Commune", "Directoire"], correct: "Régime de Vichy", explanation: "État français dirigé par Pétain, collaboration avec l'Allemagne nazie."},
+            {q: "Quelle opération alliée a lieu le 6 juin 1944 ?", options: ["Barbarossa", "Overlord", "Market Garden", "Torch"], correct: "Overlord", explanation: "6 juin 1944 : débarquement allié en Normandie (Opération Overlord)."},
+            {q: "Quelle ville est libérée par la 2e DB le 25 août 1944 ?", options: ["Lyon", "Marseille", "Paris", "Bordeaux"], correct: "Paris", explanation: "25 août 1944 : libération de Paris par Leclerc et la 2e DB."},
+            {q: "Quelle date marque la capitulation allemande ?", options: ["6 juin 1944", "8 mai 1945", "2 septembre 1945", "9 mai 1945"], correct: "8 mai 1945", explanation: "8 mai 1945 : capitulation allemande, Victoire en Europe (VE Day)."},
+            {q: "Quelles villes japonaises sont bombardées atomiquement en août 1945 ?", options: ["Tokyo et Osaka", "Hiroshima et Nagasaki", "Kyoto et Yokohama", "Nagoya et Kobe"], correct: "Hiroshima et Nagasaki", explanation: "6 août (Hiroshima) et 9 août (Nagasaki) 1945."},
+            {q: "Quel mur tombe le 9 novembre 1989 ?", options: ["mur de Chine", "mur de Berlin", "mur d'Hadrien", "mur atlantique"], correct: "mur de Berlin", explanation: "Chute du mur de Berlin, symbole de la Guerre froide."},
+            {q: "Quel pays disparaît en décembre 1991 ?", options: ["Yougoslavie", "Tchécoslovaquie", "URSS", "RDA"], correct: "URSS", explanation: "26 décembre 1991 : dissolution officielle de l'URSS."},
+            {q: "Quel traité crée l'Union européenne en 1992 ?", options: ["traité de Rome", "traité de Maastricht", "traité de Lisbonne", "traité de Nice"], correct: "traité de Maastricht", explanation: "7 février 1992 : traité de Maastricht crée l'UE et l'euro."},
+            {q: "Quelle guerre d'indépendance algérienne dure de 1954 à 1962 ?", options: ["guerre d'Indochine", "guerre d'Algérie", "guerre du Vietnam", "guerre de Corée"], correct: "guerre d'Algérie", explanation: "Guerre d'Algérie (1954-1962), indépendance le 5 juillet 1962."}
         ],
-        libre: [
-            {q: "La température mondiale a augmenté de ___°C depuis 1850.", answer: "1,1", alternatives: ["1.1", "+1,1", "+1.1", "un virgule un", "un point un"], explanation: "+1,1°C depuis l'ère préindustrielle."},
-            {q: "L'Accord de ___ (2015) vise à limiter le réchauffement à +1,5°C.", answer: "Paris", alternatives: ["paris", "Paris"], explanation: "COP21, Paris."},
-            {q: "L'année ___ a été la plus chaude jamais enregistrée.", answer: "2023", alternatives: ["2023"], explanation: "Record de température battu."},
-            {q: "La fosse des ___ est le point le plus profond des océans (-11 034 m).", answer: "Mariannes", alternatives: ["mariannes", "Mariannes", "fosse des Mariannes"], explanation: "Challenger Deep."},
-            {q: "Le principal gaz à effet de serre est le dioxyde de ___ (CO2).", answer: "carbone", alternatives: ["Carbone", "CARBONE", "carbone"], explanation: "CO2, combustion des énergies fossiles."},
-            {q: "La ___ est le plus grand émetteur de CO2 (30%).", answer: "Chine", alternatives: ["chine", "Chine", "Chine"], explanation: "Premier émetteur mondial."},
-            {q: "___% des récifs coralliens sont menacés d'ici 2050.", answer: "50", alternatives: ["cinquante", "Cinquante"], explanation: "Acidification et réchauffement des océans."},
-            {q: "Le Protocole de ___ (1987) a protégé la couche d'ozone.", answer: "Montréal", alternatives: ["montréal", "Montreal", "montreal"], explanation: "Interdiction des CFC, succès majeur."},
-            {q: "L'Accord de ___ concerne le climat (2015).", answer: "Paris", alternatives: ["paris", "Paris"], explanation: "COP21."},
-            {q: "L'___ est la forêt tropicale qui perd le plus d'arbres.", answer: "Amazonie", alternatives: ["amazonie", "Amazonie", "forêt amazonienne"], explanation: "Déforestation massive."},
-            {q: "La ___ est le leader mondial de l'énergie solaire.", answer: "Chine", alternatives: ["chine", "Chine"], explanation: "Plus de 50% des panneaux solaires."},
-            {q: "L'___ utilise la géothermie pour 90% de son chauffage.", answer: "Islande", alternatives: ["islande", "Islande"], explanation: "Énergie volcanique."},
-            {q: "Le barrage des ___-Gorges est le plus puissant (22 500 MW).", answer: "Trois", alternatives: ["trois", "3", "Trois-Gorges", "trois-gorges"], explanation: "Chine, Yangtsé."},
-            {q: "___% de la nourriture produite est gaspillée.", answer: "33", alternatives: ["trente-trois", "trente trois", "un tiers", "1/3"], explanation: "Un tiers perdu ou gaspillé."},
-            {q: "___ milliards de personnes n'ont pas accès à l'eau potable sûre.", answer: "2,2", alternatives: ["2.2", "2,2", "deux virgule deux", "deux point deux"], explanation: "Stress hydrique mondial."},
-            {q: "L'___ du niveau des mers menace les Maldives et Tuvalu.", answer: "élévation", alternatives: ["Élévation", "élévation", "remontée", "Remontée", "montée", "Montée"], explanation: "+3,4 mm/an."},
-            {q: "L'___ est l'insecte pollinisateur en déclin (40% de colonies perdues).", answer: "abeille", alternatives: ["Abeille", "abeille", "abeilles", "Abeilles"], explanation: "Essentielle pour la pollinisation."},
-            {q: "La COP___ (2023) a adopté la transition hors énergies fossiles.", answer: "28", alternatives: ["28", "vingt-huit", "vingt huit"], explanation: "COP28 à Dubaï."},
-            {q: "Seulement ___% des terres agricoles sont en agriculture biologique.", answer: "2", alternatives: ["deux", "Deux"], explanation: "Très faible part mondiale."},
-            {q: "Le rapport ___ (2019) alerte sur la 6e extinction de masse.", answer: "IPBES", alternatives: ["ipbes", "Ipbes"], explanation: "1 million d'espèces menacées."}
+        "libre": [
+            {q: "L'attentat de ___ déclenche la Première Guerre mondiale en 1914.", answer: "Sarajevo", alternatives: ["sarajevo"], explanation: "28 juin 1914, attentat contre François-Ferdinand."},
+            {q: "La bataille de ___ (1916) dure 10 mois et fait 700 000 morts.", answer: "Verdun", alternatives: ["verdun"], explanation: "'Ils ne passeront pas !'"},
+            {q: "L'armistice de 1918 est signé le ___ novembre.", answer: "11", alternatives: ["11 novembre", "11 novembre 1918"], explanation: "11 novembre à 11h, Rethondes."},
+            {q: "Le Traité de ___ (1919) humilie l'Allemagne.", answer: "Versailles", alternatives: ["versailles"], explanation: "Traité de Versailles, fin de la WWI."},
+            {q: "La Révolution ___ a lieu en 1917.", answer: "russe", alternatives: ["Russe", "russe"], explanation: "Révolution russe, chute du tsar."},
+            {q: "___ dirige les bolcheviks lors de la Révolution d'octobre 1917.", answer: "Lénine", alternatives: ["lénine", "lenine", "Lenine", "Lénine", "Vladimir Lénine"], explanation: "Vladimir Ilitch Lénine."},
+            {q: "Le krach boursier de Wall Street a lieu le 24 octobre ___", answer: "1929", explanation: "'Jeudi noir', début de la Grande Dépression."},
+            {q: "___ devient chancelier d'Allemagne en 1933.", answer: "Hitler", alternatives: ["hitler", "Adolf Hitler", "adolf hitler"], explanation: "Adolf Hitler et le nazisme."},
+            {q: "Mussolini instaure le ___ en Italie.", answer: "fascisme", alternatives: ["Fascisme", "fascisme"], explanation: "Régime fasciste italien (1922)."},
+            {q: "La Seconde Guerre mondiale commence le 1er septembre ___", answer: "1939", explanation: "Invasion de la Pologne par l'Allemagne."},
+            {q: "Le général de Gaulle lance son appel du 18 ___ 1940.", answer: "juin", alternatives: ["Juin", "juin 1940"], explanation: "Appel du 18 juin depuis Londres."},
+            {q: "Le régime de ___ dirige la France de 1940 à 1944.", answer: "Vichy", alternatives: ["vichy", "Vichy"], explanation: "État français de Pétain, collaboration."},
+            {q: "Le débarquement allié en Normandie a lieu le 6 ___ 1944.", answer: "juin", alternatives: ["Juin", "juin 1944"], explanation: "6 juin 1944, Opération Overlord."},
+            {q: "Paris est libérée le 25 ___ 1944.", answer: "août", alternatives: ["Août", "août 1944"], explanation: "25 août 1944, 2e DB du général Leclerc."},
+            {q: "L'Allemagne capitule le 8 ___ 1945.", answer: "mai", alternatives: ["Mai", "mai 1945"], explanation: "8 mai 1945, Victoire en Europe."},
+            {q: "Les villes atomisées en août 1945 sont Hiroshima et ___", answer: "Nagasaki", alternatives: ["nagasaki"], explanation: "6 et 9 août 1945."},
+            {q: "Le mur de ___ tombe le 9 novembre 1989.", answer: "Berlin", alternatives: ["berlin"], explanation: "Chute du mur de Berlin, fin de la Guerre froide."},
+            {q: "L'___ (Union des Républiques Socialistes Soviétiques) disparaît en décembre 1991.", answer: "URSS", alternatives: ["urss", "U.R.S.S.", "U.R.S.S"], explanation: "Dissolution de l'URSS, 26 décembre 1991."},
+            {q: "Le traité de ___ (1992) crée l'Union européenne.", answer: "Maastricht", alternatives: ["maastricht"], explanation: "7 février 1992, traité de Maastricht."},
+            {q: "L'Algérie devient indépendante le 5 juillet ___", answer: "1962", explanation: "Fin de la guerre d'Algérie (1954-1962)."}
         ]
     }
-};
+}
   /* fin QUESTIONS_DB */
 
 
