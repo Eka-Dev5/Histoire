@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ════════════════════════════════════════════════════
+       🎯 TITRE
+       ════════════════════════════════════════════════════ -->
+  <title>Géographie Master 🌍</title>
+
+  <style>
+
+    /* ════════════════════════════════════════════════════
+       🎨 PALETTE — Modifier ces 2 lignes pour recolorer
+          Exemples : #667eea violet | #922B21 rouge |
+                     #27ae60 vert   | #14486B bleu
+       ════════════════════════════════════════════════════ */
+    :root {
+      --primary   : #27ae60;
+      --secondary : #229954;
+      --success   : #48bb78;
+      --error     : #f56565;
+      --warning   : #ed8936;
+      --bg        : #f7fafc;
+      --text      : #2d3748;
+      --shadow    : 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    /* ── Reset global ── */
+    *, *::before, *::after {
+      box-sizing : border-box;
+      margin     : 0;
+      padding    : 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+    }
+
+    body {
+      background : linear-gradient(135deg, var(--primary), var(--secondary));
+      min-height : 100vh;
+      padding    : 15px;
+    }
+
+    /* ── Carte principale ── */
+    .quiz-container {
+      background   : white;
+      width        : 100%;
+      max-width    : 820px;
+      margin       : 0 auto;
+      border-radius: 20px;
+      padding      : 25px;
+      box-shadow   : var(--shadow);
+    }
+
+    /* ════════════════════════════════════════════════════
+       🔝 HEADER
+       ════════════════════════════════════════════════════ */
+    .header {
+      display        : flex;
+      justify-content: space-between;
+      align-items    : center;
+      margin-bottom  : 20px;
+      padding-bottom : 15px;
+      border-bottom  : 2px solid #e2e8f0;
+      flex-wrap      : wrap;
+      gap            : 10px;
+    }
+
+    .player-info    { display: flex; align-items: center; gap: 10px; }
+    .player-avatar  {
+      width         : 42px;
+      height        : 42px;
+      border-radius : 50%;
+      background    : linear-gradient(135deg, var(--primary), var(--secondary));
+      color         : white;
+      display       : flex;
+      align-items   : center;
+      justify-content: center;
+      font-size     : 1.2em;
+      font-weight   : bold;
+    }
+    .player-name    { font-weight: bold; font-size: 1.1em; color: var(--text); }
+    .player-stats   { font-size: 0.8em; color: #718096; }
+    .header-score   {
+      background    : linear-gradient(135deg, var(--primary), var(--secondary));
+      color         : white;
+      padding       : 8px 18px;
+      border-radius : 20px;
+      font-weight   : bold;
+    }
+    .player-selector { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .player-selector select {
+      padding       : 8px 12px;
+      border        : 2px solid #e2e8f0;
+      border-radius : 10px;
+      cursor        : pointer;
+      font-size     : 0.95em;
+      flex          : 1;
+      min-width     : 120px;
+    }
+    .player-selector select:focus { outline: none; border-color: var(--primary); }
+
+    /* ════════════════════════════════════════════════════
+       🔘 BOUTONS
+       ════════════════════════════════════════════════════ */
+    .btn {
+      padding      : 9px 18px;
+      border       : none;
+      border-radius: 10px;
+      cursor       : pointer;
+      font-weight  : bold;
+      font-size    : 0.9em;
+      transition   : all .2s;
+    }
+    .btn-primary         { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; }
+    .btn-primary:hover   { opacity: .88; transform: translateY(-1px); }
+    .btn-danger          { background: #fed7d7; color: #c53030; }
+    .btn-danger:hover    { background: #feb2b2; }
+    .btn-success         { background: #c6f6d5; color: #276749; }
+    .btn-success:hover   { background: #9ae6b4; }
+
+    /* ════════════════════════════════════════════════════
+       📄 SECTIONS — chaque écran du jeu
+       ════════════════════════════════════════════════════ */
+    .section        { display: none; }
+    .section.active { display: block; }
+
+    /* ── Accueil ── */
+    .home-title       { text-align: center; font-size: 2.2em; font-weight: 800; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 6px; }
+    .home-sub         { text-align: center; color: #718096; margin-bottom: 25px; }
+    .home-stats       { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin: 20px 0; }
+    .home-stat        { background: linear-gradient(145deg, #f0f4ff, #e8ecff); padding: 18px; border-radius: 15px; text-align: center; }
+    .home-stat-num    { font-size: 2em; font-weight: bold; color: var(--primary); }
+    .home-stat-label  { font-size: .8em; color: #718096; text-transform: uppercase; letter-spacing: .5px; }
+    .home-btns        { display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap; }
+    .home-btns .btn   { flex: 1; padding: 14px; font-size: 1em; border-radius: 12px; }
+
+    /* ── Leçons ── */
+    .lessons-list      { display: grid; gap: 12px; }
+    .lesson-card       { background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 14px; padding: 18px; cursor: pointer; transition: all .25s; }
+    .lesson-card:hover { border-color: var(--primary); background: #f0f4ff; }
+    .lesson-card.open  { border-color: var(--primary); background: #f0f4ff; }
+    .lesson-header     { display: flex; justify-content: space-between; align-items: center; }
+    .lesson-title      { font-weight: bold; font-size: 1.05em; color: var(--text); }
+    .lesson-tag        { background: var(--primary); color: white; padding: 3px 10px; border-radius: 12px; font-size: .75em; }
+    .lesson-body       { display: none; margin-top: 14px; padding-top: 14px; border-top: 1px solid #e2e8f0; }
+    .lesson-body.open  { display: block; }
+
+    /* ── Blocs pédagogiques ── */
+    .lesson-rule         { background: white; border-left: 4px solid var(--primary); padding: 12px 16px; border-radius: 0 10px 10px 0; margin-bottom: 10px; }
+    .lesson-rule h4      { color: var(--secondary); margin-bottom: 6px; font-size: .95em; text-transform: uppercase; letter-spacing: .5px; }
+    .lesson-table        { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: .9em; }
+    .lesson-table td,
+    .lesson-table th     { padding: 7px 10px; border: 1px solid #e2e8f0; text-align: left; }
+    .lesson-table th     { background: var(--primary); color: white; font-weight: 600; }
+    .lesson-table tr:nth-child(even) { background: #f8fafc; }
+    .lesson-warning      { background: #fff5d6; border-left: 4px solid var(--warning); padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 8px 0; font-size: .9em; }
+    .lesson-example      { background: #EEF2FF; border-left: 4px solid #667eea; border-radius: 0 10px 10px 0; padding: 11px 13px; margin: 10px 0; font-size: .88em; color: #2d3748; }
+
+    /* ── Niveaux ── */
+    .levels-container     { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 15px; }
+    .level-card           { border: 2px solid #e2e8f0; border-radius: 14px; padding: 18px; transition: all .25s; }
+    .level-card:not(.locked) { cursor: pointer; }
+    .level-card:not(.locked):hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: var(--shadow); }
+    .level-card.locked    { opacity: .55; background: #f8fafc; }
+    .level-card.completed { border-color: var(--success); background: #f0fff4; }
+    .level-card.current   { border-color: var(--primary); background: #f0f4ff; }
+    .level-header  { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .level-number  { font-size: .8em; font-weight: bold; color: #718096; text-transform: uppercase; letter-spacing: .5px; }
+    .level-title   { font-size: 1.1em; font-weight: bold; color: var(--text); margin-bottom: 4px; }
+    .level-obj     { font-size: .85em; color: #718096; }
+    .mode-selector { background: #f8fafc; border-radius: 14px; padding: 18px; margin-bottom: 18px; }
+    .mode-title    { font-weight: bold; margin-bottom: 12px; color: var(--text); }
+    .mode-btns     { display: flex; gap: 10px; flex-wrap: wrap; }
+    .mode-btn      { flex: 1; padding: 11px; border: 2px solid #e2e8f0; background: white; border-radius: 10px; cursor: pointer; font-weight: bold; transition: all .2s; text-align: center; min-width: 100px; }
+    .mode-btn.selected,
+    .mode-btn:hover { border-color: var(--primary); background: var(--primary); color: white; }
+
+    /* ── Zone de jeu ── */
+    .question-box  { background: #f8fafc; border-radius: 14px; padding: 22px; margin-bottom: 16px; }
+    .question-num  { font-size: .85em; color: #718096; margin-bottom: 8px; font-weight: 600; }
+    .question-text { font-size: 1.25em; font-weight: bold; color: var(--text); line-height: 1.5; }
+    .options-grid  { display: grid; gap: 10px; margin-top: 16px; }
+    .option-btn    { padding: 13px 18px; border: 2px solid #e2e8f0; background: white; border-radius: 10px; cursor: pointer; text-align: left; font-size: 1em; transition: all .2s; }
+    .option-btn:hover:not(:disabled) { border-color: var(--primary); background: #f0f4ff; }
+    .option-btn.selected { border-color: var(--primary); background: #f0f4ff; }
+    .option-btn.correct  { border-color: var(--success) !important; background: #c6f6d5 !important; color: #276749 !important; }
+    .option-btn.wrong    { border-color: var(--error) !important; background: #fed7d7 !important; color: #c53030 !important; }
+    .option-btn:disabled { cursor: not-allowed; }
+    .answer-input  { width: 100%; padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 1.1em; margin-top: 12px; transition: border-color .2s; }
+    .answer-input:focus   { outline: none; border-color: var(--primary); }
+    .answer-input.correct { border-color: var(--success); background: #f0fff4; }
+    .answer-input.wrong   { border-color: var(--error); background: #fff5f5; }
+
+    /* ── Feedback après réponse ── */
+    .feedback             { border-radius: 12px; padding: 16px 18px; margin-top: 14px; display: none; }
+    .feedback.show        { display: block; animation: fadeIn .3s; }
+    .feedback.correct-fb  { background: #c6f6d5; border-left: 4px solid var(--success); }
+    .feedback.wrong-fb    { background: #fed7d7; border-left: 4px solid var(--error); }
+    .feedback-title       { font-weight: bold; font-size: 1.1em; margin-bottom: 5px; }
+    .feedback-explanation { font-size: .9em; color: #4a5568; margin-top: 5px; }
+
+    /* ── Barre de progression ── */
+    .progress-wrap { margin-bottom: 16px; }
+    .progress-bar  { height: 10px; background: #e2e8f0; border-radius: 5px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); transition: width .4s; border-radius: 5px; }
+    .game-actions      { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+    .game-actions .btn { flex: 1; }
+
+    /* ── Écran résultats ── */
+    .results-box          { text-align: center; padding: 20px; }
+    .result-score-circle  { width: 130px; height: 130px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: var(--shadow); }
+    .result-score-num     { font-size: 2.5em; font-weight: 800; }
+    .result-score-sub     { font-size: .8em; opacity: .9; }
+    .result-msg           { font-size: 1.1em; color: var(--text); margin-bottom: 20px; }
+    .result-btns          { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .result-btns .btn     { padding: 12px 24px; }
+
+    /* ── Intro de leçon avant quiz ── */
+    #lessonIntro        { display: none; background: #f0f4ff; border-radius: 14px; padding: 24px 22px; margin-bottom: 18px; text-align: left; line-height: 1.6; }
+    #lessonIntroTitle   { color: var(--primary); margin-bottom: 10px; font-size: 1.35rem; font-weight: 800; }
+    #lessonIntroObj     { color: #718096; margin-bottom: 16px; font-size: 1rem; }
+    #lessonIntroContent { background: white; border-radius: 12px; padding: 18px; margin-bottom: 16px; font-size: 1rem; line-height: 1.7; max-height: 45vh; overflow-y: auto; color: #2d3748; word-break: break-word; }
+    #lessonIntroContent table { width: 100%; display: block; overflow-x: auto; border-collapse: collapse; }
+    #lessonIntroContent td,
+    #lessonIntroContent th   { padding: 8px 10px; white-space: normal; }
+
+    /* ── Notification toast ── */
+    .toast      { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%) translateY(20px); background: #2d3748; color: white; padding: 12px 22px; border-radius: 30px; font-weight: bold; opacity: 0; transition: all .3s; z-index: 999; pointer-events: none; }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ── Animation d'entrée ── */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ════════════════════════════════════════════════════
+       📱 RESPONSIVE MOBILE (< 600px)
+       ════════════════════════════════════════════════════ */
+    @media (max-width: 600px) {
+      .home-title              { font-size: 1.7em; }
+      .player-selector         { flex-direction: column; align-items: stretch; }
+      .player-selector select  { width: 100%; }
+      .levels-container        { grid-template-columns: 1fr; }
+      .home-btns .btn          { font-size: .9em; }
+      #lessonIntro             { padding: 16px 12px; }
+      #lessonIntroContent      { padding: 14px; max-height: 40vh; font-size: 0.95rem; }
+      #lessonIntroContent table { font-size: 0.8em; }
+
+      /* Première colonne des tableaux : largeur fixe */
+      .lesson-table th:first-child,
+      .lesson-table td:first-child {
+        width    : 50px;
+        min-width: 50px;
+        max-width: 50px;
+        padding  : 8px 2px;
+        text-align: center;
+        word-break: break-word;
+      }
+      /* Défilement horizontal si besoin */
+      .lesson-table { width: 100%; overflow-x: auto; display: block; }
+    }
+
+  </style>
+</head>
+<body>
+<div class="quiz-container">
+
+
+  <!-- ════════════════════════════════════════════════════
+       🔝 HEADER — Joueur actif + score
+       ════════════════════════════════════════════════════ -->
+  <div class="header">
+
+    <div class="player-info">
+      <div class="player-avatar" id="playerAvatar">?</div>
+      <div>
+        <div class="player-name"  id="playerNameDisplay">Aucun joueur</div>
+        <div class="player-stats" id="playerStats">Connecte-toi !</div>
+      </div>
+    </div>
+
+    <div class="player-selector">
+      <select id="playerSelect" onchange="switchPlayer(this.value)">
+        <option value="">-- Joueur --</option>
+      </select>
+      <button class="btn btn-primary" onclick="showNewPlayerModal()">+ Nouveau</button>
+      <button class="btn btn-danger"  onclick="deleteCurrentPlayer()">✕</button>
+    </div>
+
+    <div class="header-score" id="headerScore">0 pts</div>
+
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════
+       🧭 NAVIGATION PRINCIPALE
+       ════════════════════════════════════════════════════ -->
+  <div style="display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap;">
+    <button class="btn btn-primary" onclick="showSection('accueil')">🏠</button>
+    <button class="btn" onclick="showSection('lecons')"  style="background:#f0f4ff; color:var(--primary);">📚 Leçons</button>
+    <button class="btn" onclick="showSection('niveaux')" style="background:#f0fff4; color:#276749;">🎮 Niveaux</button>
+    <button class="btn" onclick="goToDashboard()"        style="background:#fff5d6; color:#744210;">📊 Espace</button>
+    <button class="btn" onclick="window.location.href=SUBJECT_CONFIG.lexiqueFile"
+                                                         style="background:#f5e8ff; color:#553c9a;">📖 Lexique</button>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════
+       🏠 ACCUEIL
+       ════════════════════════════════════════════════════ -->
+  <div id="accueil" class="section active">
+
+    <!-- ↓ Personnaliser le titre et le slogan ↓ -->
+    <div class="home-title">Géographie Master 🌍</div>
+    <div class="home-sub">Apprendre la géographie, un niveau à la fois.</div>
+
+    <div class="home-stats">
+      <div class="home-stat"><div class="home-stat-num" id="homeLevel">1</div><div class="home-stat-label">Niveau</div></div>
+      <div class="home-stat"><div class="home-stat-num" id="homeScore">0</div><div class="home-stat-label">Points</div></div>
+      <div class="home-stat"><div class="home-stat-num" id="homeStreak">0</div><div class="home-stat-label">Série 🔥</div></div>
+      <div class="home-stat"><div class="home-stat-num" id="homeRate">0%</div><div class="home-stat-label">Réussite</div></div>
+    </div>
+
+    <div class="home-btns">
+      <button class="btn btn-primary" onclick="showSection('lecons')">📚 Voir les leçons</button>
+      <button class="btn btn-success" onclick="showSection('niveaux')">🎮 Jouer maintenant</button>
+    </div>
+
+    <!-- Export / Import sauvegarde -->
+    <div style="margin-top:14px; padding-top:14px; border-top:1px solid #e2e8f0;">
+      <p style="font-size:.8em; color:#718096; margin-bottom:10px;">
+        💾 Sauvegarde — pour retrouver ta progression sur un autre appareil
+      </p>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn" onclick="exportSave()"
+          style="flex:1; background:#f0fff4; color:#276749; font-size:.9em;">
+          ⬇️ Exporter ma sauvegarde
+        </button>
+        <label class="btn"
+          style="flex:1; background:#f0f4ff; color:var(--primary); font-size:.9em; cursor:pointer; text-align:center;">
+          ⬆️ Importer une sauvegarde
+          <input type="file" accept=".json" onchange="importSave(event)" style="display:none;">
+        </label>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════
+       📚 LEÇONS
+       ════════════════════════════════════════════════════ -->
+  <div id="lecons" class="section">
+
+    <div style="padding:8px 0 4px;">
+      <button class="btn" onclick="showSection('accueil')"
+        style="background:rgba(0,0,0,.08); color:#718096; border:none; padding:6px 14px; border-radius:20px; font-size:.84em; cursor:pointer;">
+        🏠 Accueil
+      </button>
+    </div>
+
+    <h2 style="margin-bottom:16px; color:var(--text);">📚 Les Leçons</h2>
+    <p style="color:#718096; margin-bottom:16px;">Clique sur une leçon pour la lire. Courte, claire, efficace !</p>
+
+    <!-- Leçons injectées par renderLessons() -->
+    <div class="lessons-list" id="lessonsContainer"></div>
+
+    <button class="btn btn-primary" onclick="showSection('niveaux')"
+      style="margin-top:18px; width:100%; padding:13px;">
+      Je suis prêt — jouer ! 🎮
+    </button>
+
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════
+       🎮 NIVEAUX
+       ════════════════════════════════════════════════════ -->
+  <div id="niveaux" class="section">
+
+    <h2 style="margin-bottom:8px; color:var(--text);">🎮 Choisir un niveau</h2>
+
+    <div class="mode-selector">
+      <div class="mode-title">Mode de jeu :</div>
+      <div class="mode-btns">
+        <button class="mode-btn selected" id="btnMixte" onclick="selectMode('mixte')">🎲 Mixte</button>
+        <button class="mode-btn"          id="btnQcm"   onclick="selectMode('qcm')">🎯 QCM</button>
+        <button class="mode-btn"          id="btnLibre" onclick="selectMode('libre')">✍️ Écrit</button>
+      </div>
+    </div>
+
+    <!-- Cartes de niveaux injectées par renderLevels() -->
+    <div class="levels-container" id="levelsContainer"></div>
+
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════
+       🎯 JEU — Affichage des questions
+       ════════════════════════════════════════════════════ -->
+  <div id="jeu" class="section">
+
+    <h2 id="gameTitle" style="margin-bottom:14px; color:var(--text);">Niveau 1</h2>
+
+    <!-- Barre de progression -->
+    <div class="progress-wrap">
+      <div style="display:flex; justify-content:space-between; font-size:.85em; color:#718096; margin-bottom:4px;">
+        <span id="questionCounter">Q1/10</span>
+        <span id="scoreDisplay">0 ✓</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width:0%;"></div>
+      </div>
+    </div>
+
+    <!-- Intro leçon avant les questions -->
+    <div id="lessonIntro">
+      <div style="font-size:3em; margin-bottom:10px;">📚</div>
+      <h3 id="lessonIntroTitle" style="color:var(--primary); margin-bottom:8px;"></h3>
+      <p  id="lessonIntroObj"   style="color:#718096; margin-bottom:16px;"></p>
+      <div id="lessonIntroContent"></div>
+      <a  id="lessonIntroLexique" href="#" target="_blank"
+          style="display:inline-block; margin-bottom:12px; color:var(--primary); font-weight:bold;
+                 text-decoration:none; border-bottom:1px dashed var(--primary);">
+        📖 Voir le vocabulaire du niveau
+      </a><br>
+      <button class="btn btn-primary" onclick="startQuestions()"
+        style="padding:14px 32px; font-size:1.1em; border-radius:14px;">
+        🎮 C'est parti !
+      </button>
+    </div>
+
+    <!-- Zone de question -->
+    <div class="question-box">
+      <div class="question-num"  id="questionNum"></div>
+      <div class="question-text" id="questionText"></div>
+      <div class="options-grid"  id="qcmOptions"  style="display:none;"></div>
+      <div id="libreInput" style="display:none;">
+        <input type="text" class="answer-input" id="answerInput"
+               placeholder="Tape ta réponse..."
+               onkeyup="if(event.key==='Enter') validateAnswer();">
+      </div>
+      <div class="feedback" id="feedback">
+        <div class="feedback-title"       id="feedbackTitle"></div>
+        <div                              id="feedbackCorrect" style="font-size:.95em;"></div>
+        <div class="feedback-explanation" id="feedbackExplanation"></div>
+      </div>
+    </div>
+
+    <div class="game-actions">
+      <button class="btn"         onclick="quitGame()"      style="background:#f8fafc; color:#718096;">⬅ Quitter</button>
+      <button class="btn btn-primary" id="validateBtn"      onclick="validateAnswer()">✓ Valider</button>
+      <button class="btn btn-success" id="nextBtn"          onclick="nextQuestion()" style="display:none;">Suivant →</button>
+    </div>
+
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════
+       🏅 RÉSULTATS
+       ════════════════════════════════════════════════════ -->
+  <div id="resultats" class="section">
+    <div class="results-box">
+      <div class="result-score-circle">
+        <div class="result-score-num" id="resultPct">0%</div>
+        <div class="result-score-sub">réussite</div>
+      </div>
+      <div class="result-msg" id="resultMsg"></div>
+      <div class="result-btns">
+        <button class="btn"          onclick="retryLevel()"     style="background:#f8fafc;">🔁 Rejouer</button>
+        <button class="btn btn-primary" id="nextLevelBtn"       onclick="startNextLevel()" style="display:none;">Niveau suivant →</button>
+        <button class="btn"          onclick="showSection('niveaux')" style="background:#f0f4ff; color:var(--primary);">Tous les niveaux</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════
+       👤 MODALE NOUVEAU JOUEUR
+       ════════════════════════════════════════════════════ -->
+  <div id="newPlayerModal"
+       style="display:none; position:fixed; top:0; left:0; right:0; bottom:0;
+              background:rgba(0,0,0,0.5); z-index:1000;
+              align-items:center; justify-content:center; padding:15px;">
+    <div style="background:white; padding:25px; border-radius:20px; max-width:320px; width:100%;
+                text-align:center; box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+      <div style="font-size:2.5em; margin-bottom:10px;">👤</div>
+      <h3 style="margin-bottom:15px; color:var(--text);">Nouveau joueur</h3>
+      <input type="text" id="newPlayerNameModal" placeholder="Ton prénom"
+             style="width:100%; padding:14px; border:2px solid #e2e8f0; border-radius:12px;
+                    font-size:1.1em; margin-bottom:18px; outline:none;"
+             onkeyup="if(event.key==='Enter') confirmNewPlayer();">
+      <div style="display:flex; gap:10px;">
+        <button class="btn btn-primary" onclick="confirmNewPlayer()"   style="flex:1; padding:12px;">✓ Créer</button>
+        <button class="btn"             onclick="closeNewPlayerModal()" style="flex:1; padding:12px; background:#f8fafc; color:#718096;">✕ Annuler</button>
+      </div>
+    </div>
+  </div>
+
+
+</div><!-- /.quiz-container -->
+<div class="toast" id="toast"></div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     📜 JAVASCRIPT
+     ══════════════════════════════════════════════════════ -->
+<script>
+
+  /* ══════════════════════════════════════════════════════
+     ⚙️  CONFIG SUJET — À MODIFIER pour chaque nouvelle matière
+         name        → Nom affiché dans l'interface
+         emoji       → Emoji du cours
+         storageKey  → Clé unique localStorage (ne pas réutiliser)
+         playersKey  → Clé unique des joueurs   (ne pas réutiliser)
+     ══════════════════════════════════════════════════════ */
+  const SUBJECT_CONFIG = {
+    name         : "Géographie Master",
+    emoji        : "🌍",
+    storageKey   : "geoMaster_v1",
+    playersKey   : "geoMaster_players",
+    dashboardFile: "dashboard.html",
+    lexiqueFile  : "lexique.html"
+  };
+
+
+  /* ══════════════════════════════════════════════════════
+     📚 LEÇONS — Tableau d'objets { num, title, content }
+         content : HTML libre avec classes :
+           .lesson-rule     → bloc de règle
+           .lesson-table    → tableau comparatif
+           .lesson-warning  → encadré avertissement (fond jaune)
+           .lesson-example  → encadré exemple      (fond bleu)
+     ══════════════════════════════════════════════════════ */
+  const LESSONS_DATA = [
+    {
+        num: 1,
+        title: "La France : territoire et régions",
+        content: `<div class="lesson-rule"><h4>🗺️ Le territoire français</h4>
+    <p>La France métropolitaine compte <strong>13 régions</strong> depuis 2016 (anciennement 22). Elle s'étend sur <strong>643 801 km²</strong> (1er pays de l'UE par la superficie).</p>
+    <table class="lesson-table"><tr><th>Frontière</th><th>Pays voisin</th><th>Particularité</th></tr>
+    <tr><td>Nord</td><td>Belgique, Luxembourg</td><td>Plat pays, frontière linguistique</td></tr>
+    <tr><td>Nord-Est</td><td>Allemagne</td><td>Rhin, Vosges</td></tr>
+    <tr><td>Est</td><td>Suisse</td><td>Jura, Alpes</td></tr>
+    <tr><td>Sud-Est</td><td>Italie, Monaco</td><td>Alpes, Côte d'Azur</td></tr>
+    <tr><td>Sud</td><td>Espagne, Andorre</td><td>Pyrénées</td></tr>
+    <tr><td>Ouest</td><td>océan Atlantique</td><td>Côtes rocheuses et sableuses</td></tr>
+    <tr><td>Nord-Ouest</td><td>la Manche</td><td>Manche, Pas de Calais</td></tr>
+    </table>
+    <p style="margin-top:8px"><strong>Outre-mer :</strong> 5 DROM (Guadeloupe, Martinique, Guyane, La Réunion, Mayotte) + 5 COM + Terres australes et antarctiques françaises.</p></div>
+    
+    <div class="lesson-rule"><h4>🏔️ Les grands reliefs</h4>
+    <p><strong>Les montagnes :</strong></p>
+    <p>• <strong>Les Alpes</strong> : Mont Blanc (4 808 m, point culminant de l'UE), massifs du Mont-Blanc, du Pelvoux, de la Vanoise.</p>
+    <p>• <strong>Les Pyrénées</strong> : Vignemale, Pic du Midi, frontière naturelle avec l'Espagne.</p>
+    <p>• <strong>Le Massif central</strong> : volcanique (Puy de Dôme, Puy de Sancy 1 886 m), plateau granitique.</p>
+    <p>• <strong>Les Vosges</strong> : Ballon de Guebwiller (1 424 m), forêts de sapins.</p>
+    <p>• <strong>Le Jura</strong> : relief karstique, cascades du Hérisson.</p>
+    <p>• <strong>Les Cévennes</strong> : partie sud du Massif central, gorges du Tarn.</p>
+    <p style="margin-top:8px"><strong>Les plaines :</strong></p>
+    <p>• <strong>Plaine du Nord</strong> : bassin parisien (céréales, betteraves).</p>
+    <p>• <strong>Plaine de l'Est</strong> : Alsace, Lorraine (industrie, agriculture).</p>
+    <p>• <strong>Plaine du Sud-Ouest</strong> : Aquitaine (vignes, maïs).</p></div>
+    
+    <div class="lesson-rule"><h4>🌊 Les fleuves et cours d'eau</h4>
+    <table class="lesson-table"><tr><th>Fleuve</th><th>Longueur</th><th>Embouchure</th><th>Particularité</th></tr>
+    <tr><td><strong>La Loire</strong></td><td>1 012 km</td><td>océan Atlantique</td><td>Plus long fleuve de France, châteaux</td></tr>
+    <tr><td><strong>Le Rhône</strong></td><td>812 km (545 en France)</td><td>Méditerranée</td><td>Débit le plus puissant, delta (Camargue)</td></tr>
+    <tr><td><strong>La Seine</strong></td><td>776 km</td><td>Manche</td><td>Paris, port de Rouen (Le Havre)</td></tr>
+    <tr><td><strong>La Garonne</strong></td><td>647 km (575 en France)</td><td>océan Atlantique</td><td>Bordeaux, estuaire de la Gironde</td></tr>
+    <tr><td><strong>Le Rhin</strong></td><td>1 233 km (188 en France)</td><td>Mer du Nord</td><td>Frontière, port de Strasbourg</td></tr>
+    <tr><td><strong>La Meuse</strong></td><td>950 km (486 en France)</td><td>Mer du Nord</td><td>Ardennes, Rotterdam</td></tr>
+    </table></div>
+    
+    <div class="lesson-warning">⚠️ Attention :<br>
+    • La Loire est le plus <strong>long</strong> fleuve, le Rhône a le plus <strong>fort débit</strong>.<br>
+    • La Seine est le fleuve de Paris mais pas le plus long !<br>
+    • La France a 5 500 km de côtes (Manche, Atlantique, Méditerranée).</div>
+    
+    <div class="lesson-example">✅ Points clés :<br>
+    • 13 régions | 101 départements | 35 000 communes<br>
+    • Mont Blanc 4 808 m | Étang de Lers (Ariège) -10 m<br>
+    • 5 DROM-COM | 2,5 millions de km² de ZEE (2e mondiale)<br>
+    • Fleuves : Loire (1 012 km), Rhône, Seine, Garonne, Rhin</div>`
+    },
+    {
+        num: 2,
+        title: "L'Europe : pays, capitales et climats",
+        content: `<div class="lesson-rule"><h4>🌍 L'Union européenne</h4>
+    <p>L'UE compte <strong>27 pays</strong> (depuis le Brexit de 2020). Superficie : 4,2 millions km². Population : 450 millions.</p>
+    <p><strong>Les 6 pays fondateurs (1957) :</strong> France, Allemagne, Italie, Belgique, Pays-Bas, Luxembourg.</p>
+    <p><strong>Derniers entrants :</strong> Croatie (2013). Candidats : Ukraine, Moldavie, Géorgie, Albanie, Macédoine du Nord, Monténégro, Serbie, Turquie.</p>
+    <p><strong>Eurozone :</strong> 20 pays utilisent l'euro (€). Hors zone : Danemark, Suède, Pologne, Hongrie, Roumanie, Bulgarie, République tchèque.</p></div>
+    
+    <div class="lesson-rule"><h4>🏛️ Capitales et pays à connaître</h4>
+    <table class="lesson-table"><tr><th>Pays</th><th>Capitale</th><th>Langue officielle</th><th>Population (M)</th></tr>
+    <tr><td>Allemagne</td><td>Berlin</td><td>Allemand</td><td>83</td></tr>
+    <tr><td>Italie</td><td>Rome</td><td>Italien</td><td>59</td></tr>
+    <tr><td>Espagne</td><td>Madrid</td><td>Espagnol</td><td>47</td></tr>
+    <tr><td>Pologne</td><td>Varsovie</td><td>Polonais</td><td>38</td></tr>
+    <tr><td>Roumanie</td><td>Bucarest</td><td>Roumain</td><td>19</td></tr>
+    <tr><td>Pays-Bas</td><td>Amsterdam</td><td>Néerlandais</td><td>17</td></tr>
+    <tr><td>Belgique</td><td>Bruxelles</td><td>Français, Néerl., Allemand</td><td>11</td></tr>
+    <tr><td>Grèce</td><td>Athènes</td><td>Grec</td><td>10</td></tr>
+    <tr><td>Portugal</td><td>Lisbonne</td><td>Portugais</td><td>10</td></tr>
+    <tr><td>Suède</td><td>Stockholm</td><td>Suédois</td><td>10</td></tr>
+    <tr><td>Autriche</td><td>Vienne</td><td>Allemand</td><td>9</td></tr>
+    <tr><td>Danemark</td><td>Copenhague</td><td>Danois</td><td>6</td></tr>
+    <tr><td>Finlande</td><td>Helsinki</td><td>Finnois, Suédois</td><td>5,5</td></tr>
+    <tr><td>Irlande</td><td>Dublin</td><td>Irlandais, Anglais</td><td>5</td></tr>
+    <tr><td>Luxembourg</td><td>Luxembourg</td><td>Luxembourgeois</td><td>0,6</td></tr>
+    </table></div>
+    
+    <div class="lesson-rule"><h4>🌤️ Les climats européens</h4>
+    <table class="lesson-table"><tr><th>Climat</th><th>Zone</th><th>Caractéristiques</th></tr>
+    <tr><td><strong>Océanique</strong></td><td>Ouest (Bretagne, UK, Irlande)</td><td>Doux, humide, peu d'amplitude thermique</td></tr>
+    <tr><td><strong>Méditerranéen</strong></td><td>Sud (Espagne, Italie, Grèce)</td><td>Étés chauds et secs, hivers doux</td></tr>
+    <tr><td><strong>Continental</strong></td><td>Est (Pologne, Hongrie, Roumanie)</td><td>Hivers froids, étés chauds, amplitude forte</td></tr>
+    <tr><td><strong>Montagnard</strong></td><td>Alpes, Pyrénées, Carpates</td><td>Froid, neigeux, altitude</td></tr>
+    <tr><td><strong>Semi-aride</strong></td><td>Sud-Est (Espagne intérieure)</td><td>Sec, canicules</td></tr>
+    <tr><td><strong>Polaire / Subpolaire</strong></td><td>Nord (Finlande, Suède, Islande)</td><td>Froid, nuits polaires, aurores boréales</td></tr>
+    </table></div>
+    
+    <div class="lesson-example">✅ Points clés :<br>
+    • 27 pays dans l'UE | 6 fondateurs (1957) | 20 dans la zone euro<br>
+    • Plus grande ville : Berlin (3,7 M) | Plus petit pays : Malte (316 km²)<br>
+    • Mont Blanc 4 808 m (frontière France-Italie) | Volcan Etna (Sicile)<br>
+    • Climats : océanique, méditerranéen, continental, montagnard</div>`
+    },
+    {
+        num: 3,
+        title: "Le monde : continents et océans",
+        content: `<div class="lesson-rule"><h4>🌏 Les 7 continents</h4>
+    <table class="lesson-table"><tr><th>Continent</th><th>Superficie (M km²)</th><th>Population (M)</th><th>Points clés</th></tr>
+    <tr><td><strong>Asie</strong></td><td>44,6</td><td>4 700</td><td>Plus grand et plus peuplé, Himalaya, Chine, Inde</td></tr>
+    <tr><td><strong>Afrique</strong></td><td>30,4</td><td>1 400</td><td>Sahara, Kilimandjaro, Nil, croissance démographique</td></tr>
+    <tr><td><strong>Amérique du Nord</strong></td><td>24,7</td><td>600</td><td>USA, Canada, Mexique, Grand Canyon</td></tr>
+    <tr><td><strong>Amérique du Sud</strong></td><td>17,8</td><td>430</td><td>Amazonie, Andes, Brésil, Argentine</td></tr>
+    <tr><td><strong>Antarctique</strong></td><td>14,0</td><td>0 (scientifiques)</td><td>Plus froid, glace, protocole de Madrid</td></tr>
+    <tr><td><strong>Europe</strong></td><td>10,2</td><td>750</td><td>UE, Alpes, densément peuplée</td></tr>
+    <tr><td><strong>Océanie</strong></td><td>8,5</td><td>45</td><td>Australie, Nouvelle-Zélande, îles du Pacifique</td></tr>
+    </table></div>
+    
+    <div class="lesson-rule"><h4>🌊 Les 5 océans</h4>
+    <table class="lesson-table"><tr><th>Océan</th><th>Superficie (M km²)</th><th>Profondeur max</th><th>Particularité</th></tr>
+    <tr><td><strong>Pacifique</strong></td><td>165</td><td>Fosse des Mariannes (-11 034 m)</td><td>Plus grand, ceinture de feu, îles</td></tr>
+    <tr><td><strong>Atlantique</strong></td><td>106</td><td>Fosse de Porto Rico (-8 605 m)</td><td>Dorsale médio-atlantique, Gulf Stream</td></tr>
+    <tr><td><strong>Indien</strong></td><td>70</td><td>Fosse de Java (-7 450 m)</td><td>Monsons, routes maritimes</td></tr>
+    <tr><td><strong>Austral / Antarctique</strong></td><td>20</td><td>-</td><td>Entre Australie et Antarctique</td></tr>
+    <tr><td><strong>Arctique</strong></td><td>14</td><td>-</td><td>Glace permanente, réchauffement rapide</td></tr>
+    </table>
+    <p style="margin-top:8px"><strong>Points extrêmes :</strong></p>
+    <p>• Point le plus haut : Everest (8 849 m, Népal/Tibet)</p>
+    <p>• Point le plus bas : Fosse des Mariannes (-11 034 m)</p>
+    <p>• Point le plus chaud : Dallol, Éthiopie (34,6°C en moyenne annuelle)</p>
+    <p>• Point le plus froid : Vostok, Antarctique (-89,2°C)</p></div>
+    
+    <div class="lesson-rule"><h4>🗺️ Grands repères géographiques</h4>
+    <p><strong>Parallèles importants :</strong></p>
+    <p>• <strong>Équateur (0°)</strong> : jour = nuit toute l'année, climat tropical.</p>
+    <p>• <strong>Tropique du Cancer (23,5°N)</strong> : limite nord des tropiques.</p>
+    <p>• <strong>Tropique du Capricorne (23,5°S)</strong> : limite sud des tropiques.</p>
+    <p>• <strong>Cercle polaire arctique (66,5°N)</strong> : soleil de minuit, aurores.</p>
+    <p>• <strong>Cercle polaire antarctique (66,5°S)</strong> : nuit polaire.</p>
+    <p style="margin-top:8px"><strong>Méridiens importants :</strong></p>
+    <p>• <strong>Méridien de Greenwich (0°)</strong> : référence des fuseaux horaires.</p>
+    <p>• <strong>Méridien de Paris (2°20'E)</strong> : ancienne référence française.</p></div>
+    
+    <div class="lesson-warning">⚠️ Attention :<br>
+    • L'Asie et l'Europe forment un seul continent physique : <strong>Eurasie</strong>.<br>
+    • L'océan Austral est parfois considéré comme une extension de l'océan Pacifique, Sud et Indien.<br>
+    • L'Antarctique n'appartient à aucun pays (traité de 1959).</div>
+    
+    <div class="lesson-example">✅ Points clés :<br>
+    • 7 continents | 5 océans | 195 pays reconnus par l'ONU<br>
+    • Plus grand pays : Russie (17 M km²) | Plus peuplé : Inde (1,4 Mrd)<br>
+    • Plus haut : Everest 8 849 m | Plus bas : Fosse Mariannes -11 034 m<br>
+    • Plus grand désert : Sahara (9 M km²) | Plus grande forêt : Amazonie</div>`
+    },
+    {
+        num: 4,
+        title: "Développement et inégalités mondiales",
+        content: `<div class="lesson-rule"><h4>💰 Indicateurs de développement</h4>
+    <table class="lesson-table"><tr><th>Indicateur</th><th>Définition</th><th>Pays de référence</th></tr>
+    <tr><td><strong>PIB/habitant</strong></td><td>Richesse produite par personne</td><td>Luxembourg ($135 000), France ($40 000), Burundi ($300)</td></tr>
+    <tr><td><strong>IDH</strong> (Indice Dév. Humain)</td><td>Santé, éducation, niveau de vie (0 à 1)</td><td>Norvège (0,966), France (0,903), Niger (0,394)</td></tr>
+    <tr><td><strong>Taux d'alphabétisation</strong></td><td>% de personnes sachant lire et écrire</td><td>Andorre (100%), Mali (35%)</td></tr>
+    <tr><td><strong>Espérance de vie</strong></td><td>Années de vie moyenne</td><td>Japon (84 ans), RDC (59 ans)</td></tr>
+    <tr><td><strong>Taux de natalité</strong></td><td>Nombre de naissances pour 1 000 hab.</td><td>Niger (47‰), Corée du Sud (7‰)</td></tr>
+    <tr><td><strong>Taux de mortalité infantile</strong></td><td>Décès avant 1 an pour 1 000 naissances</td><td>Islande (2‰), Somalie (76‰)</td></tr>
+    </table></div>
+    
+    <div class="lesson-rule"><h4>🌍 Classement des pays</h4>
+    <p><strong>Pays développés (Nord) :</strong> forte industrialisation, services dominants, HDI > 0,8.</p>
+    <p>Ex: USA, Japon, Allemagne, France, Royaume-Uni, Canada, Australie, Corée du Sud.</p>
+    <p style="margin-top:8px"><strong>Pays émergents (Sud) :</strong> croissance rapide, industrialisation en cours.</p>
+    <p>Ex: Chine, Inde, Brésil, Russie, Afrique du Sud (BRICS), Mexique, Indonésie, Turquie.</p>
+    <p style="margin-top:8px"><strong>Pays en développement / du Sud :</strong> faible industrialisation, forte dépendance agricole, HDI < 0,55.</p>
+    <p>Ex: Mali, Haïti, Afghanistan, Yémen, Tchad, Burundi, Soudan du Sud.</p>
+    <p style="margin-top:8px"><strong>Pays à revenu intermédiaire :</strong> transition entre les deux.</p>
+    <p>Ex: Maroc, Vietnam, Philippines, Égypte, Ukraine.</p></div>
+    
+    <div class="lesson-rule"><h4>⚖️ Inégalités mondiales</h4>
+    <p><strong>Écart Nord-Sud :</strong></p>
+    <p>• 20% des plus riches consomment 80% des ressources mondiales.</p>
+    <p>• 10% de la population détient 76% de la richesse mondiale.</p>
+    <p>• 700 millions de personnes vivent avec moins de 2,15 $/jour.</p>
+    <p style="margin-top:8px"><strong>ODD (Objectifs de Développement Durable) :</strong></p>
+    <p>17 objectifs fixés par l'ONU en 2015 pour 2030.</p>
+    <p>Ex: faim zéro, santé, éducation, égalité, eau propre, climat.</p>
+    <p style="margin-top:8px"><strong>Dette des pays du Sud :</strong></p>
+    <p>• Dette extérieure : argent emprunté à l'étranger (FMI, Banque mondiale).</p>
+    <p>• Service de la dette : remboursement des intérêts, parfois supérieur au budget santé.</p>
+    <p>• Initiative PPTE (Pays Pauvres Très Endettés) lancée en 1996.</p></div>
+    
+    <div class="lesson-example">✅ Points clés :<br>
+    • IDH max : Norvège (0,966) | IDH min : Soudan du Sud (0,385)<br>
+    • PIB/hab max : Luxembourg ($135 000) | min : Burundi ($300)<br>
+    • 17 ODD pour 2030 | 700 millions en extrême pauvreté<br>
+    • BRICS : Brésil, Russie, Inde, Chine, Afrique du Sud (+ nouveaux entrants)</div>`
+    },
+    {
+        num: 5,
+        title: "Enjeux environnementaux du XXIe siècle",
+        content: `<div class="lesson-rule"><h4>🌡️ Le réchauffement climatique</h4>
+    <p><strong>Constats :</strong></p>
+    <p>• +1,1°C depuis l'ère préindustrielle (1850-1900).</p>
+    <p>• Objectif Accord de Paris (2015) : limiter à +1,5°C (idéal) ou +2°C (maximum).</p>
+    <p>• 2023 : année la plus chaude jamais enregistrée.</p>
+    <p style="margin-top:8px"><strong>Conséquences :</strong></p>
+    <p>• Fonte des glaces : Groenland -280 milliards tonnes/an, Antarctique instable.</p>
+    <p>• Élévation du niveau des mers : +3,4 mm/an, menace pour les îles (Maldives, Tuvalu).</p>
+    <p>• Canicules plus fréquentes : Europe 2022 (+40 000 morts), Canada 2021 (49,6°C).</p>
+    <p>• Cycles hydrologiques perturbés : sécheresses (Californie, Sahel) et inondations (Pakistan 2022).</p>
+    <p>• Acidification des océans : -30% de pH depuis 1850, menace coraux et coquillages.</p></div>
+    
+    <div class="lesson-rule"><h4>🌳 Déforestation et biodiversité</h4>
+    <table class="lesson-table"><tr><th>Zone</th><th>Taux de perte</th><th>Causes principales</th></tr>
+    <tr><td><strong>Amazonie</strong></td><td>17% depuis 1970</td><td>Agriculture (soja, élevage), mines, routes</td></tr>
+    <tr><td><strong>Bornéo</strong></td><td>30% depuis 1973</td><td>Palmiers à huile, bois tropical</td></tr>
+    <tr><td><strong>Congo</strong></td><td>10% depuis 2000</td><td>Agriculture itinérante, bois de chauffe</td></tr>
+    <tr><td><strong>Indonésie</strong></td><td>25% depuis 2000</td><td>Palmiers à huile, incendies</td></tr>
+    </table>
+    <p style="margin-top:8px"><strong>6e extinction de masse :</strong> 1 million d'espèces menacées (IPBES 2019).</p>
+    <p>• Rhinocéros noir, pangolin, tigre de Sumatra, gorille des montagnes.</p>
+    <p>• Coraux : 50% des récifs mondiaux menacés d'ici 2050.</p>
+    <p>• Abeilles : 40% des colonies disparaissent chaque année.</p></div>
+    
+    <div class="lesson-rule"><h4>♻️ Transition écologique et énergies</h4>
+    <p><strong>Mix énergétique mondial (2023) :</strong></p>
+    <p>• Pétrole : 31% | Charbon : 27% | Gaz : 23% | Nucléaire : 4% | Renouvelables : 15%</p>
+    <p style="margin-top:8px"><strong>Énergies renouvelables :</strong></p>
+    <p>• <strong>Solaire</strong> : coût divisé par 10 en 10 ans, leader Chine.</p>
+    <p>• <strong>Éolien</strong> : offshore en expansion (Mer du Nord).</p>
+    <p>• <strong>Hydraulique</strong> : barrages (Trois-Gorges, Chine : 22 500 MW).</p>
+    <p>• <strong>Géothermie</strong> : Islande (90% du chauffage).</p>
+    <p style="margin-top:8px"><strong>Accords internationaux :</strong></p>
+    <p>• <strong>Protocole de Montréal (1987)</strong> : protection couche d'ozone (succès !).</p>
+    <p>• <strong>Protocole de Kyoto (1997)</strong> : premiers engagements réduction CO2.</p>
+    <p>• <strong>Accord de Paris (2015)</strong> : +1,5°C, contributions nationales (NDC).</p>
+    <p>• <strong>COP28 (2023)</strong> : transition "hors des énergies fossiles".</p></div>
+    
+    <div class="lesson-rule"><h4>💧 Ressources en eau et sécurité alimentaire</h4>
+    <p><strong>Stress hydrique :</strong></p>
+    <p>• 2,2 milliards de personnes sans accès à l'eau potable gérée en toute sécurité.</p>
+    <p>• Aquifères fossiles surexploités : Nubien (Afrique), Ogallala (USA).</p>
+    <p>• Fleuves partagés : Nil (11 pays), Mékong (6 pays), Danube (19 pays).</p>
+    <p style="margin-top:8px"><strong>Sécurité alimentaire :</strong></p>
+    <p>• 735 millions de personnes sous-alimentées (2023).</p>
+    <p>• Gaspillage : 1/3 de la nourriture produite est perdue.</p>
+    <p>• Agriculture intensive : pesticides, OGM, élevage industriel.</p>
+    <p>• Agriculture biologique : 2% des terres agricoles mondiales.</p></div>
+    
+    <div class="lesson-warning">⚠️ Attention :<br>
+    • Le réchauffement n'est pas uniforme : +2°C en moyenne = +4°C en Arctique.<br>
+    • "Hors énergies fossiles" (COP28) ≠ "hors pétrole/gaz/charbon" immédiatement.<br>
+    • La déforestation en Amazonie approche le "point de non-retour" (20-25%).</div>
+    
+    <div class="lesson-example">✅ Points clés :<br>
+    • +1,1°C depuis 1850 | Objectif +1,5°C | 2023 année record<br>
+    • 1 million d'espèces menacées | 6e extinction de masse en cours<br>
+    • 15% d'énergies renouvelables | COP28 : transition hors fossiles<br>
+    • 735 millions sous-alimentés | 2,2 Mds sans eau potable sûre</div>`
+    }
+];
+  /* fin LESSONS_DATA */
+
+
+  /* ══════════════════════════════════════════════════════
+     ❓ BANQUE DE QUESTIONS — Indexée par numéro de niveau
+         qcm[]   : min 20 questions recommandées
+         libre[] : min 20 questions recommandées
+
+     Format QCM :
+       { q, options:["A","B","C","D"], correct:"A", explanation }
+
+     Format LIBRE :
+       { q, answer, alternatives:["variante"], explanation }
+     ══════════════════════════════════════════════════════ */
+  const QUESTIONS_DB = {
+    1: {
+        title: "La France 🗺️",
+        objective: "Territoire, régions, reliefs, fleuves",
+        qcm: [
+            {q: "Combien de régions compte la France métropolitaine depuis 2016 ?", options: ["13", "18", "22", "26"], correct: "13", explanation: "La France métropolitaine compte 13 régions depuis la réforme territoriale de 2016 (anciennement 22)."},
+            {q: "Quelle est la superficie totale de la France (métropole + outre-mer) ?", options: ["551 000 km²", "643 801 km²", "675 000 km²", "720 000 km²"], correct: "643 801 km²", explanation: "La France métropolitaine fait 551 000 km², avec les outre-mer cela fait 643 801 km² (1er pays de l'UE)."},
+            {q: "Quel est le point culminant de la France métropolitaine ?", options: ["Mont Pelvoux", "Pic du Midi", "Mont Blanc", "Puy de Sancy"], correct: "Mont Blanc", explanation: "Le Mont Blanc culmine à 4 808 m, c'est aussi le plus haut sommet de l'Union européenne."},
+            {q: "Quelle est l'altitude du Mont Blanc ?", options: ["4 105 m", "4 808 m", "5 102 m", "3 900 m"], correct: "4 808 m", explanation: "4 808 mètres, frontière France-Italie-Suisse."},
+            {q: "Quel massif montagneux sépare la France de l'Espagne ?", options: ["Les Alpes", "Les Vosges", "Les Pyrénées", "Le Jura"], correct: "Les Pyrénées", explanation: "Les Pyrénées forment une frontière naturelle de la Méditerranée à l'Atlantique."},
+            {q: "Quel est le plus long fleuve de France ?", options: ["Le Rhône", "La Seine", "La Loire", "Le Rhin"], correct: "La Loire", explanation: "La Loire mesure 1 012 km, c'est le plus long fleuve entièrement en France."},
+            {q: "Quel fleuve français a le débit le plus puissant ?", options: ["La Loire", "La Seine", "Le Rhône", "La Garonne"], correct: "Le Rhône", explanation: "Le Rhône a le débit le plus important grâce aux glaciers des Alpes et à son bassin versant."},
+            {q: "Quel fleuve traverse Paris ?", options: ["La Loire", "Le Rhône", "La Seine", "La Marne"], correct: "La Seine", explanation: "La Seine traverse Paris sur 13 km, avec 37 ponts dans la capitale."},
+            {q: "Quel fleuve se jette dans la Méditerranée ?", options: ["La Loire", "Le Rhône", "La Seine", "La Garonne"], correct: "Le Rhône", explanation: "Le Rhône se jette dans la Méditerranée par un delta : la Camargue."},
+            {q: "Quel est le plus grand département français (outre-mer inclus) ?", options: ["Nord", "Gironde", "Guyane", "Paris"], correct: "Guyane", explanation: "La Guyane est le plus grand département avec 83 534 km² (forêt amazonienne)."},
+            {q: "Quelle région française est connue pour ses châteaux de la Renaissance ?", options: ["Bretagne", "Alsace", "Centre-Val de Loire", "Provence"], correct: "Centre-Val de Loire", explanation: "Le Val de Loire est inscrit au patrimoine mondial de l'UNESCO pour ses châteaux (Chambord, Chenonceau)."},
+            {q: "Quel volcan français est encore en activité ?", options: ["Puy de Dôme", "Montagne Pelée", "Piton de la Fournaise", "Vesuve"], correct: "Piton de la Fournaise", explanation: "Le Piton de la Fournaise (La Réunion) est l'un des volcans les plus actifs au monde."},
+            {q: "Quel est le plus haut sommet du Massif central ?", options: ["Puy de Dôme", "Mont Aigoual", "Puy de Sancy", "Mont Lozère"], correct: "Puy de Sancy", explanation: "Le Puy de Sancy culmine à 1 886 m, c'est un ancien volcan."},
+            {q: "Quelle mer borde la côte méditerranéenne française ?", options: ["Mer du Nord", "Manche", "Mer Méditerranée", "Océan Atlantique"], correct: "Mer Méditerranée", explanation: "La Côte d'Azur borde la Méditerranée, avec des villes comme Nice, Cannes, Marseille."},
+            {q: "Quel département français est une île en Méditerranée ?", options: ["Haute-Corse", "Var", "Pyrénées-Orientales", "Alpes-Maritimes"], correct: "Haute-Corse", explanation: "La Corse est divisée en deux départements : Haute-Corse (2B) et Corse-du-Sud (2A)."},
+            {q: "Quelle chaîne de montagnes borde l'Alsace ?", options: ["Les Alpes", "Les Pyrénées", "Les Vosges", "Le Jura"], correct: "Les Vosges", explanation: "Les Vosges séparent l'Alsace de la Lorraine, avec le Ballon de Guebwiller (1 424 m)."},
+            {q: "Quel fleuve forme une partie de la frontière entre la France et l'Allemagne ?", options: ["La Meuse", "Le Rhin", "La Moselle", "La Sarre"], correct: "Le Rhin", explanation: "Le Rhin sert de frontière sur 188 km entre Strasbourg et Bâle."},
+            {q: "Quelle est la région la plus peuplée de France ?", options: ["Île-de-France", "Auvergne-Rhône-Alpes", "Hauts-de-France", "Nouvelle-Aquitaine"], correct: "Île-de-France", explanation: "L'Île-de-France compte 12,2 millions d'habitants (Paris et sa région)."},
+            {q: "Quel est le plus petit département français ?", options: ["Paris", "Hauts-de-Seine", "Seine-Saint-Denis", "Val-de-Marne"], correct: "Paris", explanation: "Paris (75) fait 105 km², c'est le plus petit département mais le plus densément peuplé."},
+            {q: "Quel océan borde la côte ouest de la France ?", options: ["Océan Indien", "Océan Pacifique", "Océan Atlantique", "Mer du Nord"], correct: "Océan Atlantique", explanation: "L'Atlantique borde les côtes de la Bretagne, de la Vendée, de la Gironde et du Pays basque."}
+        ],
+        libre: [
+            {q: "La France métropolitaine compte ___ régions depuis 2016.", answer: "13", alternatives: ["treize"], explanation: "13 régions depuis la réforme territoriale de 2016."},
+            {q: "Le Mont Blanc culmine à ___ mètres.", answer: "4808", alternatives: ["4 808", "4.808", "quatre mille huit cent huit"], explanation: "4 808 m, point culminant de l'UE."},
+            {q: "Les ___ séparent la France de l'Espagne.", answer: "Pyrénées", alternatives: ["pyrénées", "Pyrenees", "pyrenees"], explanation: "Chaîne montagneuse frontalière."},
+            {q: "Le plus long fleuve de France est la ___ (1 012 km).", answer: "Loire", alternatives: ["loire"], explanation: "La Loire, de la source (Mont Gerbier de Jonc) à l'océan."},
+            {q: "Le fleuve avec le débit le plus puissant est le ___.", answer: "Rhône", alternatives: ["rhône", "Rhone", "rhone"], explanation: "Le Rhône, grâce aux glaciers alpins."},
+            {q: "Le fleuve qui traverse Paris est la ___.", answer: "Seine", alternatives: ["seine"], explanation: "La Seine, 776 km de long."},
+            {q: "Le fleuve qui se jette dans la Méditerranée est le ___.", answer: "Rhône", alternatives: ["rhône", "Rhone", "rhone"], explanation: "Le Rhône et son delta (Camargue)."},
+            {q: "Le plus grand département français est la ___ (83 534 km²).", answer: "Guyane", alternatives: ["guyane", "Guyane française", "guyane française"], explanation: "La Guyane, forêt amazonienne."},
+            {q: "La région des châteaux de la Renaissance est le Val de ___.", answer: "Loire", alternatives: ["loire", "Val de Loire", "val de loire", "Centre-Val de Loire"], explanation: "Patrimoine mondial de l'UNESCO."},
+            {q: "Le volcan actif de La Réunion s'appelle le Piton de la ___.", answer: "Fournaise", alternatives: ["fournaise", "Piton de la Fournaise"], explanation: "L'un des volcans les plus actifs au monde."},
+            {q: "Le plus haut sommet du Massif central est le Puy de ___ (1 886 m).", answer: "Sancy", alternatives: ["sancy", "Puy de Sancy"], explanation: "Ancien volcan, station de ski."},
+            {q: "La mer qui borde la Côte d'Azur est la mer ___.", answer: "Méditerranée", alternatives: ["méditerranée", "Mediteranee", "mediteranee", "Méditerranée"], explanation: "Mer Méditerranée."},
+            {q: "La Corse est divisée en Haute-Corse et Corse-du-___.", answer: "Sud", alternatives: ["sud"], explanation: "Deux départements : 2B et 2A."},
+            {q: "Les ___ séparent l'Alsace de la Lorraine.", answer: "Vosges", alternatives: ["vosges"], explanation: "Chaîne des Vosges."},
+            {q: "Le ___ forme la frontière entre la France et l'Allemagne.", answer: "Rhin", alternatives: ["rhin", "Rhin"], explanation: "188 km de frontière fluviale."},
+            {q: "La région la plus peuplée de France est l'___-de-France.", answer: "Île", alternatives: ["île", "Ile", "ile", "Île-de-France"], explanation: "12,2 millions d'habitants."},
+            {q: "Le plus petit département français est ___ (105 km²).", answer: "Paris", alternatives: ["paris", "75"], explanation: "Paris, département 75."},
+            {q: "L'océan qui borde la côte ouest est l'océan ___.", answer: "Atlantique", alternatives: ["atlantique"], explanation: "Océan Atlantique."},
+            {q: "La ___ est la région la plus vaste de France métropolitaine (84 000 km²).", answer: "Nouvelle-Aquitaine", alternatives: ["nouvelle-aquitaine", "Nouvelle Aquitaine", "nouvelle aquitaine", "Aquitaine"], explanation: "Nouvelle-Aquitaine (Bordeaux, Limoges, Pau)."},
+            {q: "Le département français situé en Amérique du Sud est la ___.", answer: "Guyane", alternatives: ["guyane", "Guyane française", "guyane française"], explanation: "Guyane, territoire ultramarin."}
+        ]
+    },
+    2: {
+        title: "L'Europe 🇪🇺",
+        objective: "Pays, capitales, climats, Union européenne",
+        qcm: [
+            {q: "Combien de pays compte l'Union européenne depuis le Brexit ?", options: ["25", "26", "27", "28"], correct: "27", explanation: "27 pays depuis le départ du Royaume-Uni le 31 janvier 2020."},
+            {q: "Quel pays a quitté l'UE en 2020 (Brexit) ?", options: ["Irlande", "Danemark", "Royaume-Uni", "Suède"], correct: "Royaume-Uni", explanation: "Le Royaume-Uni a quitté l'UE le 31 janvier 2020 après un référendum en 2016."},
+            {q: "Quelle est la capitale de l'Allemagne ?", options: ["Munich", "Francfort", "Berlin", "Hambourg"], correct: "Berlin", explanation: "Berlin est la capitale depuis la réunification de 1990 (3,7 millions d'habitants)."},
+            {q: "Quelle est la capitale de l'Italie ?", options: ["Milan", "Rome", "Naples", "Turin"], correct: "Rome", explanation: "Rome, ville éternelle, siège du Vatican."},
+            {q: "Quelle est la capitale de l'Espagne ?", options: ["Barcelone", "Séville", "Madrid", "Valence"], correct: "Madrid", explanation: "Madrid, au centre de la péninsule ibérique."},
+            {q: "Quelle est la capitale de la Pologne ?", options: ["Cracovie", "Varsovie", "Gdansk", "Wroclaw"], correct: "Varsovie", explanation: "Varsovie, reconstruite après sa destruction en 1944."},
+            {q: "Quel pays européen a trois langues officielles (français, néerlandais, allemand) ?", options: ["Suisse", "Belgique", "Luxembourg", "Autriche"], correct: "Belgique", explanation: "La Belgique a trois communautés linguistiques : flamande, wallonne, germanophone."},
+            {q: "Quelle ville est le siège principal des institutions de l'UE ?", options: ["Strasbourg", "Bruxelles", "Luxembourg", "Francfort"], correct: "Bruxelles", explanation: "Bruxelles est le siège de la Commission européenne et du Conseil de l'UE."},
+            {q: "Quel pays européen est connu pour ses fjords ?", options: ["Suède", "Norvège", "Finlande", "Danemark"], correct: "Norvège", explanation: "La Norvège est célèbre pour ses fjords (Sognefjord, Geirangerfjord)."},
+            {q: "Quel pays des Balkans est membre de l'UE depuis 2013 ?", options: ["Serbie", "Croatie", "Albanie", "Macédoine du Nord"], correct: "Croatie", explanation: "La Croatie a rejoint l'UE le 1er juillet 2013."},
+            {q: "Quel climat domine sur la côte atlantique de l'Europe ?", options: ["Méditerranéen", "Continental", "Océanique", "Montagnard"], correct: "Océanique", explanation: "Climat océanique : doux, humide, peu d'amplitude thermique (Bretagne, UK, Irlande)."},
+            {q: "Quel climat caractérise le Sud de l'Europe (Espagne, Italie, Grèce) ?", options: ["Océanique", "Méditerranéen", "Continental", "Polaire"], correct: "Méditerranéen", explanation: "Étés chauds et secs, hivers doux et humides."},
+            {q: "Quel pays européen a le PIB par habitant le plus élevé ?", options: ["Allemagne", "France", "Luxembourg", "Suisse"], correct: "Luxembourg", explanation: "Luxembourg : environ 135 000 $/habitant (centre financier)."},
+            {q: "Quelle mer borde l'Europe du Nord ?", options: ["Mer Méditerranée", "Mer Baltique", "Mer du Nord", "Mer Noire"], correct: "Mer du Nord", explanation: "La Mer du Nord borde le Royaume-Uni, la Norvège, le Danemark, l'Allemagne, les Pays-Bas."},
+            {q: "Quel fleuve traverse Vienne (Autriche) et Budapest (Hongrie) ?", options: ["Le Danube", "Le Rhin", "L'Elbe", "La Vistule"], correct: "Le Danube", explanation: "Le Danube traverse 10 pays et 4 capitales (Vienne, Bratislava, Budapest, Belgrade)."},
+            {q: "Quelle chaîne de montagnes sépare l'Europe de l'Asie ?", options: ["Les Alpes", "L'Oural", "Les Carpates", "Les Pyrénées"], correct: "L'Oural", explanation: "L'Oural est considéré comme la frontière Europe-Asie."},
+            {q: "Quel pays européen est le plus grand en superficie ?", options: ["France", "Allemagne", "Ukraine", "Espagne"], correct: "Ukraine", explanation: "L'Ukraine fait 603 000 km², c'est le plus grand pays entièrement en Europe."},
+            {q: "Quelle île méditerranéenne appartient à la France ?", options: ["Sicile", "Sardaigne", "Corse", "Malte"], correct: "Corse", explanation: "La Corse est une île française en Méditerranée, au sud-est de la France continentale."},
+            {q: "Quel volcan actif se trouve en Sicile (Italie) ?", options: ["Vésuve", "Etna", "Stromboli", "Vulcano"], correct: "Etna", explanation: "L'Etna est le volcan actif le plus haut d'Europe (3 357 m)."},
+            {q: "Quel pays européen n'utilise PAS l'euro ?", options: ["France", "Allemagne", "Pologne", "Italie"], correct: "Pologne", explanation: "La Pologne utilise le zloty. Les pays hors zone euro : Danemark, Suède, Pologne, Hongrie, Roumanie, Bulgarie, R. tchèque."}
+        ],
+        libre: [
+            {q: "L'UE compte ___ pays depuis le Brexit.", answer: "27", alternatives: ["vingt-sept"], explanation: "27 pays depuis le départ du Royaume-Uni en 2020."},
+            {q: "Le ___ a quitté l'UE en 2020.", answer: "Royaume-Uni", alternatives: ["royaume-uni", "UK", "uk", "Royaume Uni", "royaume uni", "Angleterre", "angleterre", "Grande-Bretagne", "grande-bretagne"], explanation: "Brexit, 31 janvier 2020."},
+            {q: "La capitale de l'Allemagne est ___.", answer: "Berlin", alternatives: ["berlin"], explanation: "Berlin, 3,7 millions d'habitants."},
+            {q: "La capitale de l'Italie est ___.", answer: "Rome", alternatives: ["rome"], explanation: "Rome, ville éternelle."},
+            {q: "La capitale de l'Espagne est ___.", answer: "Madrid", alternatives: ["madrid"], explanation: "Madrid, centre de la péninsule ibérique."},
+            {q: "La capitale de la Pologne est ___.", answer: "Varsovie", alternatives: ["varsovie", "Varsovie"], explanation: "Varsovie, reconstruite après 1944."},
+            {q: "La ___ a trois langues officielles (français, néerlandais, allemand).", answer: "Belgique", alternatives: ["belgique"], explanation: "Trois communautés linguistiques."},
+            {q: "___ est le siège principal des institutions de l'UE.", answer: "Bruxelles", alternatives: ["bruxelles"], explanation: "Siège de la Commission européenne."},
+            {q: "La ___ est connue pour ses fjords.", answer: "Norvège", alternatives: ["norvège", "Norvege", "norvege"], explanation: "Fjords norvégiens."},
+            {q: "La ___ a rejoint l'UE en 2013.", answer: "Croatie", alternatives: ["croatie"], explanation: "Dernier pays à avoir rejoint l'UE."},
+            {q: "Le climat ___ domine sur la côte atlantique.", answer: "océanique", alternatives: ["Océanique", "oceanique", "Oceanique"], explanation: "Doux et humide."},
+            {q: "Le climat ___ caractérise le Sud de l'Europe.", answer: "méditerranéen", alternatives: ["Méditerranéen", "mediterraneen", "Mediterraneen"], explanation: "Étés chauds et secs."},
+            {q: "Le ___ a le PIB/habitant le plus élevé d'Europe.", answer: "Luxembourg", alternatives: ["luxembourg"], explanation: "Environ 135 000 $/habitant."},
+            {q: "La mer ___ borde l'Europe du Nord.", answer: "du Nord", alternatives: ["du nord", "Du Nord", "Nord", "nord"], explanation: "Mer du Nord."},
+            {q: "Le ___ traverse Vienne et Budapest.", answer: "Danube", alternatives: ["danube", "Danube"], explanation: "2 860 km, 10 pays traversés."},
+            {q: "L'___ sépare l'Europe de l'Asie.", answer: "Oural", alternatives: ["oural", "ural", "Ural", "monts Oural", "monts Ourals"], explanation: "Chaîne de l'Oural."},
+            {q: "L'___ est le plus grand pays d'Europe (603 000 km²).", answer: "Ukraine", alternatives: ["ukraine"], explanation: "Plus grand pays entièrement en Europe."},
+            {q: "L'___ est le volcan actif le plus haut d'Europe (Sicile).", answer: "Etna", alternatives: ["etna", "Etna", "l'Etna", "l'etna", "Mont Etna"], explanation: "3 357 m, Sicile."},
+            {q: "La ___ n'utilise pas l'euro (monnaie : zloty).", answer: "Pologne", alternatives: ["pologne"], explanation: "Pologne, zloty polonais."},
+            {q: "Le ___ est le plus haut sommet d'Europe (4 808 m).", answer: "Mont Blanc", alternatives: ["mont blanc", "Mont blanc", "Mont-Blanc", "mont-blanc"], explanation: "Frontière France-Italie."}
+        ]
+    },
+    3: {
+        title: "Le monde 🌏",
+        objective: "Continents, océans, repères géographiques",
+        qcm: [
+            {q: "Quel est le plus grand continent en superficie ?", options: ["Afrique", "Amérique du Nord", "Asie", "Europe"], correct: "Asie", explanation: "L'Asie fait 44,6 millions km², c'est aussi le plus peuplé (4,7 milliards)."},
+            {q: "Quel est le plus peuplé des continents ?", options: ["Afrique", "Asie", "Amérique du Nord", "Europe"], correct: "Asie", explanation: "L'Asie compte 4,7 milliards d'habitants (60% de l'humanité)."},
+            {q: "Quel est le plus grand océan du monde ?", options: ["Atlantique", "Indien", "Pacifique", "Arctique"], correct: "Pacifique", explanation: "L'océan Pacifique fait 165 millions km², plus grand que tous les continents réunis."},
+            {q: "Quel est le point le plus profond des océans ?", options: ["Fosse des Mariannes", "Fosse de Java", "Fosse de Porto Rico", "Fosse des Philippines"], correct: "Fosse des Mariannes", explanation: "La fosse des Mariannes atteint -11 034 m (Challenger Deep)."},
+            {q: "Quel est le plus haut sommet du monde ?", options: ["K2", "Mont Everest", "Kilimandjaro", "Mont Blanc"], correct: "Mont Everest", explanation: "L'Everest culmine à 8 849 m (Népal/Tibet)."},
+            {q: "Dans quel pays se trouve le Kilimandjaro ?", options: ["Kenya", "Tanzanie", "Éthiopie", "Ouganda"], correct: "Tanzanie", explanation: "Le Kilimandjaro (5 895 m) est en Tanzanie, plus haut sommet d'Afrique."},
+            {q: "Quel désert est le plus grand du monde (chaud) ?", options: ["Gobi", "Sahara", "Kalahari", "Atacama"], correct: "Sahara", explanation: "Le Sahara fait 9 millions km² (Afrique du Nord)."},
+            {q: "Quel pays est le plus grand du monde en superficie ?", options: ["Canada", "Chine", "États-Unis", "Russie"], correct: "Russie", explanation: "La Russie fait 17 millions km², à cheval sur l'Europe et l'Asie."},
+            {q: "Quel pays est le plus peuplé du monde ?", options: ["Chine", "Inde", "États-Unis", "Indonésie"], correct: "Inde", explanation: "L'Inde a dépassé la Chine en 2023 avec 1,428 milliard d'habitants."},
+            {q: "Quel parallèle marque la limite nord des tropiques ?", options: ["Équateur", "Tropique du Cancer", "Tropique du Capricorne", "Cercle polaire"], correct: "Tropique du Cancer", explanation: "23,5° Nord, le Soleil est au zénith le 21 juin."},
+            {q: "Quel méridien sert de référence pour les fuseaux horaires ?", options: ["Méridien de Paris", "Méridien de Greenwich", "Méridien de Rome", "Méridien de Berlin"], correct: "Méridien de Greenwich", explanation: "Greenwich (0°), banlieue de Londres, observatoire royal."},
+            {q: "Quel continent est entièrement situé dans l'hémisphère Sud ?", options: ["Afrique", "Australie", "Amérique du Sud", "Antarctique"], correct: "Antarctique", explanation: "L'Antarctique est centré sur le pôle Sud, aucun habitant permanent."},
+            {q: "Quel pays d'Amérique du Sud a la plus grande forêt tropicale ?", options: ["Argentine", "Brésil", "Colombie", "Pérou"], correct: "Brésil", explanation: "Le Brésil abrite 60% de l'Amazonie."},
+            {q: "Quel océan borde la côte est de l'Australie ?", options: ["Pacifique", "Indien", "Atlantique", "Austral"], correct: "Pacifique", explanation: "L'océan Pacifique borde l'est de l'Australie (Grande Barrière de Corail)."},
+            {q: "Quel est le plus long fleuve du monde ?", options: ["Nil", "Amazone", "Yangtsé", "Mississippi"], correct: "Nil", explanation: "Le Nil fait 6 650 km (débat avec l'Amazone selon les sources)."},
+            {q: "Quel pays d'Afrique est traversé par le Nil ?", options: ["Maroc", "Égypte", "Afrique du Sud", "Nigeria"], correct: "Égypte", explanation: "Le Nil traverse l'Égypte du sud au nord, Le Caire est sur ses rives."},
+            {q: "Quel pays d'Asie est une archipel de plus de 17 000 îles ?", options: ["Japon", "Philippines", "Indonésie", "Malaisie"], correct: "Indonésie", explanation: "L'Indonésie est le plus grand archipel du monde (17 000 îles)."},
+            {q: "Quel pays d'Amérique du Nord est le troisième plus grand du monde ?", options: ["Mexique", "Canada", "États-Unis", "Brésil"], correct: "États-Unis", explanation: "Les USA font 9,8 millions km², 3e pays du monde par la superficie."},
+            {q: "Quel continent est le moins peuplé ?", options: ["Europe", "Océanie", "Antarctique", "Amérique du Sud"], correct: "Antarctique", explanation: "L'Antarctique n'a aucun habitant permanent (seulement des scientifiques temporaires)."},
+            {q: "Quel pays d'Europe n'est pas membre de l'UE mais utilise l'euro ?", options: ["Norvège", "Suisse", "Monaco", "Islande"], correct: "Monaco", explanation: "Monaco, Andorre, Saint-Marin, Vatican et Monténégro utilisent l'euro sans être dans l'UE."}
+        ],
+        libre: [
+            {q: "Le plus grand continent est l'___ (44,6 M km²).", answer: "Asie", alternatives: ["asie"], explanation: "Asie, plus grand et plus peuplé."},
+            {q: "Le plus grand océan est l'océan ___ (165 M km²).", answer: "Pacifique", alternatives: ["pacifique"], explanation: "Plus grand que tous les continents réunis."},
+            {q: "Le point le plus profond est la fosse des ___ (-11 034 m).", answer: "Mariannes", alternatives: ["mariannes", "Mariannes", "fosse des Mariannes"], explanation: "Challenger Deep."},
+            {q: "Le plus haut sommet du monde est le ___ (8 849 m).", answer: "Everest", alternatives: ["everest", "Mont Everest", "mont everest"], explanation: "Népal/Tibet."},
+            {q: "Le Kilimandjaro se trouve en ___ (5 895 m).", answer: "Tanzanie", alternatives: ["tanzanie", "Tanzanie"], explanation: "Plus haut sommet d'Afrique."},
+            {q: "Le plus grand désert chaud est le ___ (9 M km²).", answer: "Sahara", alternatives: ["sahara", "Sahara"], explanation: "Afrique du Nord."},
+            {q: "Le plus grand pays du monde est la ___ (17 M km²).", answer: "Russie", alternatives: ["russie", "Russie", "Fédération de Russie"], explanation: "À cheval Europe-Asie."},
+            {q: "Le pays le plus peuplé du monde est l'___ (1,428 Mrd).", answer: "Inde", alternatives: ["inde", "Inde"], explanation: "A dépassé la Chine en 2023."},
+            {q: "Le ___ du Cancer marque la limite nord des tropiques.", answer: "Tropique", alternatives: ["tropique", "Tropique"], explanation: "23,5° Nord."},
+            {q: "Le méridien de ___ sert de référence pour les fuseaux horaires.", answer: "Greenwich", alternatives: ["greenwich", "Greenwich"], explanation: "0°, banlieue de Londres."},
+            {q: "L'___ est entièrement dans l'hémisphère Sud.", answer: "Antarctique", alternatives: ["antarctique", "Antarctique"], explanation: "Continent glacial."},
+            {q: "Le ___ abrite 60% de l'Amazonie.", answer: "Brésil", alternatives: ["brésil", "Bresil", "bresil", "Brasil"], explanation: "Plus grande forêt tropicale."},
+            {q: "L'océan ___ borde l'est de l'Australie.", answer: "Pacifique", alternatives: ["pacifique"], explanation: "Grande Barrière de Corail."},
+            {q: "Le plus long fleuve du monde est le ___ (6 650 km).", answer: "Nil", alternatives: ["nil", "Nil"], explanation: "Débat avec l'Amazone selon les sources."},
+            {q: "Le Nil traverse l'___ du sud au nord.", answer: "Égypte", alternatives: ["égypte", "Egypte", "egypte"], explanation: "Le Caire est sur ses rives."},
+            {q: "L'___ est l'archipel le plus grand du monde (17 000 îles).", answer: "Indonésie", alternatives: ["indonésie", "Indonesie", "indonesie"], explanation: "Java, Sumatra, Bornéo, Bali..."},
+            {q: "Les ___ sont le troisième plus grand pays (9,8 M km²).", answer: "États-Unis", alternatives: ["états-unis", "Etats-Unis", "etats-unis", "USA", "usa", "Etats Unis", "etats unis", "Amérique", "amerique"], explanation
+Des 
+            {q: "Les ___ sont le troisième plus grand pays (9,8 M km²).", answer: "États-Unis", alternatives: ["états-unis", "Etats-Unis", "etats-unis", "USA", "usa", "Etats Unis", "etats unis", "Amérique", "amerique", "Etats-Unis d'Amerique"], explanation: "Troisième pays par la superficie."},
+            {q: "Le continent le moins peuplé est l'___.", answer: "Antarctique", alternatives: ["antarctique", "Antarctique"], explanation: "Aucun habitant permanent."},
+            {q: "___ utilise l'euro sans être membre de l'UE.", answer: "Monaco", alternatives: ["monaco", "Andorre", "andorre", "Saint-Marin", "saint-marin", "Vatican", "vatican", "Monténégro", "monténégro"], explanation: "Monaco, Andorre, Saint-Marin, Vatican, Monténégro."}
+        ]
+    },
+    4: {
+        title: "Développement & inégalités 🌍⚖️",
+        objective: "Indicateurs, pays développés, émergents, ODD",
+        qcm: [
+            {q: "Quel indicateur mesure la richesse produite par personne ?", options: ["IDH", "PIB total", "PIB/habitant", "Taux de natalité"], correct: "PIB/habitant", explanation: "Le PIB par habitant (Produit Intérieur Brut) mesure la richesse moyenne par personne."},
+            {q: "Que signifie IDH ?", options: ["Indice de Développement Humain", "Indice de Densité Habitable", "Indice de Distribution des Habitations", "Indice de Déficit Hydrique"], correct: "Indice de Développement Humain", explanation: "IDH = Indice de Développement Humain (0 à 1), mesure santé, éducation et niveau de vie."},
+            {q: "Quel pays a l'IDH le plus élevé au monde ?", options: ["Norvège", "Suisse", "France", "Japon"], correct: "Norvège", explanation: "La Norvège a l'IDH le plus élevé (0,966 en 2023)."},
+            {q: "Quel pays africain a l'IDH le plus faible ?", options: ["Soudan du Sud", "Niger", "Tchad", "RDC"], correct: "Soudan du Sud", explanation: "Le Soudan du Sud a un IDH de 0,385 (2023), l'un des plus bas au monde."},
+            {q: "Quel pays a le PIB/habitant le plus élevé ?", options: ["USA", "Luxembourg", "Qatar", "Singapour"], correct: "Luxembourg", explanation: "Le Luxembourg dépasse 135 000 $/habitant grâce à son secteur financier."},
+            {q: "Quel pays asiatique est considéré comme le plus peuplé en 2023 ?", options: ["Chine", "Inde", "Indonésie", "Pakistan"], correct: "Inde", explanation: "L'Inde a dépassé la Chine en 2023 avec environ 1,428 milliard d'habitants."},
+            {q: "Quel groupe réunit le Brésil, la Russie, l'Inde, la Chine et l'Afrique du Sud ?", options: ["G7", "G20", "BRICS", "OTAN"], correct: "BRICS", explanation: "BRICS = Brésil, Russie, Inde, Chine, Afrique du Sud (pays émergents)."},
+            {q: "Quel accord de 2015 fixe 17 objectifs pour 2030 ?", options: ["Protocole de Kyoto", "Accord de Paris", "Objectifs de Développement Durable", "Traité de Maastricht"], correct: "Objectifs de Développement Durable", explanation: "Les 17 ODD (Objectifs de Développement Durable) ont été adoptés par l'ONU en 2015."},
+            {q: "Quel pourcentage de la population mondiale vit avec moins de 2,15 $/jour ?", options: ["2%", "5%", "9%", "15%"], correct: "9%", explanation: "Environ 700 millions de personnes (9%) vivent dans l'extrême pauvreté."},
+            {q: "Quel continent connaît la croissance démographique la plus rapide ?", options: ["Asie", "Europe", "Afrique", "Amérique du Sud"], correct: "Afrique", explanation: "L'Afrique double sa population tous les 25-30 ans (1,4 milliard en 2023)."},
+            {q: "Quel pays est le premier producteur mondial de CO2 ?", options: ["USA", "Inde", "Chine", "Russie"], correct: "Chine", explanation: "La Chine produit environ 30% des émissions mondiales de CO2."},
+            {q: "Quel pays européen a quitté l'UE en 2020 ?", options: ["Royaume-Uni", "Grèce", "Italie", "Pologne"], correct: "Royaume-Uni", explanation: "Brexit : le Royaume-Uni a quitté l'UE le 31 janvier 2020."},
+            {q: "Quel indicateur mesure le nombre de naissances pour 1 000 habitants ?", options: ["Taux de mortalité", "Taux de natalité", "Taux de fécondité", "Taux de croissance"], correct: "Taux de natalité", explanation: "Taux de natalité = nombre de naissances pour 1 000 habitants sur un an."},
+            {q: "Quel pays a l'espérance de vie la plus élevée ?", options: ["Japon", "France", "Suisse", "Singapour"], correct: "Japon", explanation: "Le Japon a une espérance de vie d'environ 84 ans."},
+            {q: "Quel pays africain est le plus peuplé ?", options: ["Égypte", "Éthiopie", "Nigeria", "RDC"], correct: "Nigeria", explanation: "Le Nigeria compte environ 220 millions d'habitants, 1er pays africain."},
+            {q: "Quelle organisation prête de l'argent aux pays en difficulté ?", options: ["OTAN", "FMI", "OMS", "UNESCO"], correct: "FMI", explanation: "Le FMI (Fonds Monétaire International) prête de l'argent contre des réformes économiques."},
+            {q: "Quel est le taux d'alphabétisation dans les pays développés ?", options: ["60%", "80%", "95%", "99%"], correct: "99%", explanation: "Dans les pays développés, le taux d'alphabétisation approche 99%."},
+            {q: "Quel pays sud-américain fait partie des BRICS ?", options: ["Argentine", "Chili", "Brésil", "Colombie"], correct: "Brésil", explanation: "Le Brésil est le seul pays sud-américain dans les BRICS originaux."},
+            {q: "Quelle est la part des énergies renouvelables dans le mix mondial ?", options: ["5%", "15%", "25%", "35%"], correct: "15%", explanation: "Les énergies renouvelables représentent environ 15% du mix énergétique mondial (2023)."},
+            {q: "Quel pourcentage de la richesse mondiale est détenu par les 10% les plus riches ?", options: ["40%", "55%", "76%", "90%"], correct: "76%", explanation: "Les 10% les plus riches détiennent 76% de la richesse mondiale (rapport Oxfam)."}
+        ],
+        libre: [
+            {q: "L'___ mesure la richesse produite par personne.", answer: "PIB/habitant", alternatives: ["pib/habitant", "PIB par habitant", "pib par habitant", "PIB par tête", "pib par tête", "produit intérieur brut par habitant"], explanation: "Produit Intérieur Brut par habitant."},
+            {q: "___ signifie Indice de Développement Humain.", answer: "IDH", alternatives: ["idh", "Indice de Développement Humain", "indice de développement humain"], explanation: "IDH : santé, éducation, niveau de vie."},
+            {q: "Le pays avec l'IDH le plus élevé est la ___ (0,966).", answer: "Norvège", alternatives: ["norvège", "Norvege", "norvege"], explanation: "Norvège, pays scandinave."},
+            {q: "Le pays africain avec l'IDH le plus faible est le Soudan du ___.", answer: "Sud", alternatives: ["sud"], explanation: "Soudan du Sud, IDH 0,385."},
+            {q: "Le ___ a le PIB/habitant le plus élevé (135 000 $).", answer: "Luxembourg", alternatives: ["luxembourg"], explanation: "Grand-duché, centre financier."},
+            {q: "L'___ est devenu le pays le plus peuplé en 2023.", answer: "Inde", alternatives: ["inde", "Inde"], explanation: "1,428 milliard, devant la Chine."},
+            {q: "Le groupe ___ rassemble Brésil, Russie, Inde, Chine, Afrique du Sud.", answer: "BRICS", alternatives: ["brics", "Brics"], explanation: "Pays émergents."},
+            {q: "Les 17 ___ de Développement Durable ont été fixés en 2015.", answer: "Objectifs", alternatives: ["objectifs", "ODD", "odd"], explanation: "ODD pour 2030."},
+            {q: "Environ ___ millions de personnes vivent avec moins de 2,15 $/jour.", answer: "700", alternatives: ["sept cents", "sept-cents"], explanation: "9% de la population mondiale."},
+            {q: "L'___ connaît la croissance démographique la plus rapide.", answer: "Afrique", alternatives: ["afrique", "Afrique"], explanation: "Doublement tous les 25-30 ans."},
+            {q: "La ___ est le premier producteur mondial de CO2.", answer: "Chine", alternatives: ["chine", "Chine"], explanation: "30% des émissions mondiales."},
+            {q: "Le ___ a quitté l'UE en 2020 (Brexit).", answer: "Royaume-Uni", alternatives: ["royaume-uni", "UK", "uk", "Royaume Uni", "royaume uni", "Angleterre", "angleterre", "Grande-Bretagne", "grande-bretagne"], explanation: "Brexit, 31 janvier 2020."},
+            {q: "Le taux de ___ mesure les naissances pour 1 000 habitants.", answer: "natalité", alternatives: ["Natalité", "natalité"], explanation: "Taux de natalité."},
+            {q: "Le ___ a l'espérance de vie la plus élevée (84 ans).", answer: "Japon", alternatives: ["japon", "Japon"], explanation: "Japon, pays asiatique."},
+            {q: "Le pays africain le plus peuplé est le ___ (220 M).", answer: "Nigeria", alternatives: ["nigeria", "Nigeria", "Nigéria", "nigéria"], explanation: "Nigeria, Afrique de l'Ouest."},
+            {q: "Le ___ prête de l'argent aux pays en difficulté.", answer: "FMI", alternatives: ["fmi", "Fonds Monétaire International", "fonds monétaire international"], explanation: "FMI, organisation internationale."},
+            {q: "Le taux d'___ dans les pays développés approche 99%.", answer: "alphabétisation", alternatives: ["Alphabétisation", "alphabetisation", "Alphabetisation"], explanation: "Capacité à lire et écrire."},
+            {q: "Le ___ est le seul pays sud-américain dans les BRICS.", answer: "Brésil", alternatives: ["brésil", "Bresil", "bresil", "Brasil"], explanation: "Brésil, pays émergent."},
+            {q: "Les énergies ___ représentent 15% du mix mondial.", answer: "renouvelables", alternatives: ["Renouvelables", "renouvelables"], explanation: "Solaire, éolien, hydraulique..."},
+            {q: "Les 10% les plus riches détiennent ___% de la richesse mondiale.", answer: "76", alternatives: ["soixante-seize", "soixante seize"], explanation: "Selon Oxfam."}
+        ]
+    },
+    5: {
+        title: "Enjeux environnementaux 🌡️🌳",
+        objective: "Réchauffement, déforestation, énergies, eau",
+        qcm: [
+            {q: "De combien de degrés la température mondiale a-t-elle augmenté depuis l'ère préindustrielle ?", options: ["+0,5°C", "+1,1°C", "+1,5°C", "+2°C"], correct: "+1,1°C", explanation: "+1,1°C depuis 1850-1900, selon le GIEC."},
+            {q: "Quel est l'objectif idéal de l'Accord de Paris (2015) ?", options: ["Limiter à +1,5°C", "Limiter à +2°C", "Stabiliser à +1°C", "Revenir à 0°C"], correct: "Limiter à +1,5°C", explanation: "Objectif : +1,5°C (idéal) ou +2°C maximum par rapport à l'ère préindustrielle."},
+            {q: "Quelle année a été la plus chaude jamais enregistrée ?", options: ["2016", "2020", "2022", "2023"], correct: "2023", explanation: "2023 a battu tous les records de température mondiale."},
+            {q: "Quel est le point le plus profond des océans ?", options: ["Fosse des Mariannes", "Fosse de Java", "Fosse de Porto Rico", "Fosse des Philippines"], correct: "Fosse des Mariannes", explanation: "-11 034 m (Challenger Deep, Pacifique)."},
+            {q: "Quel gaz est le principal responsable de l'effet de serre ?", options: ["Oxygène", "Azote", "Dioxyde de carbone (CO2)", "Méthane"], correct: "Dioxyde de carbone (CO2)", explanation: "Le CO2 est le principal gaz à effet de serre d'origine humaine (combustion fossile)."},
+            {q: "Quel pays est le plus grand émetteur de CO2 ?", options: ["USA", "Inde", "Chine", "Russie"], correct: "Chine", explanation: "La Chine émet environ 30% du CO2 mondial."},
+            {q: "Quel pourcentage des récifs coralliens est menacé d'ici 2050 ?", options: ["20%", "50%", "70%", "90%"], correct: "50%", explanation: "50% des récifs coralliens mondiaux sont menacés d'ici 2050 (acidification, réchauffement)."},
+            {q: "Quel protocole de 1987 a protégé la couche d'ozone ?", options: ["Protocole de Kyoto", "Protocole de Montréal", "Accord de Paris", "Protocole de Rio"], correct: "Protocole de Montréal", explanation: "Protocole de Montréal : interdiction des CFC, succès environnemental majeur."},
+            {q: "Quel accord de 2015 concerne le climat ?", options: ["Protocole de Kyoto", "Accord de Paris", "Traité de Maastricht", "Accord de Copenhague"], correct: "Accord de Paris", explanation: "Accord de Paris (COP21) : limiter le réchauffement à +1,5°C / +2°C."},
+            {q: "Quelle forêt tropicale perd le plus d'arbres chaque année ?", options: ["Congo", "Bornéo", "Amazonie", "Indonésie"], correct: "Amazonie", explanation: "L'Amazonie perd environ 10 000 km² de forêt par an (déforestation)."},
+            {q: "Quel pays est le leader mondial de l'énergie solaire ?", options: ["USA", "Allemagne", "Chine", "Inde"], correct: "Chine", explanation: "La Chine produit plus de 50% des panneaux solaires mondiaux."},
+            {q: "Quel pays utilise la géothermie pour 90% de son chauffage ?", options: ["Norvège", "Islande", "Suède", "Finlande"], correct: "Islande", explanation: "L'Islande utilise l'énergie géothermique (volcans, sources chaudes)."},
+            {q: "Quel barrage chinois est le plus puissant au monde ?", options: ["Barrage d'Itaipu", "Barrage des Trois-Gorges", "Barrage d'Assouan", "Barrage de Hoover"], correct: "Barrage des Trois-Gorges", explanation: "22 500 MW, sur le Yangtsé en Chine."},
+            {q: "Quel pourcentage de la nourriture produite est gaspillé ?", options: ["10%", "20%", "33%", "50%"], correct: "33%", explanation: "Un tiers de la nourriture produite est perdue ou gaspillée."},
+            {q: "Combien de personnes n'ont pas accès à l'eau potable gérée en sécurité ?", options: ["500 millions", "1,1 milliard", "2,2 milliards", "3 milliards"], correct: "2,2 milliards", explanation: "2,2 milliards de personnes n'ont pas accès à l'eau potable gérée en toute sécurité."},
+            {q: "Quel phénomène menace les îles comme les Maldives et Tuvalu ?", options: ["Sécheresse", "Élévation du niveau des mers", "Canicules", "Déforestation"], correct: "Élévation du niveau des mers", explanation: "+3,4 mm/an, menace d'innondation pour les îles basses."},
+            {q: "Quel insecte pollinisateur est en déclin mondial ?", options: ["Papillon", "Abeille", "Coccinelle", "Moustique"], correct: "Abeille", explanation: "40% des colonies d'abeilles disparaissent chaque année (pesticides, climat)."},
+            {q: "Quelle COP a adopté la transition 'hors des énergies fossiles' ?", options: ["COP21", "COP26", "COP27", "COP28"], correct: "COP28", explanation: "COP28 (Dubaï, 2023) : accord historique sur la sortie des énergies fossiles."},
+            {q: "Quel pourcentage des terres agricoles mondiales est en agriculture biologique ?", options: ["2%", "5%", "10%", "15%"], correct: "2%", explanation: "Seulement 2% des terres agricoles mondiales sont en bio."},
+            {q: "Quel rapport de 2019 alerte sur la 6e extinction de masse ?", options: ["Rapport Stern", "Rapport GIEC", "Rapport IPBES", "Rapport Oxfam"], correct: "Rapport IPBES", explanation: "IPBES : 1 million d'espèces menacées d'extinction."}
+        ],
+        libre: [
+            {q: "La température mondiale a augmenté de ___°C depuis 1850.", answer: "1,1", alternatives: ["1.1", "+1,1", "+1.1", "un virgule un", "un point un"], explanation: "+1,1°C depuis l'ère préindustrielle."},
+            {q: "L'Accord de ___ (2015) vise à limiter le réchauffement à +1,5°C.", answer: "Paris", alternatives: ["paris", "Paris"], explanation: "COP21, Paris."},
+            {q: "L'année ___ a été la plus chaude jamais enregistrée.", answer: "2023", alternatives: ["2023"], explanation: "Record de température battu."},
+            {q: "La fosse des ___ est le point le plus profond des océans (-11 034 m).", answer: "Mariannes", alternatives: ["mariannes", "Mariannes", "fosse des Mariannes"], explanation: "Challenger Deep."},
+            {q: "Le principal gaz à effet de serre est le dioxyde de ___ (CO2).", answer: "carbone", alternatives: ["Carbone", "CARBONE", "carbone"], explanation: "CO2, combustion des énergies fossiles."},
+            {q: "La ___ est le plus grand émetteur de CO2 (30%).", answer: "Chine", alternatives: ["chine", "Chine", "Chine"], explanation: "Premier émetteur mondial."},
+            {q: "___% des récifs coralliens sont menacés d'ici 2050.", answer: "50", alternatives: ["cinquante", "Cinquante"], explanation: "Acidification et réchauffement des océans."},
+            {q: "Le Protocole de ___ (1987) a protégé la couche d'ozone.", answer: "Montréal", alternatives: ["montréal", "Montreal", "montreal"], explanation: "Interdiction des CFC, succès majeur."},
+            {q: "L'Accord de ___ concerne le climat (2015).", answer: "Paris", alternatives: ["paris", "Paris"], explanation: "COP21."},
+            {q: "L'___ est la forêt tropicale qui perd le plus d'arbres.", answer: "Amazonie", alternatives: ["amazonie", "Amazonie", "forêt amazonienne"], explanation: "Déforestation massive."},
+            {q: "La ___ est le leader mondial de l'énergie solaire.", answer: "Chine", alternatives: ["chine", "Chine"], explanation: "Plus de 50% des panneaux solaires."},
+            {q: "L'___ utilise la géothermie pour 90% de son chauffage.", answer: "Islande", alternatives: ["islande", "Islande"], explanation: "Énergie volcanique."},
+            {q: "Le barrage des ___-Gorges est le plus puissant (22 500 MW).", answer: "Trois", alternatives: ["trois", "3", "Trois-Gorges", "trois-gorges"], explanation: "Chine, Yangtsé."},
+            {q: "___% de la nourriture produite est gaspillée.", answer: "33", alternatives: ["trente-trois", "trente trois", "un tiers", "1/3"], explanation: "Un tiers perdu ou gaspillé."},
+            {q: "___ milliards de personnes n'ont pas accès à l'eau potable sûre.", answer: "2,2", alternatives: ["2.2", "2,2", "deux virgule deux", "deux point deux"], explanation: "Stress hydrique mondial."},
+            {q: "L'___ du niveau des mers menace les Maldives et Tuvalu.", answer: "élévation", alternatives: ["Élévation", "élévation", "remontée", "Remontée", "montée", "Montée"], explanation: "+3,4 mm/an."},
+            {q: "L'___ est l'insecte pollinisateur en déclin (40% de colonies perdues).", answer: "abeille", alternatives: ["Abeille", "abeille", "abeilles", "Abeilles"], explanation: "Essentielle pour la pollinisation."},
+            {q: "La COP___ (2023) a adopté la transition hors énergies fossiles.", answer: "28", alternatives: ["28", "vingt-huit", "vingt huit"], explanation: "COP28 à Dubaï."},
+            {q: "Seulement ___% des terres agricoles sont en agriculture biologique.", answer: "2", alternatives: ["deux", "Deux"], explanation: "Très faible part mondiale."},
+            {q: "Le rapport ___ (2019) alerte sur la 6e extinction de masse.", answer: "IPBES", alternatives: ["ipbes", "Ipbes"], explanation: "1 million d'espèces menacées."}
+        ]
+    }
+};
+  /* fin QUESTIONS_DB */
+
+
+  /* ══════════════════════════════════════════════════════
+     🎮 ÉTAT DE JEU
+     ══════════════════════════════════════════════════════ */
+  let gameState = {
+    currentPlayer       : null,
+    currentLevel        : 1,
+    currentMode         : "mixte",
+    questions           : [],
+    currentQuestionIndex: 0,
+    score               : 0,
+    answers             : [],
+    selectedOption      : null
+  };
+
+
+  /* ══════════════════════════════════════════════════════
+     💾 LOCALSTORAGE — Lecture et écriture
+     ══════════════════════════════════════════════════════ */
+
+  function getPlayers() {
+    try   { return JSON.parse(localStorage.getItem(SUBJECT_CONFIG.playersKey)) || {}; }
+    catch { return {}; }
+  }
+
+  function savePlayers(players) {
+    localStorage.setItem(SUBJECT_CONFIG.playersKey, JSON.stringify(players));
+  }
+
+  function getPlayerData(name) {
+    const players = getPlayers();
+    if (!players[name]) {
+      players[name] = {
+        name,
+        currentLevel: 1, score: 0, completed: [],
+        totalQuestions: 0, totalCorrect: 0, streak: 0,
+        lastPlayed: null, errorHistory: [], sessionHistory: [], activeSession: null
+      };
+      savePlayers(players);
+    }
+    return players[name];
+  }
+
+
+  /* ══════════════════════════════════════════════════════
+     👤 GESTION DES JOUEURS
+     ══════════════════════════════════════════════════════ */
+
+  function switchPlayer(name) {
+    if (!name) return;
+    gameState.currentPlayer = name;
+    const p = getPlayerData(name);
+    gameState.currentLevel  = p.currentLevel || 1;
+    gameState.score         = p.score || 0;
+    updatePlayerDisplay();
+    renderLevels();
+    showToast("Joueur : " + name);
+  }
+
+  function showNewPlayerModal() {
+    document.getElementById("newPlayerModal").style.display = "flex";
+    document.getElementById("newPlayerNameModal").value = "";
+    setTimeout(() => document.getElementById("newPlayerNameModal").focus(), 100);
+  }
+
+  function closeNewPlayerModal() {
+    document.getElementById("newPlayerModal").style.display = "none";
+  }
+
+  function confirmNewPlayer() {
+    const name = (document.getElementById("newPlayerNameModal").value || "").trim();
+    if (!name) { closeNewPlayerModal(); return; }
+    const players = getPlayers();
+    if (players[name]) { showToast("Ce joueur existe déjà !"); return; }
+    players[name] = {
+      name, currentLevel: 1, score: 0, completed: [],
+      totalQuestions: 0, totalCorrect: 0, streak: 0,
+      lastPlayed: null, errorHistory: [], sessionHistory: [], activeSession: null
+    };
+    savePlayers(players);
+    switchPlayer(name);
+    closeNewPlayerModal();
+    showToast("Bienvenue " + name + " ! 🎉");
+  }
+
+  function deleteCurrentPlayer() {
+    if (!gameState.currentPlayer) { showToast("Aucun joueur sélectionné"); return; }
+    if (!confirm("Supprimer " + gameState.currentPlayer + " ? Toute sa progression sera perdue.")) return;
+    const players = getPlayers();
+    delete players[gameState.currentPlayer];
+    savePlayers(players);
+    gameState.currentPlayer = null;
+    updatePlayerDisplay();
+    renderLevels();
+    showToast("Joueur supprimé");
+  }
+
+  function updatePlayerDisplay() {
+    const players = getPlayers();
+    const sel     = document.getElementById("playerSelect");
+
+    /* Recharge la liste déroulante */
+    sel.innerHTML = "<option value=''>-- Joueur --</option>";
+    Object.keys(players).forEach(n => {
+      const o = document.createElement("option");
+      o.value = n;
+      o.textContent = n + " (Niv." + players[n].currentLevel + ")";
+      if (n === gameState.currentPlayer) o.selected = true;
+      sel.appendChild(o);
+    });
+
+    /* Stats dans le header */
+    if (gameState.currentPlayer && players[gameState.currentPlayer]) {
+      const p    = players[gameState.currentPlayer];
+      const rate = p.totalQuestions > 0
+        ? Math.round((p.totalCorrect / p.totalQuestions) * 100) : 0;
+
+      document.getElementById("playerNameDisplay").textContent = p.name;
+      document.getElementById("playerAvatar").textContent      = p.name.charAt(0).toUpperCase();
+      document.getElementById("playerStats").textContent       = "Niv." + p.currentLevel + " • " + p.score + " pts";
+      document.getElementById("headerScore").textContent       = p.score + " pts";
+      document.getElementById("homeLevel").textContent         = p.currentLevel;
+      document.getElementById("homeScore").textContent         = p.score;
+      document.getElementById("homeStreak").textContent        = p.streak || 0;
+      document.getElementById("homeRate").textContent          = rate + "%";
+    }
+  }
+
+
+  /* ══════════════════════════════════════════════════════
+     🧭 NAVIGATION
+     ══════════════════════════════════════════════════════ */
+
+  function showSection(id) {
+    document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+    if (id === "niveaux") renderLevels();
+    if (id === "accueil") updatePlayerDisplay();
+    if (id === "lecons")  renderLessons();
+  }
+
+
+  /* ══════════════════════════════════════════════════════
+     📚 RENDU DES LEÇONS
+     ══════════════════════════════════════════════════════ */
+
+  function renderLessons() {
+    document.getElementById("lessonsContainer").innerHTML =
+      LESSONS_DATA.map(l => `
+        <div class="lesson-card" onclick="toggleLesson(${l.num})">
+          <div class="lesson-header">
+            <div class="lesson-title">📘 Leçon ${l.num} — ${l.title}</div>
+            <span class="lesson-tag" id="lessonTag${l.num}">▼ ouvrir</span>
+          </div>
+          <div class="lesson-body" id="lessonBody${l.num}">${l.content}</div>
+        </div>
+      `).join("");
+  }
+
+  function toggleLesson(num) {
+    const body = document.getElementById("lessonBody" + num);
+    const tag  = document.getElementById("lessonTag"  + num);
+    const open = body.classList.contains("open");
+    body.classList.toggle("open", !open);
+    body.parentElement.classList.toggle("open", !open);
+    tag.textContent = open ? "▼ ouvrir" : "▲ fermer";
+  }
+
+
+  /* ══════════════════════════════════════════════════════
+     🎮 RENDU DES NIVEAUX
+     ══════════════════════════════════════════════════════ */
+
+  function selectMode(mode) {
+    gameState.currentMode = mode;
+    document.querySelectorAll(".mode-btn").forEach(b => b.classList.remove("selected"));
+    document.getElementById("btn" + mode.charAt(0).toUpperCase() + mode.slice(1)).classList.add("selected");
+  }
+
+  function renderLevels() {
+    const container  = document.getElementById("levelsContainer");
+    const players    = getPlayers();
+    const p          = gameState.currentPlayer ? players[gameState.currentPlayer] : null;
+    const currentLvl = p ? p.currentLevel : 1;
+    const completed  = p ? (p.completed || []) : [];
+    let html = "";
+
+    /* ↓ Changer "i <= 10" si vous avez un nombre différent de niveaux */
+    for (let i = 1; i <= 5; i++) {
+      const lv       = QUESTIONS_DB[i];
+      const isLocked = i > currentLvl && !completed.includes(i);
+      const isDone   = completed.includes(i);
+      const isCurrent= i === currentLvl;
+      let cls = "level-card";
+      let icon= "▶️";
+
+      if (isLocked)   { cls += " locked";    icon = "🔒"; }
+      else if (isDone)   { cls += " completed"; icon = "✅"; }
+      else if (isCurrent){ cls += " current";   icon = "🎯"; }
+
+      html += `
+        <div class="${cls}" onclick="${isLocked ? "" : "startLevel(" + i + ")"}">
+          <div class="level-header">
+            <span class="level-number">Niveau ${i}</span>
+            <span>${icon}</span>
+          </div>
+          <div class="level-title">${lv.title}</div>
+          <div class="level-obj">${lv.objective}</div>
+          <div style="font-size:.75em; color:#718096; margin-top:8px;">
+            ${isDone ? "Terminé ✓" : isLocked ? "Verrouillé" : "Disponible"}
+          </div>
+        </div>`;
+    }
+    container.innerHTML = html;
+  }
+
+
+  /* ══════════════════════════════════════════════════════
+     🎯 LOGIQUE DE JEU
+     ══════════════════════════════════════════════════════ */
+
+  function startLevel(levelNum) {
+    /* S'assure qu'un joueur est actif */
+    if (!gameState.currentPlayer) {
+      const names = Object.keys(getPlayers());
+      if (names.length > 0) switchPlayer(names[0]);
+      else { showToast("Crée ou choisis un joueur d'abord !"); return; }
+    }
+
+    gameState.currentLevel = levelNum;
+
+    /* Propose de reprendre une session interrompue */
+    const p = getPlayers()[gameState.currentPlayer];
+    if (p && p.activeSession && p.activeSession.level === levelNum &&
+        p.activeSession.answers && p.activeSession.answers.length > 0) {
+      if (confirm("Session en cours (" + p.activeSession.answers.length +
+                  "/" + p.activeSession.questions.length + " questions). Reprendre ?")) {
+        gameState.questions             = p.activeSession.questions;
+        gameState.currentQuestionIndex  = p.activeSession.currentQuestionIndex;
+        gameState.answers               = p.activeSession.answers;
+        gameState.selectedOption        = null;
+        document.getElementById("gameTitle").textContent =
+          "Niveau " + levelNum + " : " + QUESTIONS_DB[levelNum].title;
+        showSection("jeu");
+        renderQuestion();
+        return;
+      }
+    }
+
+    /* Nouvelle session */
+    gameState.currentQuestionIndex = 0;
+    gameState.answers              = [];
+    gameState.selectedOption       = null;
+
+    const lv     = QUESTIONS_DB[levelNum];
+    const allQcm = lv.qcm.map(q  => ({ ...q, type: "qcm"   }));
+    const allLib = lv.libre.map(q => ({ ...q, type: "libre" }));
+
+    if      (gameState.currentMode === "qcm")   gameState.questions = shuffle(allQcm).slice(0, 10);
+    else if (gameState.currentMode === "libre") gameState.questions = shuffle(allLib).slice(0, 10);
+    else /* mixte */                             gameState.questions = shuffle([
+      ...shuffle(allQcm).slice(0, 5),
+      ...shuffle(allLib).slice(0, 5)
+    ]);
+
+    document.getElementById("gameTitle").textContent = "Niveau " + levelNum + " : " + lv.title;
+    showSection("jeu");
+    showLessonIntro(levelNum);
+  }
+
+  function showLessonIntro(levelNum) {
+    const lv     = QUESTIONS_DB[levelNum];
+    const lesson = LESSONS_DATA.find(l => l.num === levelNum);
+
+    document.getElementById("questionCounter").textContent         = "📚 Leçon";
+    document.getElementById("scoreDisplay").textContent            = "";
+    document.getElementById("progressFill").style.width            = "0%";
+    document.querySelector(".question-box").style.display          = "none";
+    document.querySelector(".game-actions").style.display          = "none";
+    document.getElementById("lessonIntro").style.display           = "block";
+    document.getElementById("lessonIntroTitle").textContent        = lesson ? lesson.title : lv.title;
+    document.getElementById("lessonIntroObj").textContent          = lv.objective;
+    document.getElementById("lessonIntroContent").innerHTML        = lesson
+      ? lesson.content : "<p>Objectif : " + lv.objective + "</p>";
+    document.getElementById("lessonIntroLexique").href             =
+      SUBJECT_CONFIG.lexiqueFile + "?level=" + levelNum;
+  }
+
+  function startQuestions() {
+    document.getElementById("lessonIntro").style.display   = "none";
+    document.querySelector(".question-box").style.display  = "block";
+    document.querySelector(".game-actions").style.display  = "flex";
+    renderQuestion();
+  }
+
+  /* Fisher-Yates shuffle */
+  function shuffle(array) {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function renderQuestion() {
+    const q     = gameState.questions[gameState.currentQuestionIndex];
+    const total = gameState.questions.length;
+    const idx   = gameState.currentQuestionIndex;
+
+    document.getElementById("questionCounter").textContent  = "Q" + (idx + 1) + "/" + total;
+    document.getElementById("scoreDisplay").textContent     = gameState.answers.filter(a => a.isCorrect).length + " ✓";
+    document.getElementById("progressFill").style.width     = (idx / total * 100) + "%";
+    document.getElementById("questionNum").textContent      = (idx + 1) + ". " + q.type.toUpperCase();
+    document.getElementById("questionText").textContent     = q.q;
+    document.getElementById("feedback").style.display       = "none";
+    document.getElementById("feedback").className           = "feedback";
+    document.getElementById("validateBtn").style.display    = "inline-block";
+    document.getElementById("nextBtn").style.display        = "none";
+    gameState.selectedOption = null;
+
+    if (q.type === "qcm") {
+      document.getElementById("qcmOptions").style.display = "grid";
+      document.getElementById("libreInput").style.display = "none";
+      document.getElementById("qcmOptions").innerHTML = q.options.map(opt =>
+        `<button class="option-btn" onclick="selectOption(this,'${opt.replace(/'/g, "\\'")}')">${opt}</button>`
+      ).join("");
+    } else {
+      document.getElementById("qcmOptions").style.display = "none";
+      document.getElementById("libreInput").style.display = "block";
+      const inp = document.getElementById("answerInput");
+      inp.value = ""; inp.className = "answer-input"; inp.disabled = false;
+      setTimeout(() => inp.focus(), 100);
+    }
+  }
+
+  function selectOption(btn, val) {
+    document.querySelectorAll(".option-btn").forEach(b => b.classList.remove("selected"));
+    btn.classList.add("selected");
+    gameState.selectedOption = val;
+  }
+
+  function validateAnswer() {
+    const q = gameState.questions[gameState.currentQuestionIndex];
+    let isCorrect = false;
+    let userAnswer = "";
+
+    if (q.type === "qcm") {
+      if (!gameState.selectedOption) { showToast("Choisis une réponse !"); return; }
+      userAnswer = gameState.selectedOption;
+      isCorrect  = userAnswer === q.correct;
+      document.querySelectorAll(".option-btn").forEach(btn => {
+        btn.disabled = true;
+        const v = btn.textContent.trim();
+        if (v === q.correct)                     btn.classList.add("correct");
+        else if (v === userAnswer && !isCorrect) btn.classList.add("wrong");
+      });
+
+    } else {
+      const inp  = document.getElementById("answerInput");
+      userAnswer = inp.value.trim();
+      if (!userAnswer) { showToast("Écris ta réponse !"); return; }
+
+      /* Normalisation : casse + ponctuation ignorées */
+      const norm = s => s.toLowerCase().replace(/[.,;:!?']/g, "").replace(/\s+/g, " ").trim();
+      isCorrect  = norm(userAnswer) === norm(q.answer);
+      if (!isCorrect && q.alternatives)
+        isCorrect = q.alternatives.some(a => norm(userAnswer) === norm(a));
+
+      inp.disabled  = true;
+      inp.className = "answer-input " + (isCorrect ? "correct" : "wrong");
+    }
+
+    /* Affiche le feedback */
+    const fb = document.getElementById("feedback");
+    fb.style.display = "block";
+    fb.className     = "feedback show " + (isCorrect ? "correct-fb" : "wrong-fb");
+    document.getElementById("feedbackTitle").textContent   = isCorrect ? "✅ Bonne réponse !" : "❌ Pas tout à fait…";
+    document.getElementById("feedbackCorrect").textContent = isCorrect ? "" : "Bonne réponse : " + (q.correct || q.answer);
+    document.getElementById("feedbackExplanation").innerHTML =
+      (q.explanation || "") +
+      `<br><br><a href="${SUBJECT_CONFIG.lexiqueFile}?level=${gameState.currentLevel}" target="_blank"
+          style="color:var(--primary); font-size:.9em; font-weight:bold;">
+        📖 Voir le vocabulaire du niveau ${gameState.currentLevel}
+      </a>`;
+
+    /* Stats joueur */
+    gameState.answers.push({ question: q.q, userAnswer, correct: q.correct || q.answer, isCorrect, explanation: q.explanation });
+    if (isCorrect) gameState.score += 10; else trackError(q, userAnswer);
+
+    const players = getPlayers();
+    if (gameState.currentPlayer && players[gameState.currentPlayer]) {
+      const pp = players[gameState.currentPlayer];
+      pp.totalQuestions = (pp.totalQuestions || 0) + 1;
+      if (isCorrect) { pp.totalCorrect = (pp.totalCorrect || 0) + 1; pp.streak = (pp.streak || 0) + 1; }
+      else             pp.streak = 0;
+      savePlayers(players);
+    }
+
+    document.getElementById("validateBtn").style.display = "none";
+    document.getElementById("nextBtn").style.display     = "inline-block";
+    document.getElementById("nextBtn").textContent =
+      gameState.currentQuestionIndex === gameState.questions.length - 1
+        ? "Voir les résultats →" : "Suivant →";
+    saveActiveSession();
+  }
+
+  function trackError(question, userAnswer) {
+    if (!gameState.currentPlayer) return;
+    const players = getPlayers();
+    const p       = players[gameState.currentPlayer];
+    if (!p.errorHistory) p.errorHistory = [];
+    p.errorHistory.push({
+      question: question.q, userAnswer,
+      correctAnswer: question.correct || question.answer,
+      explanation: question.explanation,
+      date: new Date().toISOString(), level: gameState.currentLevel
+    });
+    if (p.errorHistory.length > 50) p.errorHistory = p.errorHistory.slice(-50);
+    savePlayers(players);
+  }
+
+  function saveActiveSession() {
+    if (!gameState.currentPlayer) return;
+    const players = getPlayers();
+    const p       = players[gameState.currentPlayer];
+    p.activeSession = {
+      level: gameState.currentLevel, questions: gameState.questions,
+      currentQuestionIndex: gameState.currentQuestionIndex,
+      answers: gameState.answers, mode: gameState.currentMode,
+      date: new Date().toISOString()
+    };
+    savePlayers(players);
+  }
+
+  function nextQuestion() {
+    if (gameState.currentQuestionIndex >= gameState.questions.length - 1) showResults();
+    else { gameState.currentQuestionIndex++; renderQuestion(); }
+  }
+
+  function showResults() {
+    const total   = gameState.questions.length;
+    const correct = gameState.answers.filter(a => a.isCorrect).length;
+    const pct     = Math.round(correct / total * 100);
+
+    document.getElementById("resultPct").textContent = pct + "%";
+    document.getElementById("resultMsg").textContent =
+      (pct >= 80 ? "🎉 Excellent ! Niveau suivant débloqué !" :
+       pct >= 50 ? "👍 Pas mal ! Continue à t'entraîner."     :
+                   "💪 Courage ! Relis la leçon et réessaie !") +
+      " (" + correct + "/" + total + ")";
+
+    const players = getPlayers();
+    const p       = players[gameState.currentPlayer];
+    if (p) {
+      if (!p.sessionHistory) p.sessionHistory = [];
+      p.sessionHistory.push({
+        date: new Date().toISOString(), level: gameState.currentLevel,
+        levelTitle: QUESTIONS_DB[gameState.currentLevel].title,
+        correct, total, pct, passed: pct >= 80, mode: gameState.currentMode
+      });
+      if (p.sessionHistory.length > 50) p.sessionHistory = p.sessionHistory.slice(-50);
+      p.activeSession = null;
+      p.lastPlayed    = new Date().toISOString();
+      if (pct >= 80) {
+        if (!p.completed.includes(gameState.currentLevel)) p.completed.push(gameState.currentLevel);
+        if (p.currentLevel <= gameState.currentLevel && gameState.currentLevel < 10)
+          p.currentLevel = gameState.currentLevel + 1;
+        p.score = (p.score || 0) + correct * 10;
+      }
+      savePlayers(players);
+    }
+
+    document.getElementById("nextLevelBtn").style.display = pct >= 80 ? "inline-block" : "none";
+    updatePlayerDisplay();
+    showSection("resultats");
+  }
+
+  function retryLevel()     { startLevel(gameState.currentLevel); }
+  function startNextLevel() {
+    const lvl = (getPlayers()[gameState.currentPlayer] || {}).currentLevel || 1;
+    if (lvl <= 10) startLevel(lvl);
+    else showToast("Félicitations ! Tu as tout terminé ! 🏆");
+  }
+  function quitGame() {
+    if (confirm("Quitter ? Ta progression est sauvegardée.")) {
+      saveActiveSession();
+      showSection("niveaux");
+    }
+  }
+
+
+  /* ══════════════════════════════════════════════════════
+     💾 EXPORT / IMPORT
+     ══════════════════════════════════════════════════════ */
+
+  function exportSave() {
+    const players = getPlayers();
+    if (!Object.keys(players).length) { showToast("Aucune sauvegarde à exporter."); return; }
+    const a    = document.createElement("a");
+    a.href     = URL.createObjectURL(new Blob([JSON.stringify(players, null, 2)], { type: "application/json" }));
+    a.download = SUBJECT_CONFIG.storageKey + "-sauvegarde-" + new Date().toISOString().slice(0, 10) + ".json";
+    a.click();
+    showToast("Sauvegarde téléchargée !");
+  }
+
+  function importSave(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      try {
+        const data = JSON.parse(e.target.result);
+        if (typeof data === "object" && data) {
+          savePlayers(data);
+          updatePlayerDisplay();
+          renderLevels();
+          const names = Object.keys(data);
+          if (names.length) switchPlayer(names[0]);
+          showToast("Sauvegarde importée ! Bienvenue " + names[0] + " !");
+        } else showToast("Fichier invalide.");
+      } catch { showToast("Erreur : fichier non reconnu."); }
+    };
+    reader.readAsText(file);
+    event.target.value = "";
+  }
+
+
+  /* ══════════════════════════════════════════════════════
+     🔔 TOAST  |  🔗 NAVIGATION EXTERNE
+     ══════════════════════════════════════════════════════ */
+
+  function showToast(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    setTimeout(() => t.classList.remove("show"), 3000);
+  }
+
+  function goToDashboard() {
+    window.location.href = SUBJECT_CONFIG.dashboardFile +
+      (gameState.currentPlayer ? "?player=" + encodeURIComponent(gameState.currentPlayer) : "");
+  }
+
+
+  /* ══════════════════════════════════════════════════════
+     🚀 INITIALISATION — Au chargement de la page
+     ══════════════════════════════════════════════════════ */
+
+  document.addEventListener("DOMContentLoaded", () => {
+
+    renderLessons();
+    renderLevels();
+    updatePlayerDisplay();
+
+    /* Paramètres URL : ?player=Prénom&level=3 */
+    const params    = new URLSearchParams(window.location.search);
+    const urlPlayer = params.get("player");
+    const lvlParam  = params.get("level");
+    const players   = getPlayers();
+    const names     = Object.keys(players);
+
+    if (urlPlayer && players[urlPlayer]) {
+      /* Cas 1 — joueur transmis depuis le dashboard */
+      switchPlayer(urlPlayer);
+
+    } else if (names.length > 0) {
+      /* Cas 2 — premier joueur de la liste */
+      switchPlayer(names[0]);
+
+    } else {
+      /* Cas 3 — aucun joueur → création de "Joueur 1" */
+      const def = "Joueur 1";
+      players[def] = {
+        name: def, currentLevel: 1, score: 0, completed: [],
+        totalQuestions: 0, totalCorrect: 0, streak: 0,
+        lastPlayed: new Date().toISOString(),
+        errorHistory: [], sessionHistory: [], activeSession: null
+      };
+      savePlayers(players);
+      switchPlayer(def);
+      showToast("Bienvenue ! Joueur créé automatiquement.");
+    }
+
+    /* Démarrage automatique d'un niveau si ?level=N dans l'URL */
+    if (lvlParam) {
+      const lvl = parseInt(lvlParam);
+      if (lvl >= 1 && lvl <= 5) setTimeout(() => startLevel(lvl), 300);
+    }
+
+  }); /* fin DOMContentLoaded */
+
+</script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Géographie Master 🌍</title>
+  <style>
+
+    /* ════════════════════════════════════════════════════
+       🎨 PALETTE — Même couleurs que quiz.html
+       ════════════════════════════════════════════════════ */
+    :root {
+      --primary  : #27ae60;
+      --secondary: #229954;
+      --success  : #48bb78;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; font-family: "Segoe UI", system-ui, sans-serif; }
+
+    body {
+      background     : linear-gradient(135deg, var(--primary), var(--secondary));
+      min-height     : 100vh;
+      display        : flex;
+      align-items    : center;
+      justify-content: center;
+      padding        : 20px;
+    }
+
+    /* ── Carte centrale ── */
+    .card {
+      background   : white;
+      border-radius: 24px;
+      padding      : 40px 32px;
+      max-width    : 480px;
+      width        : 100%;
+      text-align   : center;
+      box-shadow   : 0 20px 60px rgba(0,0,0,.25);
+    }
+
+    /* ── Emoji animé ── */
+    .emoji { font-size: 4em; margin-bottom: 12px; display: block; animation: bounce 2s infinite; }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
+
+    /* ── Titre dégradé ── */
+    h1 {
+      font-size             : 2.2em;
+      font-weight           : 800;
+      background            : linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom         : 8px;
+    }
+
+    .tagline { color: #718096; font-size: 1.05em; margin-bottom: 28px; }
+
+    /* ── Pills de stats ── */
+    .levels      { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+    .level-pill  { background: #f0f4ff; color: var(--primary); padding: 5px 12px; border-radius: 20px; font-size: .82em; font-weight: 600; }
+
+    /* ── Liste de fonctionnalités ── */
+    .features      { background: #f8fafc; border-radius: 14px; padding: 18px; margin-bottom: 28px; text-align: left; }
+    .feature       { display: flex; align-items: center; gap: 10px; padding: 7px 0; font-size: .95em; color: #2d3748; border-bottom: 1px solid #e2e8f0; }
+    .feature:last-child  { border-bottom: none; }
+    .feature-icon  { font-size: 1.3em; flex-shrink: 0; }
+
+    /* ── Bouton principal ── */
+    .btn-play {
+      display      : block;
+      background   : linear-gradient(135deg, var(--primary), var(--secondary));
+      color        : white;
+      text-decoration: none;
+      padding      : 18px 32px;
+      border-radius: 14px;
+      font-size    : 1.2em;
+      font-weight  : 800;
+      letter-spacing: .5px;
+      transition   : all .25s;
+      margin-bottom: 12px;
+    }
+    .btn-play:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,.2); }
+
+    /* ── Boutons secondaires ── */
+    .btn-secondary {
+      display        : inline-block;
+      color          : var(--primary);
+      text-decoration: none;
+      font-size      : .9em;
+      font-weight    : 600;
+      padding        : 8px 16px;
+      border-radius  : 10px;
+      background     : #f0f4ff;
+      transition     : all .2s;
+      margin         : 4px;
+    }
+    .btn-secondary:hover { background: #e0e8ff; }
+
+    .footer { margin-top: 20px; font-size: .78em; color: #a0aec0; }
+
+  </style>
+</head>
+<body>
+<div class="card">
+
+  <!-- ════════════════════════════════════════════════════
+       🎯 CONTENU
+       ════════════════════════════════════════════════════ -->
+
+  <!-- Emoji animé -->
+  <span class="emoji">🌍</span>
+
+  <!-- Titre -->
+  <h1>Géographie Master</h1>
+  <p class="tagline">Apprendre la géographie, un niveau à la fois.</p>
+
+  <!-- Statistiques en pills -->
+  <div class="levels">
+    <span class="level-pill">5 niveaux</span>
+    <span class="level-pill">200 questions</span>
+    <span class="level-pill">30 badges</span>
+    <span class="level-pill">Multi-joueurs</span>
+  </div>
+
+  <!-- Fonctionnalités -->
+  <div class="features">
+    <div class="feature"><span class="feature-icon">📚</span>Des leçons courtes avant chaque niveau</div>
+    <div class="feature"><span class="feature-icon">🎯</span>QCM, réponses écrites, ou les deux</div>
+    <div class="feature"><span class="feature-icon">📊</span>Un espace personnel pour suivre ses progrès</div>
+    <div class="feature"><span class="feature-icon">🎭</span>Mode Caméléon : corrige les erreurs de Lucas</div>
+    <div class="feature"><span class="feature-icon">📖</span>Un lexique interactif</div>
+    <div class="feature"><span class="feature-icon">📝</span>Des fiches de révision automatiques</div>
+  </div>
+
+  <!-- Boutons -->
+  <a href="quiz.html" class="btn-play">🎮 Jouer maintenant</a>
+  <div>
+    <a href="dashboard.html" class="btn-secondary">📊 Mon espace</a>
+    <a href="lexique.html"   class="btn-secondary">📖 Lexique</a>
+  </div>
+
+  <p class="footer">Fonctionne sur téléphone, tablette et ordinateur.<br>Aucune installation requise.</p>
+
+</div>
+</body>
+</html>

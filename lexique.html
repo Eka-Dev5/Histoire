@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ════════════════════════════════════════════════════
+       🎯 TITRE — Personnaliser
+       ════════════════════════════════════════════════════ -->
+  <title>Géographie Master — Lexique</title>
+
+  <style>
+
+    /* ════════════════════════════════════════════════════
+       🎨 PALETTE — Même couleurs que quiz.html
+       ════════════════════════════════════════════════════ */
+    :root {
+      --primary  : #27ae60;
+      --secondary: #229954;
+      --success  : #48bb78;
+      --bg       : #f7fafc;
+      --text     : #2d3748;
+    }
+
+    /* ── Reset global ── */
+    *, *::before, *::after {
+      box-sizing : border-box;
+      margin     : 0;
+      padding    : 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+    }
+
+    body {
+      background : linear-gradient(135deg, var(--primary), var(--secondary));
+      min-height : 100vh;
+      padding    : 15px;
+    }
+
+    /* ── Conteneur principal ── */
+    .container {
+      background   : white;
+      max-width    : 920px;
+      margin       : 0 auto;
+      border-radius: 20px;
+      padding      : 25px;
+      box-shadow   : 0 15px 40px rgba(0,0,0,.2);
+    }
+
+    /* ── Titre ── */
+    h1       { text-align: center; color: var(--text); margin-bottom: 5px; font-size: 1.9em; }
+    .subtitle{ text-align: center; color: #718096; margin-bottom: 20px; font-size: .95em; }
+
+    /* ── Navigation ── */
+    .nav-links   { display: flex; justify-content: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+    .nav-links a { padding: 9px 18px; background: var(--primary); color: white; text-decoration: none; border-radius: 20px; font-weight: bold; font-size: .9em; transition: all .25s; }
+    .nav-links a:hover { background: var(--secondary); transform: translateY(-2px); }
+
+    /* ── Barre de recherche ── */
+    .search-box       { width: 100%; padding: 13px 18px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 1em; margin-bottom: 16px; outline: none; transition: border-color .2s; }
+    .search-box:focus { border-color: var(--primary); }
+
+    /* ── Filtres par niveau ── */
+    .level-tabs     { display: flex; gap: 7px; margin-bottom: 18px; flex-wrap: wrap; justify-content: center; }
+    .level-tab      { padding: 7px 13px; border: 2px solid var(--primary); background: white; color: var(--primary); border-radius: 16px; cursor: pointer; font-weight: bold; font-size: .8em; transition: all .25s; }
+    .level-tab:hover,
+    .level-tab.active { background: var(--primary); color: white; }
+
+    /* ── Compteur ── */
+    .stat-bar { text-align: center; font-size: .85em; color: #718096; margin-bottom: 12px; }
+
+    /* ════════════════════════════════════════════════════
+       📇 GRILLE DE MOTS
+       ════════════════════════════════════════════════════ */
+    .lex-grid {
+      display              : grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap                  : 13px;
+    }
+
+    .word-card         { background: #f8fafc; border: 2px solid transparent; border-radius: 13px; padding: 17px; cursor: pointer; transition: all .25s; position: relative; }
+    .word-card:hover   { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,.1); border-color: var(--primary); }
+    .word-main         { font-size: 1.2em; font-weight: bold; color: var(--primary); margin-bottom: 4px; }
+    .word-trans        { font-size: .95em; color: var(--text); margin-bottom: 7px; }
+    .word-cat          { font-size: .72em; color: #718096; background: #e2e8f0; padding: 2px 9px; border-radius: 9px; display: inline-block; }
+    .word-lv           { position: absolute; top: 9px; right: 9px; font-size: .68em; color: white; background: var(--secondary); padding: 2px 7px; border-radius: 7px; }
+    .empty-msg         { text-align: center; color: #999; padding: 40px; grid-column: 1 / -1; }
+
+    /* ════════════════════════════════════════════════════
+       🔍 MODALE DE DÉTAIL
+       ════════════════════════════════════════════════════ */
+    .modal-overlay         { position: fixed; inset: 0; background: rgba(0,0,0,.5); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 15px; }
+    .modal-overlay.show    { display: flex; }
+    .modal-content         { background: white; border-radius: 18px; padding: 26px; max-width: 480px; width: 100%; max-height: 85vh; overflow-y: auto; animation: popIn .25s ease; }
+    @keyframes popIn       { from { opacity: 0; transform: scale(.92); } to { opacity: 1; transform: scale(1); } }
+    .modal-main            { font-size: 1.9em; font-weight: bold; color: var(--primary); margin-bottom: 4px; }
+    .modal-trans           { font-size: 1.2em; color: var(--text); margin-bottom: 14px; }
+    .modal-sec             { margin: 12px 0; padding: 12px 15px; background: #f7fafc; border-radius: 10px; }
+    .modal-sec h4          { color: var(--secondary); margin-bottom: 6px; font-size: .85em; text-transform: uppercase; letter-spacing: .5px; }
+    .modal-close           { background: var(--primary); color: white; border: none; padding: 11px 22px; border-radius: 20px; cursor: pointer; font-weight: bold; margin-top: 13px; width: 100%; }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) { .lex-grid { grid-template-columns: 1fr 1fr; } }
+
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ════════════════════════════════════════════════════
+       🔝 EN-TÊTE — Personnaliser l'emoji et le nom
+       ════════════════════════════════════════════════════ -->
+  <h1>🌍 Lexique Géographie Master</h1>
+  <p class="subtitle">60 mots essentiels — Niveaux 1 à 5</p>
+
+  <!-- Navigation -->
+  <div class="nav-links">
+    <a href="index.html">🏠 Accueil</a>
+    <a href="dashboard.html">📊 Dashboard</a>
+  </div>
+
+  <!-- Compteur de mots affichés -->
+  <div class="stat-bar" id="statBar">0 mots disponibles</div>
+
+  <!-- Barre de recherche -->
+  <input type="text"
+         class="search-box"
+         id="searchBox"
+         placeholder="Chercher un mot, un lieu, un concept…"
+         oninput="filterWords()">
+
+  <!-- Filtres par niveau — ajouter ou supprimer des boutons selon le nombre de niveaux -->
+  <div class="level-tabs">
+    <button class="level-tab active" onclick="filterByLevel(0, this)">Tous</button>
+    <button class="level-tab"        onclick="filterByLevel(1, this)">Niv. 1</button>
+    <button class="level-tab"        onclick="filterByLevel(2, this)">Niv. 2</button>
+    <button class="level-tab"        onclick="filterByLevel(3, this)">Niv. 3</button>
+    <button class="level-tab"        onclick="filterByLevel(4, this)">Niv. 4</button>
+    <button class="level-tab"        onclick="filterByLevel(5, this)">Niv. 5</button>
+    <!-- ↑ Ajouter "Niv. 6", "Niv. 7"… si besoin -->
+  </div>
+
+  <!-- Grille des mots — injectée par renderWords() -->
+  <div class="lex-grid" id="lexGrid"></div>
+
+</div><!-- /.container -->
+
+
+<!-- Modale de détail d'un mot -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <div class="modal-main"  id="modalMain"></div>
+    <div class="modal-trans" id="modalTrans"></div>
+    <div class="modal-sec"><h4>📖 Définition</h4><p id="modalDef"></p></div>
+    <div class="modal-sec"><h4>💬 Exemple</h4>   <p id="modalEx"  style="font-style:italic;"></p></div>
+    <div class="modal-sec"><h4>📝 Catégorie</h4> <p id="modalCat"></p></div>
+    <button class="modal-close" onclick="closeModal()">Fermer</button>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════
+     📜 JAVASCRIPT
+     ══════════════════════════════════════════════════════ -->
+<script>
+
+  /* ══════════════════════════════════════════════════════
+     📖 LEXIQUE — Tableau de mots
+         Chaque mot contient :
+           main  → terme principal (mot en anglais, notion, date…)
+           trans → traduction ou définition courte
+           def   → définition complète
+           ex    → exemple d'utilisation
+           level → numéro de niveau (1, 2, 3…)
+           cat   → catégorie (verbe, nom, date, événement…)
+
+     ↓ REMPLACER CES EXEMPLES PAR LE VRAI CONTENU ↓
+     ══════════════════════════════════════════════════════ */
+  const LEXIQUE = [
+    // NIVEAU 1
+    { main: "Mont Blanc", fr: "plus haut sommet de France", def: "Point culminant de l'UE à 4 808 m, frontière France-Italie.", ex: "Le Mont Blanc culmine à 4 808 m.", level: 1, cat: "relief"},
+    { main: "Pyrénées", fr: "chaîne frontalière Espagne", def: "Montagnes séparant la France de l'Espagne et d'Andorre.", ex: "Les Pyrénées s'étendent de la Méditerranée à l'Atlantique.", level: 1, cat: "relief"},
+    { main: "Loire", fr: "plus long fleuve de France", def: "1 012 km, de la source à l'océan Atlantique.", ex: "La Loire traverse les châteaux de la Renaissance.", level: 1, cat: "fleuve"},
+    { main: "Rhône", fr: "fleuve au débit le plus fort", def: "812 km, prend sa source dans les Alpes suisses.", ex: "Le Rhône se jette dans la Méditerranée.", level: 1, cat: "fleuve"},
+    { main: "Seine", fr: "fleuve de Paris", def: "776 km, traverse la capitale sur 13 km.", ex: "La Seine est bordée de 37 ponts à Paris.", level: 1, cat: "fleuve"},
+    { main: "Guyane", fr: "département d'outre-mer", def: "Plus grand département français, forêt amazonienne.", ex: "La Guyane est située en Amérique du Sud.", level: 1, cat: "territoire"},
+    { main: "Corse", fr: "île française", def: "Île en Méditerranée, 2 départements (2A et 2B).", ex: "La Corse est surnommée l'île de Beauté.", level: 1, cat: "territoire"},
+    { main: " région", fr: "échelon territorial", def: "La France métropolitaine compte 13 régions depuis 2016.", ex: "L'Île-de-France est la région la plus peuplée.", level: 1, cat: "administration"},
+    // NIVEAU 2
+    { main: "Union européenne", fr: "UE", def: "Union de 27 pays européens depuis le Brexit.", ex: "L'UE compte 450 millions d'habitants.", level: 2, cat: "organisation"},
+    { main: "Brexit", fr: "sortie du Royaume-Uni", def: "Départ du Royaume-Uni de l'UE le 31 janvier 2020.", ex: "Le Brexit a été voté par référendum en 2016.", level: 2, cat: "politique"},
+    { main: "Berlin", fr: "capitale de l'Allemagne", def: "3,7 millions d'habitants, capitale depuis 1990.", ex: "Berlin était divisée par un mur de 1961 à 1989.", level: 2, cat: "capitale"},
+    { main: "Rome", fr: "capitale de l'Italie", def: "Ville éternelle, siège du Vatican.", ex: "Rome compte 2,8 millions d'habitants.", level: 2, cat: "capitale"},
+    { main: "Madrid", fr: "capitale de l'Espagne", def: "Centre de la péninsule ibérique.", ex: "Madrid est la plus haute capitale d'Europe.", level: 2, cat: "capitale"},
+    { main: "Bruxelles", fr: "capitale de la Belgique", def: "Siège principal des institutions de l'UE.", ex: "Bruxelles accueille la Commission européenne.", level: 2, cat: "capitale"},
+    { main: "climat océanique", fr: "doux et humide", def: "Peu d'amplitude thermique, pluies régulières.", ex: "La Bretagne a un climat océanique.", level: 2, cat: "climat"},
+    { main: "climat méditerranéen", fr: "chaud et sec en été", def: "Étés chauds et secs, hivers doux.", ex: "La Côte d'Azur a un climat méditerranéen.", level: 2, cat: "climat"},
+    { main: "Danube", fr: "fleuve européen", def: "2 860 km, traverse 10 pays et 4 capitales.", ex: "Le Danube traverse Vienne et Budapest.", level: 2, cat: "fleuve"},
+    { main: "Oural", fr: "frontière Europe-Asie", def: "Chaîne de montagnes séparant l'Europe de l'Asie.", ex: "L'Oural est la limite conventionnelle entre les deux continents.", level: 2, cat: "relief"},
+    // NIVEAU 3
+    { main: "Asie", fr: "plus grand continent", def: "44,6 M km², 4,7 milliards d'habitants.", ex: "L'Asie est le plus grand et plus peuplé des continents.", level: 3, cat: "continent"},
+    { main: "Pacifique", fr: "plus grand océan", def: "165 M km², plus grand que tous les continents réunis.", ex: "L'océan Pacifique borde l'Asie et l'Amérique.", level: 3, cat: "océan"},
+    { main: "Everest", fr: "plus haut sommet du monde", def: "8 849 m, Himalaya, Népal/Tibet.", ex: "L'Everest est le toit du monde.", level: 3, cat: "relief"},
+    { main: "Sahara", fr: "plus grand désert chaud", def: "9 M km², Afrique du Nord.", ex: "Le Sahara s'étend sur 11 pays africains.", level: 3, cat: "désert"},
+    { main: "Russie", fr: "plus grand pays du monde", def: "17 M km², à cheval sur l'Europe et l'Asie.", ex: "La Russie compte 11 fuseaux horaires.", level: 3, cat: "pays"},
+    { main: "Inde", fr: "pays le plus peuplé", def: "1,428 milliard, a dépassé la Chine en 2023.", ex: "L'Inde est devenue le pays le plus peuplé du monde.", level: 3, cat: "pays"},
+    { main: "Nil", fr: "plus long fleuve", def: "6 650 km, traverse l'Égypte.", ex: "Le Nil fertilise la vallée égyptienne.", level: 3, cat: "fleuve"},
+    { main: "Amazonie", fr: "plus grande forêt tropicale", def: "60% au Brésil, poumon vert de la planète.", ex: "L'Amazonie produit 20% de l'oxygène mondial.", level: 3, cat: "forêt"},
+    { main: "Greenwich", fr: "méridien de référence", def: "0°, banlieue de Londres.", ex: "Greenwich sert de référence pour les fuseaux horaires.", level: 3, cat: "repère"},
+    { main: "Antarctique", fr: "continent glacial", def: "14 M km², aucun habitant permanent.", ex: "L'Antarctique est protégé par le traité de 1959.", level: 3, cat: "continent"},
+    // NIVEAU 4
+    { main: "PIB", fr: "Produit Intérieur Brut", def: "Richesse produite par un pays sur un an.", ex: "Le PIB de la France est d'environ 2 800 milliards $.", level: 4, cat: "économie"},
+    { main: "IDH", fr: "Indice de Développement Humain", def: "Mesure santé, éducation, niveau de vie (0 à 1).", ex: "La Norvège a l'IDH le plus élevé (0,966).", level: 4, cat: "économie"},
+    { main: "BRICS", fr: "pays émergents", def: "Brésil, Russie, Inde, Chine, Afrique du Sud.", ex: "Les BRICS représentent 40% de la population mondiale.", level: 4, cat: "économie"},
+    { main: "ODD", fr: "Objectifs de Développement Durable", def: "17 objectifs fixés par l'ONU pour 2030.", ex: "Les ODD visent à éliminer la pauvreté et protéger la planète.", level: 4, cat: "développement"},
+    { main: "FMI", fr: "Fonds Monétaire International", def: "Organisation prêtant de l'argent aux pays en difficulté.", ex: "Le FMI impose des conditions aux pays emprunteurs.", level: 4, cat: "économie"},
+    { main: "pays développé", fr: "Nord", def: "Forte industrialisation, HDI > 0,8.", ex: "La France est un pays développé.", level: 4, cat: "développement"},
+    { main: "pays émergent", fr: "croissance rapide", def: "Industrialisation en cours, croissance économique forte.", ex: "La Chine est le pays émergent le plus important.", level: 4, cat: "développement"},
+    { main: "pauvreté extrême", fr: "moins de 2,15 $/jour", def: "700 millions de personnes dans le monde.", ex: "L'Afrique subsaharienne concentre la pauvreté extrême.", level: 4, cat: "développement"},
+    { main: "Nigeria", fr: "pays africain le plus peuplé", def: "220 millions d'habitants, Afrique de l'Ouest.", ex: "Le Nigeria est le 1er producteur de pétrole d'Afrique.", level: 4, cat: "pays"},
+    { main: "Japon", fr: "espérance de vie élevée", def: "84 ans, pays insulaire d'Asie de l'Est.", ex: "Le Japon est le pays le plus âgé du monde.", level: 4, cat: "pays"},
+    // NIVEAU 5
+    { main: "réchauffement climatique", fr: "augmentation des températures", def: "+1,1°C depuis 1850, causé par les émissions de CO2.", ex: "Le réchauffement climatique provoque des canicules plus fréquentes.", level: 5, cat: "environnement"},
+    { main: "CO2", fr: "dioxyde de carbone", def: "Principal gaz à effet de serre d'origine humaine.", ex: "La Chine émet 30% du CO2 mondial.", level: 5, cat: "environnement"},
+    { main: "GIEC", fr: "Groupe d'experts intergouvernemental", def: "Évalue le changement climatique, prix Nobel 2007.", ex: "Le GIEC publie des rapports tous les 5-7 ans.", level: 5, cat: "environnement"},
+    { main: "Accord de Paris", fr: "accord climat 2015", def: "Limiter le réchauffement à +1,5°C / +2°C.", ex: "L'Accord de Paris a été signé par 196 pays.", level: 5, cat: "environnement"},
+    { main: "déforestation", fr: "perte des forêts", def: "10 M hectares perdus chaque année dans le monde.", ex: "L'Amazonie perd 10 000 km² de forêt par an.", level: 5, cat: "environnement"},
+    { main: "énergies renouvelables", fr: "solaire, éolien, hydraulique", def: "15% du mix énergétique mondial.", ex: "Les énergies renouvelables ne s'épuisent pas.", level: 5, cat: "énergie"},
+    { main: "géothermie", fr: "chaleur terrestre", def: "Énergie issue de la chaleur interne de la Terre.", ex: "L'Islande utilise la géothermie à 90%.", level: 5, cat: "énergie"},
+    { main: "Trois-Gorges", fr: "barrage chinois", def: "Plus puissant barrage du monde (22 500 MW).", ex: "Le barrage des Trois-Gorges est sur le Yangtsé.", level: 5, cat: "énergie"},
+    { main: "eau potable", fr: "eau saine à boire", def: "2,2 milliards de personnes n'y ont pas accès.", ex: "L'accès à l'eau potable est un ODD de l'ONU.", level: 5, cat: "ressource"},
+    { main: "6e extinction", fr: "extinction de masse", def: "1 million d'espèces menacées (rapport IPBES 2019).", ex: "L'activité humaine accélère la 6e extinction de masse.", level: 5, cat: "biodiversité"}
+];
+  /* fin LEXIQUE */
+
+
+  /* ══════════════════════════════════════════════════════
+     🔧 ÉTAT DES FILTRES
+     ══════════════════════════════════════════════════════ */
+  let currentLevel  = 0;   /* 0 = tous les niveaux */
+  let currentSearch = "";
+
+
+  /* ══════════════════════════════════════════════════════
+     🖼️ RENDU DE LA GRILLE
+     ══════════════════════════════════════════════════════ */
+
+  function renderWords() {
+    const grid     = document.getElementById("lexGrid");
+    const s        = currentSearch.toLowerCase();
+
+    /* Filtre par recherche + niveau */
+    const filtered = LEXIQUE.filter(w => {
+      const matchSearch = !s ||
+        w.main.toLowerCase().includes(s)  ||
+        w.trans.toLowerCase().includes(s) ||
+        w.def.toLowerCase().includes(s);
+      const matchLevel  = currentLevel === 0 || w.level === currentLevel;
+      return matchSearch && matchLevel;
+    });
+
+    /* Compteur */
+    document.getElementById("statBar").textContent =
+      filtered.length + " mot" + (filtered.length > 1 ? "s" : "") + " affiché" + (filtered.length > 1 ? "s" : "");
+
+    if (!filtered.length) {
+      grid.innerHTML = "<div class='empty-msg'>Aucun mot trouvé pour cette recherche.</div>";
+      return;
+    }
+
+    grid.innerHTML = filtered.map(w => {
+      const realIdx = LEXIQUE.indexOf(w);
+      return `
+        <div class="word-card" onclick="openModal(${realIdx})">
+          <div class="word-lv">Niv. ${w.level}</div>
+          <div class="word-main">${w.main}</div>
+          <div class="word-trans">${w.trans}</div>
+          <span class="word-cat">${w.cat}</span>
+        </div>`;
+    }).join("");
+  }
+
+
+  /* ══════════════════════════════════════════════════════
+     🔍 FILTRES
+     ══════════════════════════════════════════════════════ */
+
+  function filterByLevel(lvl, btn) {
+    currentLevel = lvl;
+    document.querySelectorAll(".level-tab").forEach(b => b.classList.remove("active"));
+    if (btn) btn.classList.add("active");
+    renderWords();
+  }
+
+  function filterWords() {
+    currentSearch = document.getElementById("searchBox").value;
+    renderWords();
+  }
+
+
+  /* ══════════════════════════════════════════════════════
+     🔍 MODALE DE DÉTAIL
+     ══════════════════════════════════════════════════════ */
+
+  function openModal(idx) {
+    const w = LEXIQUE[idx];
+    document.getElementById("modalMain").textContent  = w.main;
+    document.getElementById("modalTrans").textContent = w.trans;
+    document.getElementById("modalDef").textContent   = w.def;
+    document.getElementById("modalEx").textContent    = w.ex;
+    document.getElementById("modalCat").textContent   = w.cat + " • Niveau " + w.level;
+    document.getElementById("modal").classList.add("show");
+  }
+
+  function closeModal(e) {
+    if (!e || e.target.id === "modal")
+      document.getElementById("modal").classList.remove("show");
+  }
+
+
+  /* ══════════════════════════════════════════════════════
+     🚀 INITIALISATION — Gère les paramètres URL
+         ?level=3   → filtre sur le niveau 3 au chargement
+         #mot       → recherche le mot dès l'ouverture
+     ══════════════════════════════════════════════════════ */
+  document.addEventListener("DOMContentLoaded", () => {
+
+    /* Récupère un mot-clé depuis l'ancre #mot */
+    const hash = window.location.hash.replace("#", "");
+    if (hash) {
+      currentSearch = decodeURIComponent(hash);
+      document.getElementById("searchBox").value = currentSearch;
+    }
+
+    /* Récupère un niveau depuis ?level=N */
+    const lvlParam = new URLSearchParams(window.location.search).get("level");
+    if (lvlParam) {
+      currentLevel = parseInt(lvlParam);
+      document.querySelectorAll(".level-tab").forEach((b, i) => {
+        b.classList.toggle("active", i === currentLevel);
+      });
+    }
+
+    renderWords();
+  });
+
+</script>
+</body>
+</html>
