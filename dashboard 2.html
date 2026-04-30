@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ════════════════════════════════════════════════════
+       🎯 TITRE
+       ════════════════════════════════════════════════════ -->
+  <title>Histoire Master — Mon Espace</title>
+
+  <style>
+
+    /* ════════════════════════════════════════════════════
+       🎨 PALETTE — Même couleurs que quiz.html !
+       ════════════════════════════════════════════════════ */
+    :root {
+      --primary  : #922B21;
+      --secondary: #c0392b;
+      --success  : #48bb78;
+      --error    : #f56565;
+      --warning  : #ed8936;
+      --gold     : #ffd700;
+    }
+
+    /* ── Reset global ── */
+    *, *::before, *::after {
+      box-sizing : border-box;
+      margin     : 0;
+      padding    : 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+    }
+
+    body {
+      background : linear-gradient(135deg, var(--primary), var(--secondary));
+      min-height : 100vh;
+      padding    : 15px;
+    }
+
+    /* ── Conteneur principal ── */
+    .container {
+      max-width    : 1000px;
+      margin       : 0 auto;
+      background   : white;
+      border-radius: 20px;
+      padding      : 25px;
+      box-shadow   : 0 20px 60px rgba(0,0,0,.3);
+    }
+
+    h1       { text-align: center; color: var(--primary); font-size: 2.1em; margin-bottom: 4px; }
+    .subtitle{ text-align: center; color: #718096; margin-bottom: 20px; }
+
+    /* ════════════════════════════════════════════════════
+       🔘 BOUTONS
+       ════════════════════════════════════════════════════ */
+    .btn          { padding: 9px 18px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: .9em; transition: all .2s; }
+    .btn-primary  { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; }
+    .btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+    .btn-link     { background: #f0f4ff; color: var(--primary); }
+
+    /* ════════════════════════════════════════════════════
+       🗂️ ONGLETS
+       ════════════════════════════════════════════════════ */
+    .nav-tabs {
+      display      : flex;
+      gap          : 8px;
+      margin-bottom: 22px;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 10px;
+      flex-wrap    : wrap;
+      align-items  : center;
+    }
+    .tab-btn { padding: 10px 18px; border: none; background: #f0f0f0; border-radius: 20px; cursor: pointer; font-weight: bold; transition: all .25s; white-space: nowrap; font-size: .9em; }
+    .tab-btn:hover,
+    .tab-btn.active { background: var(--primary); color: white; }
+
+    .tab-content        { display: none; }
+    .tab-content.active { display: block; animation: fadeIn .3s; }
+    @keyframes fadeIn   { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ════════════════════════════════════════════════════
+       📈 STATISTIQUES
+       ════════════════════════════════════════════════════ */
+    .stats-grid {
+      display              : grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap                  : 15px;
+      margin-bottom        : 25px;
+    }
+    .stat-card    { background: linear-gradient(145deg, var(--primary), var(--secondary)); color: white; padding: 20px; border-radius: 15px; text-align: center; }
+    .stat-num     { font-size: 2.3em; font-weight: 800; display: block; }
+    .stat-label   { font-size: .8em; opacity: .9; text-transform: uppercase; letter-spacing: .5px; }
+
+    /* Barres de progression par niveau */
+    .level-progress      { margin-top: 20px; }
+    .level-progress h3   { margin-bottom: 12px; color: #2d3748; }
+    .level-row           { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: .9em; }
+    .level-row-label     { width: 140px; color: #4a5568; font-weight: 600; flex-shrink: 0; }
+    .progress-bar        { flex: 1; height: 14px; background: #e2e8f0; border-radius: 7px; overflow: hidden; }
+    .progress-fill       { height: 100%; background: linear-gradient(90deg, var(--success), #68d391); border-radius: 7px; transition: width .6s; }
+    .progress-fill.locked{ background: #e2e8f0; }
+    .level-row-pct       { width: 38px; text-align: right; color: #718096; font-size: .85em; }
+
+    /* ════════════════════════════════════════════════════
+       🏅 BADGES
+       ════════════════════════════════════════════════════ */
+    .badges-grid {
+      display              : grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap                  : 12px;
+      margin-top           : 10px;
+    }
+    .badge          { background: #f5f7fa; border: 2px solid #e2e8f0; border-radius: 14px; padding: 14px; text-align: center; opacity: .45; filter: grayscale(1); transition: all .3s; }
+    .badge.unlocked { opacity: 1; filter: none; border-color: var(--gold); background: linear-gradient(145deg, #fff9e6, #fff3cd); box-shadow: 0 4px 15px rgba(255,215,0,.25); }
+    .badge-icon     { font-size: 2.4em; margin-bottom: 6px; display: block; }
+    .badge-name     { font-weight: bold; font-size: .85em; color: #2d3748; margin-bottom: 3px; }
+    .badge-desc     { font-size: .72em; color: #718096; }
+
+    /* ════════════════════════════════════════════════════
+       🎭 CAMÉLÉON
+       ════════════════════════════════════════════════════ */
+    .cam-box         { background: #e8f4ff; border-radius: 15px; padding: 22px; }
+    .cam-avatar      { text-align: center; font-size: 4em; margin-bottom: 10px; }
+    .cam-name        { text-align: center; font-weight: bold; color: var(--secondary); margin-bottom: 14px; }
+    .cam-bubble      { background: white; border: 2px dashed var(--error); border-radius: 12px; padding: 16px; margin-bottom: 16px; font-size: 1.1em; font-family: monospace; color: #c53030; text-align: center; }
+    .cam-instruction { font-weight: bold; color: #2d3748; margin-bottom: 12px; text-align: center; }
+    .cam-options     { display: grid; gap: 10px; }
+    .cam-btn         { padding: 13px; border: 2px solid #c6d3f7; background: white; border-radius: 10px; cursor: pointer; font-size: .95em; text-align: left; transition: all .2s; }
+    .cam-btn:hover   { border-color: var(--primary); background: #f0f4ff; }
+    .cam-btn.correct { background: #c6f6d5; border-color: var(--success); color: #276749; }
+    .cam-btn.wrong   { background: #fed7d7; border-color: var(--error); color: #c53030; }
+    .cam-btn:disabled{ cursor: not-allowed; }
+    .cam-score       { text-align: center; margin-top: 14px; font-weight: bold; color: var(--secondary); }
+    .cam-no-errors   { text-align: center; color: #718096; padding: 30px; }
+
+    /* ════════════════════════════════════════════════════
+       📝 FICHES D'ERREURS
+       ════════════════════════════════════════════════════ */
+    .fiche-card    { background: white; border-left: 4px solid var(--primary); padding: 16px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,.07); margin-bottom: 12px; }
+    .fiche-q       { font-weight: bold; color: #2d3748; margin-bottom: 6px; }
+    .fiche-wrong   { color: var(--error); text-decoration: line-through; font-size: .95em; }
+    .fiche-correct { color: var(--success); font-weight: bold; font-size: .95em; }
+    .fiche-expl    { color: #718096; font-size: .85em; margin-top: 5px; font-style: italic; }
+    .print-btn     { background: var(--primary); color: white; border: none; padding: 10px 22px; border-radius: 20px; cursor: pointer; font-weight: bold; margin-bottom: 16px; display: block; }
+
+    /* ════════════════════════════════════════════════════
+       👤 SÉLECTEUR DE JOUEUR
+       ════════════════════════════════════════════════════ */
+    .player-header        { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+    .player-header select { padding: 8px 12px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: .95em; flex: 1; min-width: 150px; }
+
+    .no-print-info { background: #f0fff4; border-left: 4px solid var(--success); padding: 10px 14px; border-radius: 0 8px 8px 0; font-size: .85em; color: #276749; margin-bottom: 16px; }
+
+    /* ── Impression — masquer la navigation ── */
+    @media print { .nav-tabs, .player-header, .print-btn, .no-print { display: none; } }
+
+    /* ── Mobile ── */
+    @media (max-width: 600px) {
+      .stats-grid  { grid-template-columns: repeat(2, 1fr); }
+      .badges-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ════════════════════════════════════════════════════
+       🔝 TITRE — Personnaliser l'emoji et le nom
+       ════════════════════════════════════════════════════ -->
+  <h1>🏛️ Mon Espace Histoire Master</h1>
+  <div class="subtitle">Tous tes progrès, badges et révisions en un coup d'œil</div>
+
+
+  <!-- ════════════════════════════════════════════════════
+       👤 SÉLECTEUR DE JOUEUR + NAVIGATION
+       ════════════════════════════════════════════════════ -->
+  <div class="player-header no-print">
+    <select id="playerSelect" onchange="loadPlayer(this.value)">
+      <option value="">-- Choisir un joueur --</option>
+    </select>
+    <button class="btn btn-primary" onclick="goToQuiz()">🎮 Quiz</button>
+    <button class="btn btn-link"    onclick="window.location.href='index.html'">🏠 Accueil</button>
+    <button class="btn btn-link"    onclick="window.open('lexique.html','_blank')">📖 Lexique</button>
+  </div>
+
+  <!-- Export / Import sauvegarde -->
+  <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px;" class="no-print">
+    <button class="btn" onclick="exportSave()"
+      style="flex:1; background:#f0fff4; color:#276749; font-size:.85em;">
+      ⬇️ Exporter ma sauvegarde
+    </button>
+    <label class="btn"
+      style="flex:1; background:#f0f4ff; color:var(--primary); font-size:.85em; cursor:pointer; text-align:center;">
+      ⬆️ Importer une sauvegarde
+      <input type="file" accept=".json" onchange="importSave(event)" style="display:none;">
+    </label>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════
+       🗂️ ONGLETS DE NAVIGATION
+       ════════════════════════════════════════════════════ -->
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="showTab('stats',this)">📈 Statistiques</button>
+    <button class="tab-btn"        onclick="showTab('badges',this)">🏅 Badges (<span id="badgeCount">0</span>/30)</button>
+    <button class="tab-btn"        onclick="showTab('cameleon',this)">🎭 Caméléon</button>
+    <button class="tab-btn"        onclick="showTab('fiches',this)">📝 Mes Fiches</button>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════
+       📈 ONGLET STATISTIQUES
+       ════════════════════════════════════════════════════ -->
+  <div id="stats" class="tab-content active">
+
+    <div class="stats-grid">
+      <div class="stat-card"><span class="stat-num" id="statLevel">1</span><span class="stat-label">Niveau actuel</span></div>
+      <div class="stat-card"><span class="stat-num" id="statScore">0</span><span class="stat-label">Points totaux</span></div>
+      <div class="stat-card"><span class="stat-num" id="statStreak">0</span><span class="stat-label">Série 🔥</span></div>
+      <div class="stat-card"><span class="stat-num" id="statRate">0%</span><span class="stat-label">Précision</span></div>
+    </div>
+
+    <div class="level-progress">
+      <!-- ↓ Personnaliser le titre avec l'emoji de la matière ↓ -->
+      <h3>🏛️ Progression par niveau</h3>
+      <div id="levelBars"></div>
+    </div>
+
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════
+       🏅 ONGLET BADGES
+       ════════════════════════════════════════════════════ -->
+  <div id="badges" class="tab-content">
+    <div class="no-print-info">Les badges se débloquent automatiquement selon ta progression.</div>
+    <div class="badges-grid" id="badgesGrid"></div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════
+       🎭 ONGLET CAMÉLÉON
+       ════════════════════════════════════════════════════ -->
+  <div id="cameleon" class="tab-content">
+    <div class="cam-box">
+      <div class="cam-avatar">🦎</div>
+      <div class="cam-name">Mode Caméléon — Corrige Lucas !</div>
+      <div  id="cameleonContent"></div>
+      <div  id="camScore" class="cam-score"></div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════
+       📝 ONGLET FICHES D'ERREURS
+       ════════════════════════════════════════════════════ -->
+  <div id="fiches" class="tab-content">
+    <button class="print-btn no-print" onclick="window.print()">🖨️ Imprimer mes fiches</button>
+    <div id="fichesContent"></div>
+  </div>
+
+
+</div><!-- /.container -->
+
+
+<!-- ══════════════════════════════════════════════════════
+     📜 JAVASCRIPT
+     ══════════════════════════════════════════════════════ -->
+<script>
+
+  /* ══════════════════════════════════════════════════════
+     ⚙️  CONFIG — Même clés que dans quiz.html !
+         PLAYERS_KEY doit être IDENTIQUE à quiz.html
+     ══════════════════════════════════════════════════════ */
+  const STORAGE_KEY = "histoireMaster_v1";       /* même que quiz.html */
+  const PLAYERS_KEY = "histoireMaster_players";  /* même que quiz.html */
+
+  /* ══════════════════════════════════════════════════════
+     📋 NOMS DES NIVEAUX — Pour les barres de progression
+         ↓ Personnaliser les titres selon la matière
+     ══════════════════════════════════════════════════════ */
+  const LEVEL_NAMES = {
+    1 : "Préhistoire & Antiquité 🦴",
+    2 : "Moyen Âge ⚔️",
+    3 : "Temps Modernes 🌍",
+    4 : "Révolution & 19e s. 🔥",
+    5 : "20e siècle 💥"
+  };
+
+  /* ══════════════════════════════════════════════════════
+     🏅 BADGES — 30 badges à débloquer
+         check: p => condition sur l'objet joueur p
+         Propriétés disponibles :
+           p.score, p.completed[], p.streak,
+           p.totalQuestions, p.totalCorrect, p.cameleonHelped
+     ══════════════════════════════════════════════════════ */
+  const BADGES_DEF = [
+    { id:1,  icon:"1️⃣",  name:"Premier Pas",   desc:"Terminer le niveau 1",          check: p => (p.completed||[]).includes(1)  },
+    { id:2,  icon:"2️⃣",  name:"En route",      desc:"Terminer le niveau 2",          check: p => (p.completed||[]).includes(2)  },
+    { id:3,  icon:"3️⃣",  name:"Bon départ",    desc:"Terminer le niveau 3",          check: p => (p.completed||[]).includes(3)  },
+    { id:4,  icon:"4️⃣",  name:"Milieu de parcours", desc:"Terminer le niveau 4",     check: p => (p.completed||[]).includes(4)  },
+    { id:5,  icon:"5️⃣",  name:"À mi-chemin",   desc:"Terminer le niveau 5",          check: p => (p.completed||[]).includes(5)  },
+    { id:6,  icon:"6️⃣",  name:"Avancé",        desc:"Terminer le niveau 6",          check: p => (p.completed||[]).includes(6)  },
+    { id:7,  icon:"7️⃣",  name:"Expert",        desc:"Terminer le niveau 7",          check: p => (p.completed||[]).includes(7)  },
+    { id:8,  icon:"8️⃣",  name:"Champion",      desc:"Terminer le niveau 8",          check: p => (p.completed||[]).includes(8)  },
+    { id:9,  icon:"9️⃣",  name:"Presque !",     desc:"Terminer le niveau 9",          check: p => (p.completed||[]).includes(9)  },
+    { id:10, icon:"🏆",  name:"Historien Légendaire",   desc:"Terminer le niveau 10",         check: p => (p.completed||[]).includes(10) },
+    { id:11, icon:"🎯",  name:"Sniper",         desc:"100% à un niveau",              check: _ => false                           },
+    { id:12, icon:"🔥",  name:"En feu !",       desc:"Série de 10 bonnes réponses",   check: p => (p.streak||0) >= 10            },
+    { id:13, icon:"⚡",  name:"Éclair",          desc:"Série de 20 bonnes réponses",   check: p => (p.streak||0) >= 20            },
+    { id:14, icon:"💎",  name:"Diamant",         desc:"Dépasser 500 points",           check: p => (p.score||0) >= 500            },
+    { id:15, icon:"🌟",  name:"Étoile",          desc:"Dépasser 1000 points",          check: p => (p.score||0) >= 1000           },
+    { id:16, icon:"🌈",  name:"Arc-en-ciel",     desc:"Dépasser 2000 points",          check: p => (p.score||0) >= 2000           },
+    { id:17, icon:"📝",  name:"Scripteur",       desc:"Répondre à 50 questions",       check: p => (p.totalQuestions||0) >= 50    },
+    { id:18, icon:"📚",  name:"Bosseur",         desc:"Répondre à 100 questions",      check: p => (p.totalQuestions||0) >= 100   },
+    { id:19, icon:"🧠",  name:"Génie",           desc:"Répondre à 200 questions",      check: p => (p.totalQuestions||0) >= 200   },
+    { id:20, icon:"✅",  name:"Précis",          desc:"80% sur 20 questions",          check: p => (p.totalQuestions||0) >= 20 && ((p.totalCorrect||0)/(p.totalQuestions||1)) >= 0.8 },
+    { id:21, icon:"🦅",  name:"Aigle",           desc:"90% sur 50 questions",          check: p => (p.totalQuestions||0) >= 50 && ((p.totalCorrect||0)/(p.totalQuestions||1)) >= 0.9 },
+    { id:22, icon:"🏅",  name:"Médaillé",        desc:"3 niveaux terminés",            check: p => (p.completed||[]).length >= 3  },
+    { id:23, icon:"🎓",  name:"Diplômé",         desc:"5 niveaux terminés",            check: p => (p.completed||[]).length >= 5  },
+    { id:24, icon:"🦁",  name:"Courageux",       desc:"Rejouer après une erreur",      check: p => (p.totalQuestions||0) >= 2     },
+    { id:25, icon:"🔁",  name:"Persévérant",     desc:"Corriger ses erreurs",          check: p => (p.errorHistory||[]).length > 0},
+    { id:26, icon:"🎭",  name:"Ami de Lucas",    desc:"Aider Lucas 1 fois",            check: p => (p.cameleonHelped||0) >= 1     },
+    { id:27, icon:"👨‍🏫", name:"Professeur",      desc:"Aider Lucas 5 fois",            check: p => (p.cameleonHelped||0) >= 5     },
+    { id:28, icon:"🧑‍🎓", name:"Maître",          desc:"Aider Lucas 10 fois",           check: p => (p.cameleonHelped||0) >= 10    },
+    { id:29, icon:"🌍",  name:"Explorateur",     desc:"Tous les niveaux terminés",     check: p => (p.completed||[]).length >= 10 },
+    { id:30, icon:"🏆",  name:"Légendaire",      desc:"2000+ pts + tout terminé",      check: p => (p.score||0) >= 2000 && (p.completed||[]).length >= 10 }
+  ];
+
+  /* ══════════════════════════════════════════════════════
+     🎭 EXERCICES CAMÉLÉON
+         ↓ Remplacer par des erreurs liées à la matière
+         error   → phrase incorrecte de Lucas
+         correct → phrase correcte
+         rule    → explication de la règle
+         options → 4 propositions (la bonne parmi les 4)
+     ══════════════════════════════════════════════════════ */
+  const CAMELEON_EXERCISES = [
+    { error:"La Préhistoire s'arrête avec les dinosaures.", correct:"La Préhistoire s'arrête avec l'invention de l'écriture.", rule:"La Préhistoire s'arrête avec l'écriture (-3300), pas avec les dinosaures (-65M ans) !", options:["La Préhistoire s'arrête avec les dinosaures.","La Préhistoire s'arrête avec l'invention de l'écriture.","La Préhistoire s'arrête avec la roue.","La Préhistoire s'arrête avec le feu."] },
+    { error:"Charlemagne est couronné roi de France en 800.", correct:"Charlemagne est couronné Empereur d'Occident en 800.", rule:"Charlemagne est couronné EMPEREU R (pas roi) d'Occident le 25 décembre 800 à Rome !", options:["Charlemagne est couronné roi de France en 800.","Charlemagne est couronné Empereur d'Occident en 800.","Charlemagne est couronné roi d'Allemagne en 800.","Charlemagne est couronné pape en 800."] },
+    { error:"Jeanne d'Arc est brûlée vive à Paris.", correct:"Jeanne d'Arc est brûlée vive à Rouen.", rule:"Jeanne d'Arc est brûlée à Rouen le 30 mai 1431, pas à Paris !", options:["Jeanne d'Arc est brûlée vive à Paris.","Jeanne d'Arc est brûlée vive à Rouen.","Jeanne d'Arc est brûlée vive à Orléans.","Jeanne d'Arc est brûlée vive à Reims."] },
+    { error:"La Bastille est prise le 4 juillet 1789.", correct:"La Bastille est prise le 14 juillet 1789.", rule:"Le 14 juillet 1789 (pas le 4) est la date de la prise de la Bastille, fête nationale française !", options:["La Bastille est prise le 4 juillet 1789.","La Bastille est prise le 14 juillet 1789.","La Bastille est prise le 24 juillet 1789.","La Bastille est prise le 1er juillet 1789."] },
+    { error:"Napoléon est vaincu définitivement à Austerlitz.", correct:"Napoléon est vaincu définitivement à Waterloo.", rule:"Austerlitz (1805) est sa plus grande VICTOIRE. Waterloo (1815) est sa défaite finale !", options:["Napoléon est vaincu définitivement à Austerlitz.","Napoléon est vaincu définitivement à Waterloo.","Napoléon est vaincu définitivement à Moscou.","Napoléon est vaincu définitivement à Leipzig."] },
+    { error:"La guerre de Cent Ans dure exactement 100 ans.", correct:"La guerre de Cent Ans dure 116 ans (1337-1453).", rule:"Malgré son nom, la guerre de Cent Ans dure 116 ans, de 1337 à 1453 !", options:["La guerre de Cent Ans dure exactement 100 ans.","La guerre de Cent Ans dure 116 ans (1337-1453).","La guerre de Cent Ans dure 50 ans.","La guerre de Cent Ans dure 200 ans."] },
+    { error:"L'armistice de la 1re Guerre mondiale date du 11 novembre 1919.", correct:"L'armistice de la 1re Guerre mondiale date du 11 novembre 1918.", rule:"L'armistice est signé le 11 novembre 1918 (pas 1919). Le traité de Versailles est de 1919 !", options:["L'armistice date du 11 novembre 1919.","L'armistice date du 11 novembre 1918.","L'armistice date du 8 mai 1918.","L'armistice date du 14 juillet 1918."] },
+    { error:"L'appel du 18 juin 1940 est lancé par le maréchal Pétain.", correct:"L'appel du 18 juin 1940 est lancé par le général de Gaulle.", rule:"De Gaulle lance son appel depuis Londres le 18 juin 1940. Pétain, lui, choisit l'armistice !", options:["L'appel est lancé par Pétain.","L'appel est lancé par le général de Gaulle.","L'appel est lancé par Churchill.","L'appel est lancé par Leclerc."] },
+    { error:"La chute du mur de Berlin a lieu le 9 novembre 1991.", correct:"La chute du mur de Berlin a lieu le 9 novembre 1989.", rule:"Le mur de Berlin tombe le 9 novembre 1989 (pas 1991). L'URSS disparaît en décembre 1991 !", options:["Le mur tombe le 9 novembre 1991.","Le mur tombe le 9 novembre 1989.","Le mur tombe le 9 novembre 1985.","Le mur tombe le 9 novembre 1979."] },
+    { error:"Christophe Colomb découvre l'Afrique en 1492.", correct:"Christophe Colomb découvre l'Amérique en 1492.", rule:"Colomb découvre l'AMÉRIQUE en 1492, pensant atteindre les Indes. Pas l'Afrique !", options:["Colomb découvre l'Afrique en 1492.","Colomb découvre l'Amérique en 1492.","Colomb découvre l'Asie en 1492.","Colomb découvre l'Océanie en 1492."] }
+  ]; /* fin CAMELEON_EXERCISES */
+
+
+  /* ══════════════════════════════════════════════════════
+     🔧 VARIABLES GLOBALES
+     ══════════════════════════════════════════════════════ */
+  let currentPlayerData = null;
+  let currentPlayerName = null;
+  let camIdx            = 0;
+  let currentCamOptions = [];
+
+
+  /* ══════════════════════════════════════════════════════
+     💾 LOCALSTORAGE
+     ══════════════════════════════════════════════════════ */
+
+  function getPlayers() {
+    try   { return JSON.parse(localStorage.getItem(PLAYERS_KEY)) || {}; }
+    catch { return {}; }
+  }
+
+  function savePlayers(p) {
+    localStorage.setItem(PLAYERS_KEY, JSON.stringify(p));
+  }
+
+
+  /* ══════════════════════════════════════════════════════
+     💾 EXPORT / IMPORT
+     ══════════════════════════════════════════════════════ */
+
+  function exportSave() {
+    const players = getPlayers();
+    if (!Object.keys(players).length) { alert("Aucune sauvegarde à exporter."); return; }
+    const a    = document.createElement("a");
+    a.href     = URL.createObjectURL(new Blob([JSON.stringify(players, null, 2)], { type: "application/json" }));
+    a.download = STORAGE_KEY + "-sauvegarde-" + new Date().toISOString().slice(0, 10) + ".json";
+    a.click();
+  }
+
+  function importSave(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      try {
+        const data = JSON.parse(e.target.result);
+        if (typeof data === "object" && data) {
+          savePlayers(data);
+          loadPlayerList();
+          alert("Sauvegarde importée !");
+        } else alert("Fichier invalide.");
+      } catch { alert("Erreur : fichier non reconnu."); }
+    };
+    reader.readAsText(file);
+    event.target.value = "";
+  }
+
+
+  /* ══════════════════════════════════════════════════════
+     👤 GESTION DES JOUEURS
+     ══════════════════════════════════════════════════════ */
+
+  /** Retourne au quiz en passant le joueur actif dans l'URL */
+  function goToQuiz() {
+    window.location.href = "quiz.html" +
+      (currentPlayerName ? "?player=" + encodeURIComponent(currentPlayerName) : "");
+  }
+
+  /** Charge la liste des joueurs dans le <select> */
+  function loadPlayerList() {
+    const sel     = document.getElementById("playerSelect");
+    const players = getPlayers();
+    const names   = Object.keys(players);
+
+    sel.innerHTML = "<option value=''>-- Choisir un joueur --</option>";
+    names.forEach(n => {
+      const o = document.createElement("option");
+      o.value       = n;
+      o.textContent = n + " (Niv." + players[n].currentLevel + ")";
+      sel.appendChild(o);
+    });
+
+    /* Priorité au joueur transmis dans l'URL (?player=Prénom) */
+    const urlPlayer = new URLSearchParams(window.location.search).get("player");
+
+    if (urlPlayer && players[urlPlayer]) {
+      sel.value = urlPlayer;
+      loadPlayer(urlPlayer);
+    } else if (names.length > 0) {
+      sel.value = names[0];
+      loadPlayer(names[0]);
+    }
+  }
+
+  /** Active un joueur et affiche toutes ses données */
+  function loadPlayer(name) {
+    if (!name) { currentPlayerData = null; return; }
+    const players      = getPlayers();
+    currentPlayerData  = players[name] || null;
+    currentPlayerName  = name;
+    if (currentPlayerData) renderAll();
+  }
+
+
+  /* ══════════════════════════════════════════════════════
+     🗂️ NAVIGATION PAR ONGLETS
+     ══════════════════════════════════════════════════════ */
+
+  function showTab(id, btn) {
+    /* Recharge les données fraîches avant de changer d'onglet */
+    if (currentPlayerName) {
+      currentPlayerData = getPlayers()[currentPlayerName] || null;
+    }
+    document.querySelectorAll(".tab-content").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+    if (btn) btn.classList.add("active");
+
+    /* Rendu spécifique à chaque onglet */
+    if (id === "cameleon") renderCameleon();
+    if (id === "fiches")   renderFiches();
+  }
+
+
+  /* ══════════════════════════════════════════════════════
+     📈 RENDU GÉNÉRAL (stats + badges)
+     ══════════════════════════════════════════════════════ */
+
+  function renderAll() {
+    if (!currentPlayerData) return;
+    const p    = currentPlayerData;
+    const rate = p.totalQuestions > 0
+      ? Math.round((p.totalCorrect || 0) / p.totalQuestions * 100) : 0;
+
+    document.getElementById("statLevel").textContent  = p.currentLevel || 1;
+    document.getElementById("statScore").textContent  = p.score || 0;
+    document.getElementById("statStreak").textContent = p.streak || 0;
+    document.getElementById("statRate").textContent   = rate + "%";
+
+    renderLevelBars();
+    renderBadges();
+  }
+
+  /** Barres de progression pour chaque niveau */
+  function renderLevelBars() {
+    const p         = currentPlayerData;
+    const completed = p.completed || [];
+    const current   = p.currentLevel || 1;
+    let html        = "";
+
+    /* ↓ Changer "i <= 10" selon le nombre de niveaux */
+    for (let i = 1; i <= 5; i++) {
+      const done    = completed.includes(i);
+      const isCur   = i === current && !done;
+      const locked  = i > current && !done;
+      const pct     = done ? 100 : isCur ? 50 : 0;
+      const label   = LEVEL_NAMES[i] || "Niveau " + i;
+      const icon    = done ? "✅" : isCur ? "▶" : locked ? "🔒" : "—";
+
+      html += `
+        <div class="level-row">
+          <span class="level-row-label">${label}</span>
+          <div class="progress-bar">
+            <div class="progress-fill${locked ? " locked" : ""}" style="width:${pct}%;"></div>
+          </div>
+          <span class="level-row-pct">${icon}</span>
+        </div>`;
+    }
+    document.getElementById("levelBars").innerHTML = html;
+  }
+
+  /** Grille des badges (verrouillés / débloqués) */
+  function renderBadges() {
+    const p = currentPlayerData;
+    let unlocked = 0;
+
+    const html = BADGES_DEF.map(b => {
+      const ok = b.check(p);
+      if (ok) unlocked++;
+      return `
+        <div class="badge${ok ? " unlocked" : ""}">
+          <span class="badge-icon">${b.icon}</span>
+          <div class="badge-name">${b.name}</div>
+          <div class="badge-desc">${b.desc}</div>
+        </div>`;
+    }).join("");
+
+    document.getElementById("badgesGrid").innerHTML    = html;
+    document.getElementById("badgeCount").textContent  = unlocked;
+  }
+
+
+  /* ══════════════════════════════════════════════════════
+     🎭 MODE CAMÉLÉON
+     ══════════════════════════════════════════════════════ */
+
+  function renderCameleon() {
+    const p       = currentPlayerData;
+    const ex      = CAMELEON_EXERCISES[camIdx % CAMELEON_EXERCISES.length];
+    currentCamOptions = ex.options;
+    const helped  = p ? p.cameleonHelped || 0 : 0;
+
+    document.getElementById("cameleonContent").innerHTML = `
+      <div class="cam-bubble">❌ Lucas dit : "${ex.error}"</div>
+      <div class="cam-instruction">Quelle est la phrase correcte ?</div>
+      <div class="cam-options">
+        ${ex.options.map((opt, i) =>
+          `<button class="cam-btn" id="camBtn${i}" onclick="checkCameleon(${i})">${opt}</button>`
+        ).join("")}
+      </div>
+      <div style="margin-top:12px; font-size:.85em; color:#718096;">
+        Lucas aidé ${helped} fois ✅
+      </div>`;
+
+    document.getElementById("camScore").textContent = "";
+  }
+
+  function checkCameleon(idx) {
+    const ex     = CAMELEON_EXERCISES[camIdx % CAMELEON_EXERCISES.length];
+    const chosen = currentCamOptions[idx];
+    const isOk   = chosen === ex.correct;
+
+    /* Désactive tous les boutons et colorie correct / faux */
+    document.querySelectorAll(".cam-btn").forEach(b => b.disabled = true);
+    document.getElementById("camBtn" + idx).classList.add(isOk ? "correct" : "wrong");
+    if (!isOk) {
+      document.querySelectorAll(".cam-btn").forEach(b => {
+        if (b.textContent === ex.correct) b.classList.add("correct");
+      });
+    }
+
+    document.getElementById("camScore").innerHTML = `
+      ${isOk ? "✅ Bravo ! Tu as aidé Lucas !" : "❌ Pas tout à fait… Retiens bien :"}<br>
+      <em>${ex.rule}</em><br><br>
+      <button class="btn btn-primary" onclick="nextCameleon()" style="margin-top:8px;">
+        Exercice suivant →
+      </button>`;
+
+    /* Incrémente le compteur si bonne réponse */
+    if (isOk && currentPlayerName) {
+      const players = getPlayers();
+      const pp      = players[currentPlayerName];
+      if (pp) {
+        pp.cameleonHelped = (pp.cameleonHelped || 0) + 1;
+        savePlayers(players);
+        currentPlayerData = pp;
+      }
+    }
+  }
+
+  function nextCameleon() { camIdx++; renderCameleon(); }
+
+
+  /* ══════════════════════════════════════════════════════
+     📝 FICHES D'ERREURS
+     ══════════════════════════════════════════════════════ */
+
+  function renderFiches() {
+    const p      = currentPlayerData;
+    const errors = p && p.errorHistory ? p.errorHistory.slice(-20).reverse() : [];
+    const c      = document.getElementById("fichesContent");
+
+    if (!errors.length) {
+      c.innerHTML = "<div class='cam-no-errors'>🎉 Aucune erreur enregistrée ! Continue comme ça !</div>";
+      return;
+    }
+
+    /* Déduplique par question */
+    const unique = [...new Map(errors.map(e => [e.question, e])).values()];
+
+    c.innerHTML = `<p style="color:#718096; margin-bottom:14px;">${unique.length} erreur(s) à réviser :</p>` +
+      unique.map(e => `
+        <div class="fiche-card">
+          <div class="fiche-q">❓ ${e.question}</div>
+          <div class="fiche-wrong">✗ Ta réponse : ${e.userAnswer || "—"}</div>
+          <div class="fiche-correct">✓ Bonne réponse : ${e.correctAnswer}</div>
+          ${e.explanation ? `<div class="fiche-expl">💡 ${e.explanation}</div>` : ""}
+        </div>`
+      ).join("");
+  }
+
+
+  /* ══════════════════════════════════════════════════════
+     🚀 INITIALISATION
+     ══════════════════════════════════════════════════════ */
+  document.addEventListener("DOMContentLoaded", () => { loadPlayerList(); });
+
+</script>
+</body>
+</html>
