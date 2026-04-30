@@ -208,52 +208,6 @@
     }
     /* ===== FIN DE LA SOLUTION ===== */
     
-    /* ===== SOLUTION POUR LES TABLEAUX ===== */
-    /* Remplace les règles existantes pour .lesson-table */
-    .lesson-table {
-        width: 100%;
-        table-layout: auto; /* Les colonnes s'adaptent au contenu */
-        border-collapse: collapse;
-        overflow-x: auto; /* Barre de défilement si nécessaire */
-        font-size: 1em; /* Taille de texte standard */
-    }
-
-    .lesson-table th, .lesson-table td {
-        padding: 8px 12px;
-        border: 1px solid #e2e8f0;
-        text-align: left;
-        word-break: normal; /* Empêche la coupure forcée */
-        overflow-wrap: break-word; /* Coupure uniquement si mot trop long */
-        white-space: normal;
-        min-width: 15%; /* Largeur minimale en % (adaptatif) */
-    }
-
-    .lesson-table th {
-        background: var(--primary);
-        color: white;
-        font-weight: 600;
-        white-space: nowrap; /* Empêche le retour à la ligne dans les en-têtes */
-    }
-
-    /* Adaptation pour tablette */
-    @media (max-width: 768px) {
-        .lesson-table th, .lesson-table td {
-            min-width: 10%; /* Réduit la largeur minimale sur tablette */
-            padding: 6px 8px; /* Réduit légèrement le padding */
-        }
-    }
-
-    /* Adaptation pour mobile */
-    @media (max-width: 480px) {
-        .lesson-table {
-            font-size: 0.9em; /* Réduit légèrement la taille du texte SI BESOIN */
-        }
-        .lesson-table th, .lesson-table td {
-            min-width: 8%; /* Réduit encore la largeur minimale */
-            padding: 4px 6px;
-        }
-    }
-    /* ===== FIN DE LA SOLUTION ===== */
 
 
   </style>
